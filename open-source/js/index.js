@@ -9,9 +9,12 @@ $(window).on('scroll', function () {
 });
 
 $('.nav-item a').on('click', function (event) {
-  var $anchor = $(this);
+  var anchor = $(this).attr("href");
+  if(anchor.startsWith("http")){
+    return;
+  }
   $('html, body').stop().animate({
-    scrollTop: $($anchor.attr('href')).offset().top - 70
+    scrollTop: $(anchor).offset().top - 70
   }, 1300, 'easeInOutExpo');
   event.preventDefault();
 });
