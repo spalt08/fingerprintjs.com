@@ -1,5 +1,5 @@
 /*!
-  * fingerprintjs.com demo.js
+  * fingerprintjs.com demo.ts
   * Copyright 2019 https://fingerprintjs.com
   */
 import * as $ from "jquery";
@@ -10,8 +10,13 @@ import * as format from "./format";
 import { ago } from "./timeago";
 import './lead-form';
 
-export function fpLoaded(fp: any) {
-  fp.send({ ip: 'full', callbackData: true }).then(function (res: any) {
+export function load(fp: any, onCatch: (err: any) => void, onFinally: () => void) {
+  let prSend = fp.send({ ip: 'full', callbackData: true, debug: true });
+  prSend.catch(function (err: any) { 
+    onCatch(err);
+  }).finally(function() {
+    onFinally();
+  }).then((res: any) => {
     initApp(res);
   });
 }

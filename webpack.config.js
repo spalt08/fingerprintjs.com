@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: '[name].js',
-    library: "fpjsio"
+    library: "fpjsDemo"
   },
   module: {
     rules: [
