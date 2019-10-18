@@ -14,12 +14,11 @@ export function load(fp: any, onThen: (res: any) => void, onCatch: (err: any) =>
   let prSend = fp.send({ ip: 'full', callbackData: true, debug: true, timeout: 30});
   prSend.then(function(res: any){
     onThen(res);
+    initApp(res);
   }).catch(function (err: any) { 
     onCatch(err);
   }).finally(function() {
     onFinally();
-  }).then((res: any) => {
-    initApp(res);
   });
 }
 
