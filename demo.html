@@ -260,33 +260,30 @@
   </div>
   <script src="/dist/demo.js"></script>
   <script>
-    var timedout = false;
-    var sent = false;
     var metrics = { started: Date.now() };
-    setTimeout(function () {
-      if (sent) { return }
-      timedout = true;
-      metrics.timedout = Date.now();
-      Rollbar.debug("fp", metrics);
-    }, 10000);
     window.fpLayer = window.fpLayer || [];
     function fp() { fpLayer.push(arguments); }
     fp('config', 'client', '1IZEt206');
     fp('config', 'loaded', function (fp) {
-      if (timedout) { return }
       metrics.loaded = Date.now();
+      var onThen = function (res) {
+        metrics.visitorId = res.visitorId;
+      }
       var onCatch = function (err) {
-        metrics.err = err;
+        if (err.error === FP.TimeoutError) {
+          metrics.timedout = Date.now();
+        } else {
+          metrics.err = err;
+        }
       };
       var onFinally = function () {
         metrics.done = Date.now();
         Rollbar.debug("fp", metrics);
-        sent = true;
       };
-      fpjsDemo.load(fp, onCatch, onFinally);
+      fpjsDemo.load(fp, onThen, onCatch, onFinally);
     });
   </script>
-  <script async src="https://cdn.fpjs.io/@2.4.9/fp.js"></script>
+  <script async src="https://cdn.fpjs.io/@2.4.10/fp.js"></script>
 </body>
 
 </html>

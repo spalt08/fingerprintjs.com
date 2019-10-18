@@ -10,9 +10,11 @@ import * as format from "./format";
 import { ago } from "./timeago";
 import './lead-form';
 
-export function load(fp: any, onCatch: (err: any) => void, onFinally: () => void) {
-  let prSend = fp.send({ ip: 'full', callbackData: true, debug: true });
-  prSend.catch(function (err: any) { 
+export function load(fp: any, onThen: (res: any) => void, onCatch: (err: any) => void, onFinally: () => void) {
+  let prSend = fp.send({ ip: 'full', callbackData: true, debug: true, timeout: 30});
+  prSend.then(function(res: any){
+    onThen(res);
+  }).catch(function (err: any) { 
     onCatch(err);
   }).finally(function() {
     onFinally();
