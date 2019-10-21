@@ -39,6 +39,12 @@
       metrics.loaded = Date.now();
       fp.send({ debug: true }).then(function (res) {
         metrics.visitorId = res.visitorId;
+        for (var i = 0, l = res.components.length; i < l; i++) {
+          var component = res.components[i];
+          if (component.duration > 5) {
+            metrics[component.key] = component.duration;
+          }
+        }
       }).catch(function (err) {
         if (err.error === FP.TimeoutError) {
           metrics.timedout = Date.now();
@@ -51,7 +57,7 @@
       });
     });
   </script>
-  <script async src="https://cdn.fpjs.io/@2.4.10/fp.js"></script>
+  <script async src="/js/fp-201910211429.js"></script>
 </head>
 
 <body>
