@@ -11,7 +11,7 @@ import { ago } from "./timeago";
 import './lead-form';
 
 export function load(fp: any, onThen: (res: any) => void, onCatch: (err: any) => void, onFinally: () => void) {
-  let prSend = fp.send({ ip: 'full', callbackData: true, debug: true, timeout: 20000});
+  let prSend = fp.send({ ip: 'full', callbackData: true, debug: true, timeout: 30000});
   prSend.then(function(res: any){
     onThen(res);
     initApp(res);

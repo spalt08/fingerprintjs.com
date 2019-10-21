@@ -28,8 +28,14 @@
     fp('config', 'client', '1IZEt206');
     fp('config', 'loaded', function (fp) {
       metrics.loaded = Date.now();
-      fp.send({ debug: true }).then(function (res) {
+      fp.send({ debug: true, timeout: 30000 }).then(function (res) {
         metrics.visitorId = res.visitorId;
+        for (var i = 0, l = res.components.length; i < l; i++) {
+          var component = res.components[i];
+          if (component.duration > 5) {
+            metrics[component.key] = component.duration;
+          }
+        }
       }).catch(function (err) {
         if (err.error === FP.TimeoutError) {
           metrics.timedout = Date.now();
@@ -42,7 +48,7 @@
       });
     });
   </script>
-  <script async src="https://cdn.fpjs.io/@2.4.10/fp.js"></script>
+  <script async src="https://cdn.fpjs.io/@2.4.11/fp.js"></script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
