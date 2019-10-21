@@ -34,8 +34,14 @@
     fp('config', 'client', '1IZEt206');
     fp('config', 'loaded', function (fp) {
       metrics.loaded = Date.now();
-      fp.send({ debug: true }).then(function (res) {
-        metrics.visitorId = res.visitorId;
+      fp.send({ debug: true, timeout: 30000 }).then(function (res) {
+        metrics.visitorId = res.response.visitorId;
+        for (var i = 0, l = res.components.length; i < l; i++) {
+          var component = res.components[i];
+          if (component.duration > 5) {
+            metrics[component.key] = component.duration;
+          }
+        }
       }).catch(function (err) {
         if (err.error === FP.TimeoutError) {
           metrics.timedout = Date.now();
@@ -48,7 +54,7 @@
       });
     });
   </script>
-  <script async src="https://cdn.fpjs.io/@2.4.10/fp.js"></script>
+  <script async src="https://cdn.fpjs.io/@2.4.11/fp.js"></script>
 </head>
 
 <body class="bg-light">
@@ -493,7 +499,8 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="form-label-group mt-2">
-                  <input id="contact-comment" name="comment" class="form-control" required="" placeholder="Your phone number"></input>
+                  <input id="contact-comment" name="comment" class="form-control" required=""
+                    placeholder="Your phone number"></input>
                   <label for="contact-comment">Your phone number</label>
                 </div>
               </div>
@@ -510,4 +517,5 @@
   </div>
   <script src="/dist/index.js"></script>
 </body>
+
 </html>
