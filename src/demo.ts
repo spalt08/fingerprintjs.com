@@ -130,7 +130,7 @@ function initApp(response: any) {
     }
   });
   if (response.visitorFound) {
-    var url = "https://v2.api.fpjs.io/visitors/";
+    var url = "https://api.fpjs.io/visitors/";
     url += response.visitorId;
     url += "/?token=" + process.env.FPJS_API_TOKEN;
     url += "&limit=6";
