@@ -63,7 +63,6 @@
           Your ID:
           <span id="vid" v-cloak>{{currentVisit.visitorId}}</span>
         </h1>
-        </p>
         <div class="card">
           <h5 class="card-header miriam text-center text-md-left" v-if="false">
             LOADING...
@@ -118,11 +117,25 @@
             </div>
           </div>
         </div>
-        <div class="text-center mt-4">
-          <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#contact-modal" data-source="demo">
-            Get PRO
-          </button>
+        <div class="row mt-3">
+          <div class="col-6">
+            <form class="form-inline">
+              <div class="form-label-group">
+                <input id="lead-email" type="email" class="form-control form-control-lg" 
+                  placeholder="Enter your email address"/>
+                <label for="lead-email">Enter your email</label>
+                <button id="lead-submit" type="submit" class="btn btn-primary btn-lg ml-2">Start free trial</button>
+              </div>
+            </form>
+            <p id="lead-explanation" class="pr-5">
+              Try Fingerprint.js PRO free for 14 days, no credit card required. 
+            </p>
+          </div>
+          <div class="col-1"></div>
         </div>
+          <!-- <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#contact-modal" data-source="demo">
+            Get PRO
+          </button> -->
       </div>
     </div>
     <div class="row">
@@ -182,12 +195,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col text-center">
-        Questions? Talk to a founder via
-        <a href="mailto:valentin@fingerprintjs.com"> email</a>.
       </div>
     </div>
   </div>

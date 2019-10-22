@@ -163,3 +163,34 @@ No media query since this is the default in Bootstrap because it is "mobile firs
   color: red;
   font-weight: 800;
 }
+
+#lead-email {
+  border: 0;
+  min-width: 355px;
+  box-shadow: 0 0 0 1px #c4cdd5;
+}
+
+#lead-email:focus {
+  color: black;
+  outline: 0;
+  box-shadow: 0 0 0 2px #393e9e;
+}
+
+#lead-submit {
+  background-color: #393e9e;
+  color: white;
+  box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);
+  border-width: 0;
+  border-style: solid;
+  border-color: transparent;
+  line-height: 1.7;
+}
+
+#lead-submit:hover {
+  box-shadow: 0 5px 25px 0 rgba(0,0,0,0.25);
+}
+#lead-explanation {
+  color: #454f5b;
+  font-size: 0.75em;
+
+}
