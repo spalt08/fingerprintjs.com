@@ -119,15 +119,17 @@
         </div>
         <div class="row mt-3">
           <div class="col-6">
-            <form id="email-form" class="form-inline" method="POST" action="#" v-on:submit.prevent="emailLeadSubmit()">
+            <form id="email-form" class="form-inline" method="POST" action="#start-trial" v-on:submit.prevent="emailFormSubmit()">
               <div class="form-label-group">
-                <input id="lead-email" type="email" name="lead-email" class="form-control form-control-lg"
-                  placeholder="Enter your email address" required />
-                <label for="lead-email">Enter your email</label>
-                <button id="lead-submit" type="submit" class="btn btn-primary btn-lg ml-2">Start free trial</button>
+                <input id="lead-email1" type="email" name="lead-email" 
+                  class="lead-input form-control form-control-lg" 
+                  placeholder="Enter your email"
+                  required v-model="lead.email"/>
+                <label for="lead-email1">Enter your email</label>
+                <button type="submit" class="lead-submit btn btn-primary btn-lg ml-2">Start free trial</button>
               </div>
             </form>
-            <p id="lead-explanation" class="pr-5">
+            <p class="pr-5 lead-explanation">
               Try Fingerprint.js PRO free for 14 days, no credit card required.
             </p>
           </div>
@@ -194,25 +196,30 @@
         </div>
       </div>
     </div>
-    <div class="overlay">
-      <button type="button" class="overlay-close">Close</button>
+    <div class="overlay" v-cloak v-if="leadMode">
+      <button type="button" class="overlay-close" v-on:click="leadMode=false">Close</button>
       <div class="container">
         <div class="row" style="padding-top: 130px">
           <div class="col-6 offset-3">
             <h1 class="mb-4" style="color:white">Start your free 14-day trial of Fingerprint.js PRO</h1>
-            <form>
+            <form v-on:submit="fullFormSubmit()">
               <div class="form-label-group">
-                <input id="lead-email" type="email" name="lead-email" class="form-control form-control-lg"
-                  placeholder="Enter your email address" required />
+                <input id="lead-email2" type="email" name="lead-email" 
+                  class="lead-input form-control form-control-lg" 
+                  placeholder="Enter your email"
+                  required v-model="lead.email"/>
                 <label for="lead-email">Email address</label>
               </div>
               <div class="form-label-group">
-                <input id="lead-email" type="text" name="lead-email" class="form-control form-control-lg"
-                  placeholder="Enter your email address" required />
+                <input id="lead-website2" type="text" name="lead-website" 
+                class="lead-input form-control form-control-lg" 
+                placeholder="Enter your website"
+                autofocus
+                required v-model="lead.website"/>
                 <label for="lead-email">Your website</label>
               </div>
               <div class="form-group text-right">
-                <button id="lead-submit" type="submit" class="btn btn-primary btn-lg ml-2">Start free trial</button>
+                <button type="submit" class="lead-submit btn btn-primary btn-lg ml-2">Start free trial</button>
               </div>
             </form>
           </div>
@@ -256,34 +263,34 @@
   </div>
   <script src="/dist/demo.js"></script>
   <script>
-    // var metrics = { started: Date.now() };
-    // window.fpLayer = window.fpLayer || [];
-    // function fp() { fpLayer.push(arguments); }
-    // fp('config', 'client', 'mDSpjPTMCy');
-    // fp('config', 'loaded', function (fp) {
-    //   metrics.loaded = Date.now();
-    //   var onThen = function (res) {
-    //     metrics.visitorId = res.visitorId;
-    //     for (var i = 0, l = res.components.length; i < l; i++) {
-    //       var component = res.components[i];
-    //       if (component.duration > 5) {
-    //         metrics[component.key] = component.duration;
-    //       }
-    //     }
-    //   }
-    //   var onCatch = function (err) {
-    //     if (err.error === FP.TimeoutError) {
-    //       metrics.timedout = Date.now();
-    //     } else {
-    //       metrics.err = err;
-    //     }
-    //   };
-    //   var onFinally = function () {
-    //     metrics.done = Date.now();
-    //     Rollbar.debug("fp", metrics);
-    //   };
-    //   fpjsDemo.load(fp, onThen, onCatch, onFinally);
-    // });
+    var metrics = { started: Date.now() };
+    window.fpLayer = window.fpLayer || [];
+    function fp() { fpLayer.push(arguments); }
+    fp('config', 'client', 'mDSpjPTMCy');
+    fp('config', 'loaded', function (fp) {
+      metrics.loaded = Date.now();
+      var onThen = function (res) {
+        metrics.visitorId = res.visitorId;
+        for (var i = 0, l = res.components.length; i < l; i++) {
+          var component = res.components[i];
+          if (component.duration > 5) {
+            metrics[component.key] = component.duration;
+          }
+        }
+      }
+      var onCatch = function (err) {
+        if (err.error === FP.TimeoutError) {
+          metrics.timedout = Date.now();
+        } else {
+          metrics.err = err;
+        }
+      };
+      var onFinally = function () {
+        metrics.done = Date.now();
+        // Rollbar.debug("fp", metrics);
+      };
+      fpjsDemo.load(fp, onThen, onCatch, onFinally);
+    });
   </script>
   <script async src="/js/fp-201910221534.js"></script>
 </body>

@@ -2,12 +2,10 @@
   * fingerprintjs.com demo.ts
   * Copyright 2019 https://fingerprintjs.com
   */
-import "bootstrap";
 import Vue from "vue";
 import * as mapboxgl from "mapbox-gl";
 import * as format from "./format";
 import { ago } from "./timeago";
-import './lead-form';
 
 export function load(fp: any, onThen: (res: any) => void, onCatch: (err: any) => void, onFinally: () => void) {
   let prSend = fp.send({ ip: 'full', callbackData: true, debug: true, timeout: 30000 });
@@ -106,7 +104,9 @@ function initApp(response: any) {
     el: "#demo",
     data: {
       currentVisit: currentVisit,
-      visits: [] as Visit[]
+      visits: [] as Visit[],
+      leadMode: false,
+      lead: {}
     },
     methods: {
       showHistory: function () {
@@ -115,8 +115,14 @@ function initApp(response: any) {
       refresh: function () {
         location.reload();
       },
-      emailLeadSubmit: () => {
-        alert("yearh!");
+      emailFormSubmit: function () {
+        this.leadMode = true;
+        gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
+      },
+      fullFormSubmit: function() {
+        this.leadMode = false;
+        setTimeout(()=>{alert("Thanks, we received your information,\nwe'll get back to you soon by email.\n🚀")}, 400);
+
       }
     }
   });

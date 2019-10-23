@@ -164,19 +164,19 @@ No media query since this is the default in Bootstrap because it is "mobile firs
   font-weight: 800;
 }
 
-#lead-email {
+.lead-input {
   border: 0;
   min-width: 355px;
   box-shadow: 0 0 0 1px #c4cdd5;
 }
 
-#lead-email:focus {
+.lead-input:focus {
   color: black;
   outline: 0;
   box-shadow: 0 0 0 2px #393e9e;
 }
 
-#lead-submit {
+.lead-submit {
   background-color: #393e9e;
   color: white;
   box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);
@@ -186,10 +186,12 @@ No media query since this is the default in Bootstrap because it is "mobile firs
   line-height: 1.7;
 }
 
-#lead-submit:hover {
-  box-shadow: 0 5px 25px 0 rgba(0,0,0,0.25);
+.lead-submit:hover {
+  box-shadow: 0 5px 25px 0 rgba(0,0,0,0.4);
+  background-color: #393e9e;
 }
-#lead-explanation {
+
+.lead-explanation {
   color: #454f5b;
   font-size: 0.75em;
 }
@@ -204,11 +206,11 @@ No media query since this is the default in Bootstrap because it is "mobile firs
   z-index: 99;
 }
 .overlay .overlay-close {
-	width: 80px;
-	height: 80px;
+	width: 40px;
+	height: 40px;
 	position: absolute;
-	right: 20px;
-	top: 20px;
+	right: 30px;
+	top: 30px;
 	overflow: hidden;
 	border: none;
 	background: url(/img/cross.png) no-repeat center center;
