@@ -2,7 +2,6 @@
   * fingerprintjs.com demo.ts
   * Copyright 2019 https://fingerprintjs.com
   */
-import * as $ from "jquery";
 import "bootstrap";
 import Vue from "vue";
 import * as mapboxgl from "mapbox-gl";
@@ -11,13 +10,13 @@ import { ago } from "./timeago";
 import './lead-form';
 
 export function load(fp: any, onThen: (res: any) => void, onCatch: (err: any) => void, onFinally: () => void) {
-  let prSend = fp.send({ ip: 'full', callbackData: true, debug: true, timeout: 30000});
-  prSend.then(function(res: any){
+  let prSend = fp.send({ ip: 'full', callbackData: true, debug: true, timeout: 30000 });
+  prSend.then(function (res: any) {
     onThen(res);
     initApp(res);
-  }).catch(function (err: any) { 
+  }).catch(function (err: any) {
     onCatch(err);
-  }).finally(function() {
+  }).finally(function () {
     onFinally();
   })
 }
@@ -27,15 +26,11 @@ export function load(fp: any, onThen: (res: any) => void, onCatch: (err: any) =>
 (mapboxgl as any).accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 
 class Visit {
-  private readonly index: number;
   private readonly response: any;
-  private readonly visitorId: string;
   private readonly botProbability: number;
-  private readonly ip: string;
   private readonly ipLocation: any;
   private readonly browserDetails: any;
   private readonly time: Date;
-  private readonly visitorFound: boolean;
 
   public readonly incognito: boolean;
   public readonly lng: number;
@@ -47,18 +42,14 @@ class Visit {
   public mapInitialized = false;
 
   constructor(index: number, response: any) {
-    this.index = index;
     this.response = response;
-    this.visitorId = response.visitorId;
     this.incognito = response.incognito;
     this.botProbability = response.botProbability;
-    this.ip = response.ip;
     this.ipLocation = response.ipLocation;
     this.lng = this.ipLocation.longitude;
     this.lat = this.ipLocation.latitude;
     this.browserDetails = response.browserDetails;
     this.time = new Date(response.time);
-    this.visitorFound = response.visitorFound;
     // UI variables
     this.mapContainerId = "map-container-" + index;
   }
@@ -83,15 +74,12 @@ class Visit {
     return ago(this.time) + ", " + this.time.toLocaleString();
   }
 
-  formattedDeviceId() {
-    return "Coming soon...";
-  }
   onArrowClick() {
     this.collapsed = !this.collapsed;
     if (!this.mapInitialized) {
       var visit = this;
       setTimeout(function () {
-        visit.initMap();
+        // visit.initMap();
       }, 100);
     }
   }
@@ -114,7 +102,7 @@ class Visit {
 
 function initApp(response: any) {
   var currentVisit = new Visit(0, response);
-  var app = new Vue({
+  new Vue({
     el: "#demo",
     data: {
       currentVisit: currentVisit,
@@ -126,6 +114,9 @@ function initApp(response: any) {
       },
       refresh: function () {
         location.reload();
+      },
+      emailLeadSubmit: () => {
+        alert("yearh!");
       }
     }
   });
@@ -133,15 +124,15 @@ function initApp(response: any) {
     var url = "https://api.fpjs.io/visitors/";
     url += response.visitorId;
     url += "/?token=" + process.env.FPJS_API_TOKEN;
-    url += "&limit=6";
-    $.getJSON(url, function (visitsResponse) {
-      for (var i = 1; i < visitsResponse.visits.length; i++) {
-        var visit = new Visit(i, visitsResponse.visits[i]);
-        app.visits.push(visit);
-      }
-    });
+    url += "&limit=10";
+    // $.getJSON(url, function (visitsResponse) {
+    //   for (var i = 1; i < visitsResponse.visits.length; i++) {
+    //     var visit = new Visit(i, visitsResponse.visits[i]);
+    //     app.visits.push(visit);
+    //   }
+    // });
   }
-  initCurrentVisitMap(currentVisit);
+  // initCurrentVisitMap(currentVisit);
 }
 
 function initCurrentVisitMap(visit: Visit) {
@@ -230,7 +221,7 @@ function initCurrentVisitMap(visit: Visit) {
   });
 };
 
-$('body').on('click', '[data-toggle=modal]', (e) => {
-  var source = $(e.currentTarget).data("source");
-  gtag("event", "contact-click", { event_category: "contact", event_label: source });
-});
+// $('body').on('click', '[data-toggle=modal]', (e) => {
+//   var source = $(e.currentTarget).data("source");
+//   gtag("event", "contact-click", { event_category: "contact", event_label: source });
+// });

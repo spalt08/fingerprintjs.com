@@ -4,7 +4,7 @@ $('#contact-form').on('submit', (e) => {
   gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
   e.preventDefault();
   var payload = {
-    website: $('#contact-website').val(),
+    website: $("#contact-website").val(),
     email: $('#contact-email').val(),
     name: $('#contact-name').val(),
     comment: $('#contact-comment').val()

@@ -7,22 +7,23 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1",
-    "mapbox-gl": "^1.2.1",
-    "vue": "^2.6.10"
+    "bootstrap": "^4",
+    "jquery": "^3",
+    "mapbox-gl": "^1.4",
+    "vue": "^2.6"
   },
   "devDependencies": {
-    "@types/bootstrap": "^4.3.1",
+    "@types/bootstrap": "^4",
     "@types/gtag.js": "^0.0.2",
-    "@types/jquery": "^3.3.31",
-    "@types/node": "^12.7.1",
-    "ts-loader": "^6.0.4",
-    "typescript": "^3.5.3",
-    "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6"
+    "@types/jquery": "^3",
+    "@types/node": "^12",
+    "ts-loader": "^6",
+    "typescript": "^3",
+    "webpack": "^4",
+    "webpack-cli": "^3"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch --colors"
   }
 }

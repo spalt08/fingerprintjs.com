@@ -192,5 +192,28 @@ No media query since this is the default in Bootstrap because it is "mobile firs
 #lead-explanation {
   color: #454f5b;
   font-size: 0.75em;
+}
 
+.overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+  background: #212b35;
+  z-index: 99;
+}
+.overlay .overlay-close {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	overflow: hidden;
+	border: none;
+	background: url(/img/cross.png) no-repeat center center;
+	text-indent: 200%;
+	color: transparent;
+	outline: none;
+	z-index: 100;
 }
