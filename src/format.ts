@@ -22,6 +22,9 @@ export var ipLocation = (ipLocation: any) => {
   if (loc.latitude && loc.longitude) {
     out += " (" + loc.latitude + ", " + loc.longitude + ")";
   }
+  if(out === ""){
+    out = "Unknown location, anonymous proxy";
+  }
   return out;
 }
 

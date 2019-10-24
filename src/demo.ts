@@ -84,7 +84,7 @@ class Visit {
 
   onArrowClick() {
     this.collapsed = !this.collapsed;
-    if (!this.mapInitialized) {
+    if (!this.mapInitialized && this.lat && this.lng) {
       var visit = this;
       setTimeout(function () {
         visit.initMap();
@@ -174,7 +174,10 @@ function initApp(response: any) {
       }
     });
   }
-  initCurrentVisitMap(currentVisit);
+  // TOR browsers' IPs don't return lng/lat
+  if (currentVisit.lat && currentVisit.lng) {
+    initCurrentVisitMap(currentVisit);
+  }
 }
 
 function initCurrentVisitMap(visit: Visit) {
