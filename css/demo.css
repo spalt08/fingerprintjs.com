@@ -231,7 +231,7 @@ a.white {
   background: #212b35;
   z-index: 99;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .overlay .overlay-close {
