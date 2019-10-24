@@ -38,32 +38,40 @@
         <a href="/" class="navbar-brand">
           <span class="miriam">Fingerprint.js PRO</span>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a href="#!trial" class="p-3 text-light" data-toggle="modal" data-target="#contact-modal"
-              data-source="header">
-              Start your trial
-            </a>
-            <a href="https://github.com/fpjspro/fingerprintjs.com/" class="p-3 text-light" target="_blank">
-              <i class="mdi mdi-github-face"></i>
-              Edit on GitHub
-            </a>
-          </div>
-        </div>
       </nav>
     </div>
   </div>
   <div id="demo" class="container">
     <div class="row">
-      <div class="col">
-        <h1 id="vid-container" class="miriam text-center text-md-left mt-2">
+      <div class="col-12">
+        <h1 class="demo-h1 text-center mt-3">Fraud detection API demo</h1>
+        <h4 class="text-center"><strong>99.5%</strong> identification accuracy</h4>
+      </div>
+      <div class="col-12 order-lg-3">
+        <form id="email-form" method="POST" action="#start-trial" v-on:submit.prevent="emailFormSubmit()">
+          <div class="row no-gutters mt-3">
+            <div class="col-12 col-lg-4">
+              <div class="form-label-group">
+                <input id="lead-email1" type="email" name="lead-email" class="lead-input form-control form-control-lg"
+                  placeholder="Enter your email" v-model="lead.email" />
+                <label for="lead-email1">Enter your email</label>
+              </div>
+            </div>
+            <div class="col-12 col-lg-2">
+              <button type="submit" class="lead-submit btn btn-primary btn-lg btn-block ml-lg-3">Start free
+                trial</button>
+            </div>
+            <div class="col-12 order-lg-3 lead-explanation mt-3 mt-lg-0 text-center text-lg-left">
+              Try Fingerprint.js PRO free for 14 days, no credit card required.
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-12">
+        <h1 id="vid-container" class="miriam text-center text-md-left mt-2 pt-3">
           Your ID:
           <span id="vid" v-cloak>{{currentVisit.visitorId}}</span>
         </h1>
-        </p>
         <div class="card">
           <h5 class="card-header miriam text-center text-md-left" v-if="false">
             LOADING...
@@ -117,11 +125,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="text-center mt-4">
-          <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#contact-modal" data-source="demo">
-            Start free trial
-          </button>
         </div>
       </div>
     </div>
@@ -184,78 +187,62 @@
         </div>
       </div>
     </div>
-    <div class="row mt-3">
-      <div class="col text-center">
-        Questions? Talk to a founder via
-        <a href="mailto:valentin@fingerprintjs.com"> email</a>.
+    <div class="overlay" v-cloak v-if="leadMode">
+      <button type="button" class="overlay-close" v-on:click="leadMode=false">Close</button>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-lg-6 offset-lg-3">
+            <h2 class="overlay-header mb-4">Start your free 14-day trial of Fingerprint.js PRO</h2>
+            <form v-on:submit.prevent="fullFormSubmit()">
+              <div class="form-label-group">
+                <input id="lead-email2" type="email" name="lead-email" class="lead-input form-control form-control-lg"
+                  placeholder="Enter your email" required v-model="lead.email" />
+                <label for="lead-email">Email address</label>
+              </div>
+              <div class="form-label-group">
+                <input id="lead-website2" type="text" name="lead-website"
+                  class="lead-input form-control form-control-lg" placeholder="Enter your website" required
+                  v-model="lead.website" />
+                <label for="lead-email">Your website</label>
+              </div>
+              <div class="form-group text-right">
+                <button type="submit" class="lead-submit btn btn-primary btn-lg ml-2">Start free trial</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <footer class="pt-4  pt-md-5">
-          <div class="row border-top pt-3">
-            <div class="col-6 col-md-5 text-center text-md-left">
-              <h5>Resources</h5>
-              <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="/privacy.html">Privacy policy</a></li>
-                <li><a class="text-muted" href="/terms.html">Terms and conditions</a></li>
-              </ul>
-            </div>
-            <div class="col-6 col-md-5 text-center text-md-left">
-              <h5>Contact us</h5>
-              <ul class="list-unstyled text-small">
-                <li class="text-muted">
-                  <i class="mdi mdi-email"></i>
-                  <a class="text-muted" href="mailto:support@fingerprintjs.com">support@fingerprintjs.com</a></li>
-                <li class="text-muted">
-                  <i class="mdi mdi-phone"></i>
-                  <a href="tel:+13313307266">+1(331)330-7266</a></li>
-                <li class="text-muted">
-                  <i class="mdi mdi-near-me"></i>
+  <div class="container-fluid mt-3" style="background-color: #444;color:white">
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col text-center mt-3 text-lg-left">
+            <a href="/privacy" class="white">
+              <h5>Privacy policy</h5>
+            </a>
+            <a href="/terms" class="white">
+              <h5>Terms and conditions</h5>
+            </a>
+            <ul class="list-unstyled text-small">
+              <li class="py-2">
+                <i class="mdi mdi-email"></i>
+                <a class="white" href="mailto:support@fingerprintjs.com">support@fingerprintjs.com</a></li>
+              <li class="py-2">
+                <i class="mdi mdi-phone"></i>
+                <a class="white" href="tel:+13313307266">+1(331)330-7266</a></li>
+              <li class="py-2">
+                <i class="mdi mdi-near-me"></i>
+                <span class="white">
                   1440 W. Taylor St #735, Chicago, IL 60607, USA</li>
-              </ul>
-            </div>
+              </span>
+            </ul>
+            <small class="d-block mb-3" style="color:white">&copy; fingerprintjs.com 2019</small>
           </div>
-          <div class="text-center">
-            <small class="d-block mb-3 text-muted">&copy; fingerprintjs.com 2019</small>
-          </div>
-        </footer>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="contact-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-center">
-            Start your <b class="nunito">FPJS PRO</b> trial</h5>
-          <button type="button" class="close" data-dismiss="modal">
-            <span>&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id="contact-form-errors" class="alert alert-danger" style="display: none">
-          </div>
-          <form id="contact-form" method="POST" action="#">
-            <div class="form-label-group mt-2">
-              <input id="contact-email" name="email" type="email" class="form-control" placeholder="Your email"
-                required>
-              <label for="contact-email">Your email</label>
-            </div>
-            <div class="form-label-group mt-2">
-              <input id="contact-website" name="website" type="text" class="form-control" placeholder="Your website"
-                required>
-              <label for="contact-website">Your website</label>
-            </div>
-            <div>
-              <input type="submit" class="btn btn-success btn-block" value="Get Fingerprint.js PRO">
-            </div>
-          </form>
         </div>
       </div>
-    </div>
+    </footer>
   </div>
   <script src="/dist/demo.js"></script>
   <script>

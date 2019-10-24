@@ -163,3 +163,103 @@ No media query since this is the default in Bootstrap because it is "mobile firs
   color: red;
   font-weight: 800;
 }
+
+.lead-input {
+  border: 0;
+  box-shadow: 0 0 0 1px #c4cdd5;
+}
+
+@media (min-width: 1000px){
+  .lead-input {
+    min-width: 355px;
+  }
+}
+
+a.white {
+  color: white;
+}
+.red {
+  color: red;
+}
+
+.lead-input:focus {
+  color: black;
+  outline: 0;
+  box-shadow: 0 0 0 2px #393e9e;
+}
+
+.lead-submit {
+  background-color: #393e9e;
+  color: white;
+  box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);
+  border-width: 0;
+  border-style: solid;
+  border-color: transparent;
+  line-height: 1.9;
+}
+
+.lead-submit:hover {
+  box-shadow: 0 5px 25px 0 rgba(0,0,0,0.4);
+  background-color: #393e9e;
+}
+
+@media (min-width: 1000px) {
+  .lead-submit {
+    line-height: 1.75;
+  }
+}
+
+
+.lead-explanation {
+  color: #454f5b;
+}
+@media (min-width: 1000px) {
+  .lead-explanation {
+    font-size: 0.75em;
+  }
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #212b35;
+  z-index: 99;
+}
+.overlay .overlay-close {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	right: 30px;
+	top: 30px;
+	overflow: hidden;
+	border: none;
+	background: url(/img/cross.png) no-repeat center center;
+	text-indent: 200%;
+	color: transparent;
+	outline: none;
+	z-index: 100;
+}
+
+.overlay .container {
+  margin-top: 100px;
+}
+
+@media(min-width: 1000px){
+  .overlay .container {
+    margin-top: 150px;
+  }
+}
+.overlay-header {
+  color:white;
+}
+
+
+@media(min-width: 1000px) {
+  .demo-h1 {
+    font-size: 4em;
+    font-weight: 800;
+  }
+}
