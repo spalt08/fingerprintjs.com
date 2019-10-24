@@ -177,13 +177,13 @@ h1, h2, h3 {
 
 @media (min-width: 360px) {
   #main-logo {
-    font-size: 3.7rem;
+    font-size: 3.5rem;
   }
 }
 
 @media (min-width: 400px) {
   #main-logo {
-    font-size: 4.2rem;
+    font-size: 3.9rem;
   }
 }
 @media (min-width: 760px) {

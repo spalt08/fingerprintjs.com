@@ -2,6 +2,7 @@
   * fingerprintjs.com demo.ts
   * Copyright 2019 https://fingerprintjs.com
   */
+import * as $ from "jquery";
 import Vue from "vue";
 import * as mapboxgl from "mapbox-gl";
 import * as format from "./format";
@@ -24,11 +25,16 @@ export function load(fp: any, onThen: (res: any) => void, onCatch: (err: any) =>
 (mapboxgl as any).accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 
 class Visit {
+  private readonly index: number;
   private readonly response: any;
+  private readonly visitorId: string;
   private readonly botProbability: number;
+  // used in the UI, not used in code directly
+  private readonly ip: string;
   private readonly ipLocation: any;
   private readonly browserDetails: any;
   private readonly time: Date;
+  private readonly visitorFound: boolean;
 
   public readonly incognito: boolean;
   public readonly lng: number;
@@ -40,14 +46,18 @@ class Visit {
   public mapInitialized = false;
 
   constructor(index: number, response: any) {
+    this.index = index;
     this.response = response;
+    this.visitorId = response.visitorId;
     this.incognito = response.incognito;
     this.botProbability = response.botProbability;
+    this.ip = response.ip;
     this.ipLocation = response.ipLocation;
     this.lng = this.ipLocation.longitude;
     this.lat = this.ipLocation.latitude;
     this.browserDetails = response.browserDetails;
     this.time = new Date(response.time);
+    this.visitorFound = response.visitorFound;
     // UI variables
     this.mapContainerId = "map-container-" + index;
   }
@@ -77,7 +87,7 @@ class Visit {
     if (!this.mapInitialized) {
       var visit = this;
       setTimeout(function () {
-        // visit.initMap();
+        visit.initMap();
       }, 100);
     }
   }
@@ -100,7 +110,7 @@ class Visit {
 
 function initApp(response: any) {
   var currentVisit = new Visit(0, response);
-  new Vue({
+  var app = new Vue({
     el: "#demo",
     data: {
       currentVisit: currentVisit,
@@ -119,10 +129,32 @@ function initApp(response: any) {
         this.leadMode = true;
         gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
       },
-      fullFormSubmit: function() {
-        this.leadMode = false;
-        setTimeout(()=>{alert("Thanks, we received your information,\nwe'll get back to you soon by email.\n🚀")}, 400);
-
+      fullFormSubmit: function () {
+        var payload = {
+          email: this.lead.email,
+          website: this.lead.website,
+          name: this.lead.email
+        };
+        $.ajax({
+          url: process.env.FPJS_LEAD_URL,
+          type: 'post',
+          dataType: 'json',
+          contentType: 'application/json',
+          data: JSON.stringify(payload)
+        }).catch(() => {
+          gtag("event", "lead-submit", { event_category: "lead", event_label: "error" });
+          alert("🛑\nError occurred, contact us at: support@fingerprintjs.com");
+          this.leadMode = false;
+        }).then((response: any) => {
+          if (response.errors && response.errors.length > 0) {
+            gtag("event", "lead-submit", { event_category: "lead", event_label: "validation-fail" });
+          } else {
+            alert("Thanks, we received your request,\nwe'll get back to you soon.\n🚀");
+            this.lead = {};
+            gtag("event", "lead-submit", { event_category: "lead", event_label: "success" });
+          }
+          this.leadMode = false;
+        });
       }
     }
   });
@@ -131,14 +163,14 @@ function initApp(response: any) {
     url += response.visitorId;
     url += "/?token=" + process.env.FPJS_API_TOKEN;
     url += "&limit=10";
-    // $.getJSON(url, function (visitsResponse) {
-    //   for (var i = 1; i < visitsResponse.visits.length; i++) {
-    //     var visit = new Visit(i, visitsResponse.visits[i]);
-    //     app.visits.push(visit);
-    //   }
-    // });
+    $.getJSON(url, function (visitsResponse) {
+      for (var i = 1; i < visitsResponse.visits.length; i++) {
+        var visit = new Visit(i, visitsResponse.visits[i]);
+        app.visits.push(visit);
+      }
+    });
   }
-  // initCurrentVisitMap(currentVisit);
+  initCurrentVisitMap(currentVisit);
 }
 
 function initCurrentVisitMap(visit: Visit) {
@@ -226,8 +258,3 @@ function initCurrentVisitMap(visit: Visit) {
     });
   });
 };
-
-// $('body').on('click', '[data-toggle=modal]', (e) => {
-//   var source = $(e.currentTarget).data("source");
-//   gtag("event", "contact-click", { event_category: "contact", event_label: source });
-// });

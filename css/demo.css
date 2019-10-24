@@ -166,8 +166,20 @@ No media query since this is the default in Bootstrap because it is "mobile firs
 
 .lead-input {
   border: 0;
-  min-width: 355px;
   box-shadow: 0 0 0 1px #c4cdd5;
+}
+
+@media (min-width: 1000px){
+  .lead-input {
+    min-width: 355px;
+  }
+}
+
+a.white {
+  color: white;
+}
+.red {
+  color: red;
 }
 
 .lead-input:focus {
@@ -183,7 +195,7 @@ No media query since this is the default in Bootstrap because it is "mobile firs
   border-width: 0;
   border-style: solid;
   border-color: transparent;
-  line-height: 1.7;
+  line-height: 1.9;
 }
 
 .lead-submit:hover {
@@ -191,9 +203,20 @@ No media query since this is the default in Bootstrap because it is "mobile firs
   background-color: #393e9e;
 }
 
+@media (min-width: 1000px) {
+  .lead-submit {
+    line-height: 1.75;
+  }
+}
+
+
 .lead-explanation {
   color: #454f5b;
-  font-size: 0.75em;
+}
+@media (min-width: 1000px) {
+  .lead-explanation {
+    font-size: 0.75em;
+  }
 }
 
 .overlay {
@@ -218,4 +241,25 @@ No media query since this is the default in Bootstrap because it is "mobile firs
 	color: transparent;
 	outline: none;
 	z-index: 100;
+}
+
+.overlay .container {
+  margin-top: 100px;
+}
+
+@media(min-width: 1000px){
+  .overlay .container {
+    margin-top: 150px;
+  }
+}
+.overlay-header {
+  color:white;
+}
+
+
+@media(min-width: 1000px) {
+  .demo-h1 {
+    font-size: 4em;
+    font-weight: 800;
+  }
 }
