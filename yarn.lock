@@ -69,11 +69,6 @@
     "@types/jquery" "*"
     popper.js "^1.14.1"
 
-"@types/geojson@*":
-  version "7946.0.7"
-  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.7.tgz#c8fa532b60a0042219cdf173ca21a975ef0666ad"
-  integrity sha512-wE2v81i4C4Ol09RtsWFAqg3BUitWbHSpSlIo+bNdsCJijO9sjme+zm+73ZMCa/qMC8UEERxzGbvmr1cffo2SiQ==
-
 "@types/gtag.js@^0.0.2":
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/@types/gtag.js/-/gtag.js-0.0.2.tgz#64620922012f6cdf2c3b13a84dde3686ab7d48d9"
@@ -85,13 +80,6 @@
   integrity sha512-Lz4BAJihoFw5nRzKvg4nawXPzutkv7wmfQ5121avptaSIXlDNJCUuxZxX/G+9EVidZGuO0UBlk+YjKbwRKJigg==
   dependencies:
     "@types/sizzle" "*"
-
-"@types/mapbox-gl@^0.54.5":
-  version "0.54.5"
-  resolved "https://registry.yarnpkg.com/@types/mapbox-gl/-/mapbox-gl-0.54.5.tgz#d50285796cb9d3544121d9e2b5314da99f9774bf"
-  integrity sha512-h0MqA7rtP88vuMepODf1oomJLeuRAZfOiYdeGS3NYO4TMQs237TkA+bNehy7V5nfyCjPRuKrb0fnWMjncHak0g==
-  dependencies:
-    "@types/geojson" "*"
 
 "@types/node@^12":
   version "12.11.5"

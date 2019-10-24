@@ -53,7 +53,7 @@
             <div class="col-12 col-lg-4">
               <div class="form-label-group">
                 <input id="lead-email1" type="email" name="lead-email" class="lead-input form-control form-control-lg"
-                  placeholder="Enter your email" v-model="lead.email" />
+                  autocomplete="off" placeholder="Enter your email" v-model="lead.email" />
                 <label for="lead-email1">Enter your email</label>
               </div>
             </div>
@@ -195,12 +195,13 @@
             <h2 class="overlay-header mb-4">Start your free 14-day trial of Fingerprint.js PRO</h2>
             <form v-on:submit.prevent="fullFormSubmit()">
               <div class="form-label-group">
-                <input id="lead-email2" type="email" name="lead-email" class="lead-input form-control form-control-lg"
-                  placeholder="Enter your email" required v-model="lead.email" />
+                <input id="lead-email2" type="email" name="lead-email" autocomplete="off"
+                  class="lead-input form-control form-control-lg" placeholder="Enter your email" required
+                  v-model="lead.email" />
                 <label for="lead-email">Email address</label>
               </div>
               <div class="form-label-group">
-                <input id="lead-website2" type="text" name="lead-website"
+                <input id="lead-website2" type="text" name="lead-website" autocomplete="off"
                   class="lead-input form-control form-control-lg" placeholder="Enter your website" required
                   v-model="lead.website" />
                 <label for="lead-email">Your website</label>
@@ -212,6 +213,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
   <div class="container-fluid mt-3" style="background-color: #444;color:white">
