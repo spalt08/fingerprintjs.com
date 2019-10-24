@@ -6,8 +6,8 @@ $('#contact-form').on('submit', (e) => {
   var payload = {
     website: $("#contact-website").val(),
     email: $('#contact-email').val(),
-    name: $('#contact-name').val(),
-    comment: $('#contact-comment').val()
+    name: $('#contact-email').val(),
+    // comment: $('#contact-comment').val()
   };
   $.ajax({
     url: process.env.FPJS_LEAD_URL,
@@ -33,7 +33,7 @@ $('#contact-form').on('submit', (e) => {
       $errorsDiv.empty();
       $errorsDiv.hide();
       $('#contact-modal').modal('hide');
-      setTimeout(() => { alert('Thanks, we received your data') }, 300);
+      setTimeout(() => { alert('Thanks, we received your data.') }, 300);
     }
   });
 });
