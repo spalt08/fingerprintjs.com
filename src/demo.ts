@@ -116,6 +116,7 @@ function initApp(response: any) {
       currentVisit: currentVisit,
       visits: [] as Visit[],
       leadMode: false,
+      leadSubmitting: false,
       lead: {}
     },
     methods: {
@@ -135,6 +136,7 @@ function initApp(response: any) {
           website: this.lead.website,
           name: this.lead.email
         };
+        this.leadSubmitting = true;
         $.ajax({
           url: process.env.FPJS_LEAD_URL,
           type: 'post',
@@ -142,10 +144,13 @@ function initApp(response: any) {
           contentType: 'application/json',
           data: JSON.stringify(payload)
         }).catch(() => {
+          this.leadSubmitting = false;
+          this.leadMode = false;
           gtag("event", "lead-submit", { event_category: "lead", event_label: "error" });
           alert("🛑\nError occurred, contact us at: support@fingerprintjs.com");
-          this.leadMode = false;
         }).then((response: any) => {
+          this.leadSubmitting = false;
+          this.leadMode = false;
           if (response.errors && response.errors.length > 0) {
             gtag("event", "lead-submit", { event_category: "lead", event_label: "validation-fail" });
           } else {
@@ -153,7 +158,6 @@ function initApp(response: any) {
             this.lead = {};
             gtag("event", "lead-submit", { event_category: "lead", event_label: "success" });
           }
-          this.leadMode = false;
         });
       }
     }

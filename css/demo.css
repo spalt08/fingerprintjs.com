@@ -203,6 +203,10 @@ a.white {
   background-color: #393e9e;
 }
 
+.lead-submit:disabled {
+  background-color: #777;
+}
+
 @media (min-width: 1000px) {
   .lead-submit {
     line-height: 1.75;
