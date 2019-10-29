@@ -2,6 +2,12 @@
 @import "modules/material-icons";
 @import "modules/color-util";
 @import "modules/font-util";
-//
+
 @import "modules/lead-form";
-@import "pages/index"
+@import "pages/index";
+
+// footer
+.footer-container {
+  color: white;
+  background-color: #444;
+}
