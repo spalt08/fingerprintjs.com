@@ -8,17 +8,16 @@
   <title>Fingerprint.js PRO - fraud detection & browser fingerprinting API</title>
   <link rel="preconnect" href="https://api.fpjs.io">
   <link rel="preconnect" href="https://api.rollbar.com">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="css/bootstrap4-pleasant.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" type="text/css" href="/css/materialdesignicons.min.css" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134245186-1"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/dist/main.css">
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134245186-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'UA-134245186-1');
-  </script>
+  </script> -->
   <script>
     var _rollbarConfig = {
       accessToken: "7cccede652874b068cc3f9bb1e05b8e4",
@@ -60,14 +59,12 @@
   <script async src="/js/fp-201910221534.js"></script>
 </head>
 
-<body class="bg-light">
+<body>
   <div class="bg-primary navbar-dark text-white">
     <div class="container">
       <nav class="navbar px-0 navbar-expand-lg navbar-dark">
         <a href="/" class="navbar-brand">
-          <span class="nunito">Fingerprint.js</span>
-          <i id="nav-fp" class="material-icons">fingerprint</i>
-          <span class="nunito">PRO</span>
+          <span class="miriam">Fingerprint.js PRO</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
           <span class="navbar-toggler-icon"></span>
@@ -93,413 +90,233 @@
     </div>
   </div>
   <div class="container">
-    <div class="row pt-5">
-      <div class="col text-center">
-        <h1 id="main-logo">
-          Fingerprint.js PRO
-        </h1>
-        <h2 id="accuracy">
-          <span class="red">99.5%</span> identification accuracy
-        </h2>
-
-        <a href="/demo" class="btn btn-danger btn-lg">
-          <h3 class="pt-2">
-            <i class="material-icons" style="vertical-align: middle">fingerprint</i>
-            run the demo
-          </h3>
-        </a>
-
+    <div class="row">
+      <div class="col-12">
+        <h1 class="fw-900 text-center mt-5">Fraud detection API</h1>
+        <h5 class="text-center"><strong class="red">99.5%</strong> identification accuracy</h5>
+      </div>
+      <div class="col-12 order-lg-3">
+        <form id="email-form" method="POST" action="#start-trial" v-on:submit.prevent="emailFormSubmit()">
+          <div class="row no-gutters mt-3">
+            <div class="col-12 col-lg-4">
+              <div class="form-label-group">
+                <input id="lead-email1" type="email" name="lead-email" class="lead-input form-control form-control-lg"
+                  autocomplete="off" placeholder="Enter your email" v-model="lead.email" />
+                <label for="lead-email1">Enter your email</label>
+              </div>
+            </div>
+            <div class="col-12 col-lg-2">
+              <button type="submit" class="lead-submit btn btn-primary btn-lg btn-block ml-lg-3">Start free
+                trial</button>
+            </div>
+            <div class="col-12 order-lg-3 lead-explanation mt-3 mt-lg-0 text-center text-lg-left">
+              Try Fingerprint.js PRO free for 14 days, no credit card required.
+            </div>
+            <div class="colr-12 mt-3">
+              <img src="/img/demo-mobile.png" class="img-fluid" />
+            </div>
+            <div class="col-12 mt-3">
+              <a href="/demo" class="btn btn-warning btn-lg btn-block demo-button fw-600">
+                Run the demo
+              </a>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div id="industries">
-      <h3 id="fraud-header" class="text-center">Fraud detection API for your business</h3>
-      <div class="card-group">
-        <div class="card">
-          <img src="/img/ecommerce-round.svg" class="industry-img py-4 border-bottom" alt="e-commerce & retail">
-          <div class="card-body">
-            <h5 class="card-title text-center">E-commerce & Retail</h5>
-            <p class="card-text">
-              Every fraudulent order is money directly out of your pocket. With our best in class tools you can <b>stop
-                malicious users before they cost you real money</b>.
-            </p>
+  </div>
+  <div class="container-fluid bg-light">
+    <div class="container mt-5">
+      <div id="industries" class="pt-3">
+        <h2 class="text-center fw-800 mt-3">Industries</h2>
+        <div class="card-group mt-4">
+          <div class="card">
+            <img src="/img/payment.svg" class="industry-img py-4 border-bottom" alt="payment processing">
+            <div class="card-body">
+              <h5 class="card-title text-center fw-800">PAYMENT PROCESSING</h5>
+              <p class="card-text text-center">
+                Confirm that <b>every payment you collect is real</b> and not an advanced bot using
+                multiple techniques to evade detection.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/img/crypto.svg" class="industry-img py-4 border-bottom" alt="crypto trading" />
+            <div class="card-body">
+              <h5 class="card-title text-center fw-800">CRYPTOCURRENCY</h5>
+              <p class="card-text text-center">
+                Make sure that your trading, exchange and transfer operations are safe from malicious
+                activity or account fraud.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/img/gaming.svg" class="industry-img py-4 border-bottom" alt="gaming">
+            <div class="card-body">
+              <h5 class="card-title text-center fw-800">GAMING</h5>
+              <p class="card-text text-center">
+                <b>Catch users trying to break your system</b> via multiple accounts, devices, and IP addresses to
+                unjustly
+                enrich themselves.
+              </p>
+            </div>
           </div>
         </div>
-        <div class="card">
-          <img src="/img/news-round.svg" class="industry-img py-4 border-bottom" alt="news & content">
-          <div class="card-body">
-            <h5 class="card-title text-center">News & Content</h5>
-            <p class="card-text">
-              Users know how to evade your paywalls with incognito windows. Make sure that <b>users pay a fair price for
-                your content</b> on your site.
-              <b>
-                <a href="/paywall">Learn more.</a>
-              </b>
-            </p>
+        <div class="card-group mt-4">
+          <div class="card">
+            <img src="/img/ecommerce.svg" class="industry-img py-4 border-bottom" alt="e-commerce & retail">
+            <div class="card-body">
+              <h5 class="card-title text-center fw-800">E-COMMERCE</h5>
+              <p class="card-text text-center">
+                Every fraudulent order is money directly out of your pocket. With our best in class tools you can
+                <b>stop
+                  malicious users before they cost you real money</b>.
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <img src="/img/payment-round.svg" class="industry-img py-4 border-bottom" alt="payment processing">
-          <div class="card-body">
-            <h5 class="card-title text-center">Payment Processing</h5>
-            <p class="card-text">
-              Confirm that <b>every payment you collect is real</b> and not an advanced bot using
-              multiple techniques to evade detection.
-            </p>
+          <div class="card">
+            <img src="/img/content.svg" class="industry-img py-4 border-bottom" alt="news & content">
+            <div class="card-body">
+              <h5 class="card-title text-center fw-800">CONTENT CREATION</h5>
+              <p class="card-text text-center">
+                Users know how to get unlimited views of your content with incognito windows. Make sure that <b>users
+                  pay a fair price
+                  for your content</b> on your site.
+                <br />
+                <b>
+                  <a href="/paywall">LEARN MORE</a>
+                </b>
+              </p>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="card-group mt-4">
-        <div class="card">
-          <img src="/img/gaming-round.svg" class="industry-img py-4 border-bottom" alt="gaming">
-          <div class="card-body">
-            <h5 class="card-title text-center">Gaming</h5>
-            <p class="card-text">
-              <b>Catch users trying to break your system</b> via multiple accounts, devices, and IP addresses to
-              unjustly
-              enrich themselves.
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="/img/travel-round.svg" class="industry-img py-4 border-bottom" alt="travel & entertainment" />
-          <div class="card-body">
-            <h5 class="card-title text-center">Travel & Entertainment</h5>
-            <p class="card-text">
-              We can help you <b>confirm that every ticket sale is legitimate</b>.
-              Prevent bots from scraping your prices.
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="/img/more-round.svg" class="industry-img py-4 border-bottom" alt="custom solutions">
-          <div class="card-body">
-            <h5 class="card-title text-center">More</h5>
-            <p class="card-text">
-              We can build a custom solution that works for your industry.
-              <br>
-              <a href="#!trial" data-toggle="modal" data-target="#contact-modal" data-source="industry-more">
-                <b>Contact us</b></a>
-              to learn how.
-            </p>
+          <div class="card">
+            <img src="/img/more.svg" class="industry-img py-4 border-bottom" alt="custom solutions">
+            <div class="card-body">
+              <h5 class="card-title text-center fw-800">CUSTOM SOLUTION</h5>
+              <p class="card-text text-center">
+                We can build a custom solution that works for your industry.
+                <br>
+                <a href="#!trial" data-toggle="modal" data-target="#contact-modal" data-source="industry-more">
+                  <b>CONTACT US</b></a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CHALLENGES -->
-  <div class="bg-white pt-5">
-    <div class="container">
-      <h3 id="challenges-header" class="text-center">We understand the challenges you're facing</h3>
-      <div id="challenges-container" class="row">
-        <div id="challenges-left" class="col-sm-8">
-          <div class="row mb-5 no-gutters">
-            <div class="col-3 col-md-2 text-center">
-              <div class="challenge-box">#1</div>
-            </div>
-            <div class="col">
-              <div class="challenge-answer">Fraud is more advanced than ever</div>
-            </div>
-          </div>
-          <div class="row mb-5">
-            <div class="col">
-              The old tools to catch fraudulent users are not good enough anymore.
-              You have to stay up to date to fight the latest evasion techniques. We continuously research new methods
-              to keep you safe.
-            </div>
-          </div>
-          <div class="row mb-5 no-gutters">
-            <div class="col-3 col-md-2 text-center">
-              <div class="challenge-box">#2</div>
-            </div>
-            <div class="col">
-              <div class="challenge-answer">Cookies are not enough</div>
-            </div>
-          </div>
-          <div class="row mb-5">
-            <div class="col">
-              Everyone on the internet knows how to clear their cookies these days. You need a tracking method that
-              survives clearing cookies.
-              With our fingerprint + machine learning we can help you identify bad users across browsing sessions,
-              incognito windows or clearing cookies.
-            </div>
-          </div>
-          <div class="row mb-5 no-gutters">
-            <div class="col-3 col-md-2 text-center">
-              <div class="challenge-box">#3</div>
-            </div>
-            <div class="col">
-              <div class="challenge-answer">Bots are harder to detect</div>
-            </div>
-          </div>
-          <div class="row mb-5">
-            <div class="col">
-              Today's bots look like real users. There is bot software out there that runs full browsers to look just
-              like real visitors.
-              Every year they get more advanced. We can help you detect whether any of your visitors is a suspected bot
-              and then you can have them prove they are humans.
-            </div>
-          </div>
-          <div class="row mb-5 no-gutters">
-            <div class="col-3 col-md-2 text-center">
-              <div class="challenge-box">#4</div>
-            </div>
-            <div class="col">
-              <div class="challenge-answer">Incognito detection is unreliable</div>
-            </div>
-          </div>
-          <div class="row mb-5">
-            <div class="col">
-              Users know that they can avoid paywalls by opening incognito windows.
-              We can work with you to craft custom paywalls combining a unique, fingerprint driven trial period.
-              This means you don't need to block all incognito browsers but can actually show more trial content and get
-              more paying customers in the end.
-            </div>
-          </div>
-        </div>
-        <div id="challenges-right" class="col-sm-4 bg-light">
-          <h4 class="fw-600 mb-5 text-center mt-4">
-            <strong>What we offer</strong>
-          </h4>
-          <p>
-            We offer a complete solution to your user identification problems.
-          </p>
-          <p>
-            Our team will be there with you from the initial contact, collecting requirements,
-            implementing a custom solution,
-            and delivering the software that you need to identify suspicious users that are trying to take advantage of
-            you.
-          </p>
-          <p>
-            With our software you can truly understand your website visitors, get a clear view of your traffic,
-            including incognito sessions.
-          </p>
-          <p>
-            Use our tools to automate your fraud-detection processes. Get instant answers about any visitor.
-            Measure how many visitors are using incognito or how many are bots.
-          </p>
-          <p>
-            Receive notifications about suspicious activity on your website.
-          </p>
-          <p>
-            <a href="#!trial" data-toggle="modal" data-target="#contact-modal" data-source="we-offer">
-              <b>Contact us</b>
-            </a>
-            to learn how Fingerprint.js PRO can help your business.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FEATURES-->
-  <div id="features" class="bg-white pb-4">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col my-4">
-          <h3><b>Fingerprint.js PRO can...</b></h3>
-        </div>
-      </div>
-      <div class="card-group">
-        <div class="card">
-          <div class="card-header">
-            <i class="material-icons">fingerprint</i>
-            <span>
-              Browser fingerprinting
-            </span>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              generate the highest entropy browser fingerprint on the market.
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <i class="material-icons">group_add</i>
-            <span>
-              Anonymous user identification
-            </span>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              track bad users even when they try to stay anonymous.
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <i class="material-icons">router</i>
-            <span> Bot detection </span>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              detect JavaScript bots.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="card-group mt-1">
-        <div class="card">
-          <div class="card-header">
-            <i class="material-icons">device_unknown</i>
-            <span>
-              Incognito mode detection
-            </span>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              track users across incognito browsing sessions with the newest methods.
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <i class="material-icons">location_on</i>
-            <span>
-              Geolocation
-            </span>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              determine where your users are located.
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <i class="material-icons">developer_mode</i>
-            <span>API & Webhook</span>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              send you data directly to drive automated workflows.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- PRICING -->
-  <div id="pricing" class="container-fluid bg-light">
-    <div class="container pb-5">
-      <div class="row p-5">
-        <div class="col text-center">
-          <h2><b>Pricing</b></h2>
+  <div class="container">
+    <div class="row py-4">
+      <div class="col text-center fw-800">
+        <h2><b>Pricing</b></h2>
+      </div>
+    </div>
+    <div class="card-deck mb-3 text-center">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title miriam fw-900" style="font-size: 2.8rem">starter</h1>
+          <h3 class="card-title pricing-card-title">$100 <small class="text-muted">/ mo</small></h3>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li><b>100k</b> identifications </li>
+            <li><b>100k</b> API calls</li>
+            <li><b>30 day</b> history</li>
+            <li><b>Email</b> support</li>
+          </ul>
+          <button type="button" class="btn btn-lg btn-block lead-submit" data-source="pricing-starter">Start free
+            trial</button>
         </div>
       </div>
-      <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Starter</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$100 <small class="text-muted">/ mo</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>100k identifications included</li>
-              <li>100k API calls</li>
-              <li>30 day history</li>
-              <li>Email support</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary" data-toggle="modal"
-              data-target="#contact-modal" data-source="pricing-starter">Get started</button>
-          </div>
-        </div>
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Enterprise</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">Contact us</h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li><b>Unlimited</b> identifications</li>
-              <li><b>Unlimited</b> API calls</li>
-              <li><b>Unlimited</b> visit history</li>
-              <li><b>24/7</b> dedicated support</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary" data-toggle="modal"
-              data-target="#contact-modal" data-source="pricing-enterprise">Contact us</button>
-          </div>
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title miriam fw-900" style="font-size: 2.8rem">unlimited</h1>
+          <h3 class="card-title pricing-card-title">Contact us</h3>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li><b>Unlimited</b> identifications</li>
+            <li><b>Unlimited</b> API calls</li>
+            <li><b>Unlimited</b> visit history</li>
+            <li><b>24/7</b> dedicated support</li>
+          </ul>
+          <button type="button" class="btn btn-lg btn-block lead-submit" data-source="pricing-enterprise">Start free
+            trial</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="bg-white">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <footer class="pt-4  pt-md-5">
-            <div class="row">
-              <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                  <li><a class="text-muted" href="/privacy.html">Privacy policy</a></li>
-                  <li><a class="text-muted" href="/terms.html">Terms and conditions</a></li>
-                </ul>
-              </div>
-              <div class="col-6 col-md">
-                <h5>Contact us</h5>
-                <ul class="list-unstyled text-small">
-                  <li class="text-muted">
-                    <i class="mdi mdi-email"></i>
-                    <a class="text-muted" href="mailto:support@fingerprintjs.com">support@fingerprintjs.com</a></li>
-                  <li class="text-muted">
-                    <i class="mdi mdi-phone"></i>
-                    <a href="tel:+13313307266">+1(331)330-7266</a></li>
-                  <li class="text-muted">
-                    <i class="mdi mdi-near-me"></i>
-                    1440 W. Taylor St #735, Chicago, IL 60607, USA</li>
-                </ul>
-              </div>
-            </div>
-            <div class="text-center">
-              &copy; fingerprintjs.com 2019
-            </div>
-          </footer>
-        </div>
+  <!-- Understand your users-->
+  <div class="container">
+    <div class="row text-center">
+      <div class="col my-4">
+        <h2 class="fw-800">Fully understand your users</h2>
+      </div>
+    </div>
+
+    <img src="/img/dash.png" class="img-fluid" alt="dashboard" />
+    <div class="text-center">
+      <h4 class="fw-800 mt-4">BROWSER FINGERPRINTING</h4>
+      <div class="miriam">
+        generate the highest entropy browser fingerprint on the market.
+      </div>
+
+      <h4 class="fw-800 mt-5">ANONYMOUS USER IDENTIFICATION</h4>
+      <div class="miriam">
+        track bad users even when they try to stay anonymous.
+      </div>
+
+      <h4 class="fw-800 mt-5">BOT DETECTION</h4>
+      <div class="miriam">
+        detect JavaScript bots
+      </div>
+
+      <h4 class="fw-800 mt-5">INCOGNITO MODE DETECTION</h4>
+      <div class="miriam">
+        track users across incognito browsing sessions with the newest methods.
+      </div>
+
+      <h4 class="fw-800 mt-5">GEOLOCATION</h4>
+      <div class="miriam">
+        determine where your users are located.
+      </div>
+
+      <h4 class="fw-800 mt-5">API & WEBHOOKS</h4>
+      <div class="miriam">
+        create automated workflows
       </div>
     </div>
   </div>
-  <div class="modal fade" id="contact-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-center">
-            Start your <b class="nunito">Fingerprint.js PRO</b> trial</h5>
-          <button type="button" class="close" data-dismiss="modal">
-            <span>&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id="contact-form-errors" class="alert alert-danger" style="display: none">
+  <div class="container-fluid mt-3" style="background-color: #444;color:white">
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col text-center mt-3 text-lg-left">
+            <a href="/privacy" class="white">
+              <h5>Privacy policy</h5>
+            </a>
+            <a href="/terms" class="white">
+              <h5>Terms and conditions</h5>
+            </a>
+            <ul class="list-unstyled text-small">
+              <li class="py-2">
+                <i class="mdi mdi-email"></i>
+                <a class="white" href="mailto:support@fingerprintjs.com">support@fingerprintjs.com</a></li>
+              <li class="py-2">
+                <i class="mdi mdi-phone"></i>
+                <a class="white" href="tel:+13313307266">+1(331)330-7266</a></li>
+              <li class="py-2">
+                <i class="mdi mdi-near-me"></i>
+                <span class="white">
+                  1440 W. Taylor St #735, Chicago, IL 60607, USA</li>
+              </span>
+            </ul>
+            <small class="d-block mb-3" style="color:white">&copy; fingerprintjs.com 2019</small>
           </div>
-          <form id="contact-form" method="POST" action="#">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="form-label-group mt-2">
-                  <input id="contact-website" name="website" type="text" class="form-control" placeholder="Your website"
-                    required>
-                  <label for="contact-website">Your website</label>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-label-group mt-2">
-                  <input id="contact-email" name="email" type="email" class="form-control" placeholder="Your email"
-                    required>
-                  <label for="contact-email">Your email</label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6 col-s-12 mt-2">
-                <input type="submit" class="btn btn-primary btn-block" value="  Send  ">
-              </div>
-            </div>
-          </form>
         </div>
       </div>
-    </div>
+    </footer>
   </div>
+
   <script src="/dist/index.js"></script>
 </body>
 

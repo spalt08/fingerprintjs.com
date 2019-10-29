@@ -4,8 +4,8 @@ var webpack = require('webpack')
 module.exports = {
   mode: process.env["WEBPACK_ENV"] || "development",
   entry: {
-    index: './src/index',
-    demo: './src/demo'
+    index: './src/javascript/index',
+    demo: './src/javascript/demo'
   },
   output: {
     path: path.resolve(__dirname, './dist'),
