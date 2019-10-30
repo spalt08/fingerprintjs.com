@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no user-scalable=no">
   <meta name="description" content="Browser identification demo, fraud detection demo">
+  <link rel="preconnect" href="https://cdn.fpjs.io">
   <link rel="preconnect" href="https://api.fpjs.io">
   <link rel="preconnect" href="https://api.rollbar.com">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/css/materialdesignicons.min.css" />
-  <link href="css/demo.css" rel="stylesheet">
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+  <link href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/dist/main.css">
   <title>Fingerprint.js PRO demo</title>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134245186-1"></script>
   <script>
@@ -70,7 +70,7 @@
       <div class="col-12">
         <h1 id="vid-container" class="miriam text-center text-md-left mt-2 pt-3">
           Your ID:
-          <span id="vid" v-cloak>{{currentVisit.visitorId}}</span>
+          <span class="red fw-900" v-cloak>{{currentVisit.visitorId}}</span>
         </h1>
         <div class="card">
           <h5 class="card-header miriam text-center text-md-left" v-if="false">

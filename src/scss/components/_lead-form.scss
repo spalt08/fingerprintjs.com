@@ -1,5 +1,3 @@
-@import "lead-form/overlay";
-
 .lead-input {
   border: 0;
   box-shadow: 0 0 0 1px #c4cdd5;
@@ -11,9 +9,9 @@
   box-shadow: 0 0 0 2px #393e9e;
 }
 
-@media (min-width: 1000px){
+@media (min-width: $lg){
   .lead-input {
-    min-width: 355px;
+    min-width: 250px;
   }
 }
 

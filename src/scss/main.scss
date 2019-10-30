@@ -1,13 +1,13 @@
-@import "modules/fancy-input";
-@import "modules/material-icons";
-@import "modules/color-util";
-@import "modules/font-util";
+@import "variables";
+@import "fancy-input";
+@import "color-util";
+@import "font-util";
+@import "vue-util";
 
-@import "modules/lead-form";
+@import "components/lead-form";
+@import "components/footer";
+
 @import "pages/index";
+@import "pages/demo";
+@import "pages/paywall";
 
-// footer
-.footer-container {
-  color: white;
-  background-color: #444;
-}

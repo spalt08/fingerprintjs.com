@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Browser Fingerprinting, JavaScript identification, fraud detection">
   <title>Fingerprint.js PRO - fraud detection & browser fingerprinting API</title>
+  <link rel="preconnect" href="https://cdn.fpjs.io">
   <link rel="preconnect" href="https://api.fpjs.io">
   <link rel="preconnect" href="https://api.rollbar.com">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -71,19 +72,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a href="/#features" class="p-3 text-decoration-none text-light" data-link="#features">
-              Features
-            </a>
-            <a href="#!trial" class="p-3 text-light" data-toggle="modal" data-target="#contact-modal"
-              data-source="header">
-              Start your trial
-            </a>
-            <a href="/#pricing" class="p-3 text-decoration-none text-light" data-link="#pricing">
-              Pricing
-            </a>
-            <a href="/open-source" class="p-3 text-decoration-none text-light">
-              Open-Source
-            </a>
+            <a href="/demo" class="p-3 text-decoration-none text-light"> Demo </a>
+            <a href="#trial" class="p-3 text-light"> Start free trial </a>
+            <a href="#industries" class="p-3 text-light"> Industries </a>
+            <a href="/#pricing" class="p-3 text-decoration-none text-light" data-link="#pricing"> Pricing </a>
+            <a href="/#tools" class="p-3 text-decoration-none text-light" data-link="#tools"> Tools </a>
+            <a href="/open-source" class="p-3 text-decoration-none text-light"> Open-Source </a>
           </div>
         </div>
       </nav>
@@ -91,41 +85,43 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <h1 class="fw-900 text-center mt-5">Fraud detection API</h1>
-        <h5 class="text-center"><strong class="red">99.5%</strong> identification accuracy</h5>
-      </div>
-      <div class="col-12 order-lg-3">
+      <div class="col-12 col-lg-5">
+        <div class="text-center text-lg-left">
+          <h1 class="index-header">Fraud detection API</h1>
+          <h5><strong class="red">99.5%</strong> identification accuracy</h5>
+        </div>
         <form id="email-form" method="POST" action="#start-trial" v-on:submit.prevent="emailFormSubmit()">
-          <div class="row no-gutters mt-3">
-            <div class="col-12 col-lg-4">
+          <div class="row no-gutters mt-4">
+            <div class="col-12 col-lg-7">
               <div class="form-label-group">
                 <input id="lead-email1" type="email" name="lead-email" class="lead-input form-control form-control-lg"
                   autocomplete="off" placeholder="Enter your email" v-model="lead.email" />
                 <label for="lead-email1">Enter your email</label>
               </div>
             </div>
-            <div class="col-12 col-lg-2">
-              <button type="submit" class="lead-submit btn btn-primary btn-lg btn-block ml-lg-3">Start free
-                trial</button>
+            <div class="col-12 col-lg-4">
+              <button type="submit" class="lead-submit btn btn-primary btn-block ml-lg-3 px-3">Start free trial</button>
             </div>
-            <div class="col-12 order-lg-3 lead-explanation mt-3 mt-lg-0 text-center text-lg-left">
+            <div class="col-12 lead-explanation mt-3 mt-lg-0 text-center text-lg-left">
               Try Fingerprint.js PRO free for 14 days, no credit card required.
-            </div>
-            <div class="colr-12 mt-3">
-              <img src="/img/demo-mobile.png" class="img-fluid" />
-            </div>
-            <div class="col-12 mt-3">
-              <a href="/demo" class="btn btn-warning btn-lg btn-block demo-button fw-600">
-                Run the demo
-              </a>
             </div>
           </div>
         </form>
       </div>
+      <div class="col-12 d-md-none">
+        <img src="/img/demo-mobile-faded.png" class="img-fluid mt-2" />
+      </div>
+      <div class="col-12 col-lg-6 offset-lg-1 mt-3 d-none d-lg-block">
+        <img src="/img/demo-desktop.png" class="img-fluid shadow mt-5" />
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="/demo" class="btn btn-danger btn-lg mt-2 mt-lg-5">Run the demo</a>
     </div>
   </div>
-  <div class="container-fluid bg-light">
+
+  <!-- INDUSTRIES -->
+  <div class="container-fluid bg-light pb-5">
     <div class="container mt-5">
       <div id="industries" class="pt-3">
         <h2 class="text-center fw-800 mt-3">Industries</h2>
@@ -145,7 +141,7 @@
             <div class="card-body">
               <h5 class="card-title text-center fw-800">CRYPTOCURRENCY</h5>
               <p class="card-text text-center">
-                Make sure that your trading, exchange and transfer operations are safe from malicious
+                <strong>Ensure that your trading, exchange and transfer operations are safe</strong> from malicious
                 activity or account fraud.
               </p>
             </div>
@@ -177,11 +173,11 @@
           <div class="card">
             <img src="/img/content.svg" class="industry-img py-4 border-bottom" alt="news & content">
             <div class="card-body">
-              <h5 class="card-title text-center fw-800">CONTENT CREATION</h5>
+              <h5 class="card-title text-center fw-800">PAYWALL</h5>
               <p class="card-text text-center">
                 Users know how to get unlimited views of your content with incognito windows. Make sure that <b>users
                   pay a fair price
-                  for your content</b> on your site.
+                  for your content</b>.
                 <br />
                 <b>
                   <a href="/paywall">LEARN MORE</a>
@@ -245,7 +241,7 @@
     </div>
   </div>
 
-  <!-- Understand your users-->
+  <!-- TOOLS -->
   <div class="container">
     <div class="row text-center">
       <div class="col my-4">
@@ -254,15 +250,15 @@
       </div>
     </div>
 
-    <img src="/img/dash.png" class="img-fluid" alt="dashboard" />
+    <img src="/img/dash-desktop.png" class="img-fluid shadow" alt="dashboard" />
     <div class="text-center">
-      <h4 class="fw-800 mt-4">BROWSER FINGERPRINTING</h4>
+      <h4 class="fw-800 mt-5">BROWSER FINGERPRINTING</h4>
       <div class="miriam">
         Generate the highest entropy browser fingerprint on the market.
         <div>
-        <a href="https://docs.fingerprintjs.com/pro/browser-fingerprinting" target="_blank">Read more.</a>
+          <a href="https://docs.fingerprintjs.com/pro/browser-fingerprinting" target="_blank">Read more.</a>
         </div>
-        
+
       </div>
 
       <h4 class="fw-800 mt-5">ANONYMOUS USER IDENTIFICATION</h4>
@@ -277,7 +273,7 @@
       <div class="miriam">
         Detect JavaScript bots.
         <div>
-        <a href="https://docs.fingerprintjs.com/pro/bot-detection" target="_blank">Read more.</a>
+          <a href="https://docs.fingerprintjs.com/pro/bot-detection" target="_blank">Read more.</a>
         </div>
       </div>
 
@@ -309,6 +305,8 @@
       </div>
     </div>
   </div>
+
+  <!-- FOOTER -->
   <div class="container-fluid mt-3 footer-container">
     <footer>
       <div class="container">
