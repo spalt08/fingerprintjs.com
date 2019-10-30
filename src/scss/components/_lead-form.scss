@@ -16,18 +16,19 @@
 }
 
 .lead-submit {
-  background-color: #393e9e;
+  background-color: $bg-primary;
   color: white;
   box-shadow: 0 5px 15px 0 rgba(0,0,0,0.15);
   border-width: 0;
   border-style: solid;
   border-color: transparent;
-  line-height: 1.9;
+  line-height: 2.3;
 }
 
 .lead-submit:hover {
   box-shadow: 0 5px 25px 0 rgba(0,0,0,0.4);
-  background-color: #393e9e;
+  background-color: $bg-primary;
+  color: white;
 }
 
 .lead-submit:disabled {
@@ -36,7 +37,7 @@
 
 @media (min-width: 1000px) {
   .lead-submit {
-    line-height: 1.75;
+    line-height: 2.4;
   }
 }
 

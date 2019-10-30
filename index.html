@@ -92,17 +92,17 @@
         </div>
         <form id="email-form" method="POST" action="#start-trial" v-on:submit.prevent="emailFormSubmit()">
           <div class="row no-gutters mt-4">
-            <div class="col-12 col-lg-7">
+            <div class="col-12 col-xl-7">
               <div class="form-label-group">
                 <input id="lead-email1" type="email" name="lead-email" class="lead-input form-control form-control-lg"
                   autocomplete="off" placeholder="Enter your email" v-model="lead.email" />
                 <label for="lead-email1">Enter your email</label>
               </div>
             </div>
-            <div class="col-12 col-lg-4">
-              <button type="submit" class="lead-submit btn btn-primary btn-block ml-lg-3 px-3">Start free trial</button>
+            <div class="col-12 col-xl-4">
+              <button type="submit" class="lead-submit btn btn-primary btn-block ml-xl-3 px-3">Start free trial</button>
             </div>
-            <div class="col-12 lead-explanation mt-3 mt-lg-0 text-center text-lg-left">
+            <div class="col-12 lead-explanation mt-3 mt-xl-0 text-center text-lg-left">
               Try Fingerprint.js PRO free for 14 days, no credit card required.
             </div>
           </div>
@@ -111,12 +111,12 @@
       <div class="col-12 d-md-none">
         <img src="/img/demo-mobile-faded.png" class="img-fluid mt-2" />
       </div>
-      <div class="col-12 col-lg-6 offset-lg-1 mt-3 d-none d-lg-block">
+      <div class="col-12 col-lg-7 mt-3 d-none d-md-block">
         <img src="/img/demo-desktop.png" class="img-fluid shadow mt-5" />
       </div>
     </div>
-    <div class="text-center">
-      <a href="/demo" class="btn btn-danger btn-lg mt-2 mt-lg-5">Run the demo</a>
+    <div class="col-8 offset-2 col-lg-4 offset-lg-4">
+      <a href="/demo" class="btn btn-danger btn-lg btn-block mt-2 mt-md-4 mt-lg-5">Run the demo</a>
     </div>
   </div>
 
@@ -125,7 +125,7 @@
     <div class="container mt-5">
       <div id="industries" class="pt-3">
         <h2 class="text-center fw-800 mt-3">Industries</h2>
-        <div class="card-group mt-4">
+        <div class="card-deck mt-4">
           <div class="card">
             <img src="/img/payment.svg" class="industry-img py-4 border-bottom" alt="payment processing">
             <div class="card-body">
@@ -158,7 +158,7 @@
             </div>
           </div>
         </div>
-        <div class="card-group mt-4">
+        <div class="card-deck mt-4">
           <div class="card">
             <img src="/img/ecommerce.svg" class="industry-img py-4 border-bottom" alt="e-commerce & retail">
             <div class="card-body">
@@ -212,7 +212,7 @@
     <div class="card-deck mb-3 text-center">
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
-          <h1 class="card-title pricing-card-title miriam fw-900" style="font-size: 2.8rem">starter</h1>
+          <h1 class="card-title pricing-card-title fw-600" style="font-size: 2.8rem">starter</h1>
           <h3 class="card-title pricing-card-title">$100 <small class="text-muted">/ mo</small></h3>
           <ul class="list-unstyled mt-3 mb-4">
             <li><b>100k</b> identifications </li>
@@ -226,7 +226,7 @@
       </div>
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
-          <h1 class="card-title pricing-card-title miriam fw-900" style="font-size: 2.8rem">unlimited</h1>
+          <h1 class="card-title pricing-card-title fw-600" style="font-size: 2.8rem">unlimited</h1>
           <h3 class="card-title pricing-card-title">Contact us</h3>
           <ul class="list-unstyled mt-3 mb-4">
             <li><b>Unlimited</b> identifications</li>

@@ -3,7 +3,17 @@
   margin-top: 3rem!important;
 }
 
+.industry-img {
+  margin: auto;
+}
+
 @media (min-width: $lg) {
+  .index-header {
+    margin-top: 4.5rem!important;
+  }
+}
+
+@media (min-width: $xl) {
   .index-header {
     margin-top: 8rem!important;
   }
