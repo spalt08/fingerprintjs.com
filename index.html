@@ -17,9 +17,9 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('set', { dimension1: process.env.BRANCH });
     gtag('config', 'UA-134245186-1', {
-      'custom_map': { 'dimension1': 'branch' }
+      'custom_map': { 'dimension1': 'branch' },
+      'branch': 'main-lead-optimize'
     });
   </script>
   <script>
