@@ -17,9 +17,9 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'UA-134245186-1',{
-      'custom_map': {'dimension1': 'branch'},
-      'branch': process.env.BRANCH
+    gtag('set', { dimension1: process.env.BRANCH });
+    gtag('config', 'UA-134245186-1', {
+      'custom_map': { 'dimension1': 'branch' }
     });
   </script>
   <script>
@@ -107,8 +107,10 @@
             <div class="navbar-nav">
               <a href="/demo" class="p-3 text-decoration-none text-light"> Demo </a>
               <a href="/#industries" class="p-3 text-light" v-on:click="scrollTo('industries', $event)"> Industries </a>
-              <a href="/#pricing" class="p-3 text-decoration-none text-light" v-on:click="scrollTo('pricing', $event)"> Pricing </a>
-              <a href="/#tools" class="p-3 text-decoration-none text-light" v-on:click="scrollTo('tools', $event)"> Tools </a>
+              <a href="/#pricing" class="p-3 text-decoration-none text-light" v-on:click="scrollTo('pricing', $event)">
+                Pricing </a>
+              <a href="/#tools" class="p-3 text-decoration-none text-light" v-on:click="scrollTo('tools', $event)">
+                Tools </a>
               <a href="/open-source" class="p-3 text-decoration-none text-light"> Open-Source </a>
             </div>
           </div>
@@ -252,7 +254,8 @@
               <li><b>30 day</b> history</li>
               <li><b>Email</b> support</li>
             </ul>
-            <button type="button" class="btn btn-block lead-submit" v-on:click="startTrial('pricing:starter')">Start free trial</button>
+            <button type="button" class="btn btn-block lead-submit" v-on:click="startTrial('pricing:starter')">Start
+              free trial</button>
           </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -265,7 +268,8 @@
               <li><b>Unlimited</b> visit history</li>
               <li><b>24/7</b> dedicated support</li>
             </ul>
-            <button type="button" class="btn btn-block lead-submit" v-on:click="startTrial('pricing:unlimited')">Start free trial</button>
+            <button type="button" class="btn btn-block lead-submit" v-on:click="startTrial('pricing:unlimited')">Start
+              free trial</button>
           </div>
         </div>
       </div>
