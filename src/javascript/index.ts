@@ -53,7 +53,6 @@ let app = new Vue({
         this.leadSubmitting = false;
         this.leadMode = false;
         gtag("event", "lead-submit", { event_category: "lead", event_label: "error" });
-        Rollbar.error(e)
         alert("🛑\nError occurred, contact us at: support@fingerprintjs.com");
       });
     }
