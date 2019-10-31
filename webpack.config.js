@@ -44,7 +44,8 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
       FPJS_API_TOKEN: process.env.FPJS_API_TOKEN,
-      FPJS_LEAD_URL: process.env.FPJS_LEAD_URL
+      FPJS_LEAD_URL: process.env.FPJS_LEAD_URL,
+      BRANCH: process.env.BRANCH
     })
   ]
 }

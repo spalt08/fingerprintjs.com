@@ -25,11 +25,19 @@ new Vue({
     },
     startTrial: function () {
       this.leadMode = true;
-      gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
+      gtag("event", "lead-submit", {
+        event_category: "lead",
+        event_label: "attempt",
+        branch: process.env.BRANCH
+      });
     },
     emailFormSubmit: function () {
       this.leadMode = true;
-      gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
+      gtag("event", "lead-submit", {
+        event_category: "lead",
+        event_label: "attempt",
+        branch: process.env.BRANCH
+      });
     },
     fullFormSubmit: function () {
       var payload = {
@@ -48,16 +56,28 @@ new Vue({
         this.leadSubmitting = false;
         this.leadMode = false;
         if (response.errors && response.errors.length > 0) {
-          gtag("event", "lead-submit", { event_category: "lead", event_label: "validation-fail" });
+          gtag("event", "lead-submit", { 
+            event_category: "lead", 
+            event_label: "validation-fail",
+            branch: process.env.BRANCH
+          });
         } else {
           alert("Thanks, we received your request,\nwe'll get back to you soon.\n🚀");
           this.lead = {};
-          gtag("event", "lead-submit", { event_category: "lead", event_label: "success" });
+          gtag("event", "lead-submit", { 
+            event_category: "lead", 
+            event_label: "success",
+            branch: process.env.BRANCH
+          });
         }
       }).catch((e) => {
         this.leadSubmitting = false;
         this.leadMode = false;
-        gtag("event", "lead-submit", { event_category: "lead", event_label: "error" });
+        gtag("event", "lead-submit", { 
+          event_category: "lead", 
+          event_label: "error",
+          branch: process.env.BRANCH
+        });
         alert("🛑\nError occurred, contact us at: support@fingerprintjs.com");
       });
     }
