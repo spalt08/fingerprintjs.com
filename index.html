@@ -103,10 +103,9 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a href="/demo" class="p-3 text-decoration-none text-light"> Demo </a>
-              <a href="#trial" class="p-3 text-light"> Start free trial </a>
-              <a href="#industries" class="p-3 text-light"> Industries </a>
-              <a href="/#pricing" class="p-3 text-decoration-none text-light" data-link="#pricing"> Pricing </a>
-              <a href="/#tools" class="p-3 text-decoration-none text-light" data-link="#tools"> Tools </a>
+              <a href="/#industries" class="p-3 text-light" v-on:click="scrollTo('industries', $event)"> Industries </a>
+              <a href="/#pricing" class="p-3 text-decoration-none text-light" v-on:click="scrollTo('pricing', $event)"> Pricing </a>
+              <a href="/#tools" class="p-3 text-decoration-none text-light" v-on:click="scrollTo('tools', $event)"> Tools </a>
               <a href="/open-source" class="p-3 text-decoration-none text-light"> Open-Source </a>
             </div>
           </div>
@@ -223,8 +222,7 @@
                 <p class="card-text text-center">
                   We can build a custom solution that works for your industry.
                   <br>
-                  <a href="#!trial" data-toggle="modal" data-target="#contact-modal" data-source="industry-more">
-                    <b>CONTACT US</b></a>
+                  <a href="mailto:support@fingerprintjs.com"> <b>CONTACT US</b></a>
                 </p>
               </div>
             </div>
@@ -234,7 +232,7 @@
     </div>
 
     <!-- PRICING -->
-    <div class="container">
+    <div id="pricing" class="container">
       <div class="row py-4">
         <div class="col text-center fw-800">
           <h2><b>Pricing</b></h2>
@@ -251,8 +249,7 @@
               <li><b>30 day</b> history</li>
               <li><b>Email</b> support</li>
             </ul>
-            <button type="button" class="btn btn-block lead-submit" data-source="pricing-starter">Start free
-              trial</button>
+            <button type="button" class="btn btn-block lead-submit" v-on:click="startTrial('pricing:starter')">Start free trial</button>
           </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -265,8 +262,7 @@
               <li><b>Unlimited</b> visit history</li>
               <li><b>24/7</b> dedicated support</li>
             </ul>
-            <button type="button" class="btn btn-block lead-submit" data-source="pricing-enterprise">Start free
-              trial</button>
+            <button type="button" class="btn btn-block lead-submit" v-on:click="startTrial('pricing:unlimited')">Start free trial</button>
           </div>
         </div>
       </div>
@@ -274,7 +270,7 @@
   </div>
 
   <!-- TOOLS -->
-  <div class="container">
+  <div id="tools" class="container">
     <div class="row text-center">
       <div class="col my-4">
         <h2 class="fw-800">Fully understand your users</h2>

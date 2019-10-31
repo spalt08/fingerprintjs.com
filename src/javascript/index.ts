@@ -5,16 +5,7 @@
 import * as $ from "jquery";
 import Vue from "vue";
 
-$('[data-link]').on('click', (e) => {
-  var selector = $(e.target).data('link');
-  var el = $(selector).get(0);
-  if (el && el.scrollIntoView) {
-    e.preventDefault();
-    el.scrollIntoView({ behavior: 'smooth' });
-  }
-});
-
-let app = new Vue({
+new Vue({
   el: "#vue-wrapper",
   data: {
     leadMode: false,
@@ -22,6 +13,17 @@ let app = new Vue({
     lead: {}
   },
   methods: {
+    scrollTo: (id: string, e: Event) => {
+      let el = document.getElementById(id);
+      if (el && el.scrollIntoView) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+    startTrial: function () {
+      this.leadMode = true;
+      gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
+    },
     emailFormSubmit: function () {
       this.leadMode = true;
       gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
