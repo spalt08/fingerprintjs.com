@@ -9,7 +9,7 @@ import './lead-form';
 
 $('[data-toggle=modal]').on('click', (e) => {
   var source = $(e.currentTarget).data("source");
-  gtag("event", "contact-click", { event_category: "contact", event_label: source });
+  gtag("event", "contact-click", { event_category: "contact", event_label: source, branch: 'master' });
 });
 
 $('[data-link]').on('click', (e) => {

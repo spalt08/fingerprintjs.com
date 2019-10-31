@@ -1,7 +1,7 @@
 import * as $ from "jquery";
 import 'bootstrap/js/dist/modal';
 $('#contact-form').on('submit', (e) => {
-  gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
+  gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt", branch: "master" });
   e.preventDefault();
   var payload = {
     website: $("#contact-website").val(),
@@ -16,12 +16,12 @@ $('#contact-form').on('submit', (e) => {
     contentType: 'application/json',
     data: JSON.stringify(payload)
   }).catch(() => {
-    gtag("event", "lead-submit", { event_category: "lead", event_label: "error" });
+    gtag("event", "lead-submit", { event_category: "lead", event_label: "error", branch: "master" });
     alert("Error occurred, contact us at: support@fingerprintjs.com");
   }).then((response: any) => {
     var $errorsDiv = $('#contact-form-errors');
     if (response.errors && response.errors.length > 0) {
-      gtag("event", "lead-submit", { event_category: "lead", event_label: "validation-fail" });
+      gtag("event", "lead-submit", { event_category: "lead", event_label: "validation-fail", branch: "master" });
       var errorsHTML = "";
       for (var i = 0; i < response.errors.length; i++) {
         errorsHTML += "<div>" + response.errors[i] + "</div>";
@@ -29,7 +29,7 @@ $('#contact-form').on('submit', (e) => {
       $errorsDiv.html(errorsHTML);
       $errorsDiv.show();
     } else {
-      gtag("event", "lead-submit", { event_category: "lead", event_label: "success" });
+      gtag("event", "lead-submit", { event_category: "lead", event_label: "success", branch: "master" });
       $errorsDiv.empty();
       $errorsDiv.hide();
       $('#contact-modal').modal('hide');

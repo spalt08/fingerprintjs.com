@@ -128,7 +128,7 @@ function initApp(response: any) {
       },
       emailFormSubmit: function () {
         this.leadMode = true;
-        gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
+        gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt", branch: "master" });
       },
       fullFormSubmit: function () {
         var payload = {
@@ -156,7 +156,7 @@ function initApp(response: any) {
           } else {
             alert("Thanks, we received your request,\nwe'll get back to you soon.\n🚀");
             this.lead = {};
-            gtag("event", "lead-submit", { event_category: "lead", event_label: "success" });
+            gtag("event", "lead-submit", { event_category: "lead", event_label: "success", branch: "master" });
           }
         });
       }
