@@ -149,8 +149,8 @@
                 </div>
                 <div class="col-lg-1 col-2">
                   <button class="btn btn-sm btn-outline-secondary py-0" v-on:click="visit.onArrowClick()">
-                    <i class="mdi mdi-arrow-up" v-if="visit.collapsed"></i>
-                    <i class="mdi mdi-arrow-down" v-if="!visit.collapsed"></i>
+                    <b v-if="visit.collapsed">open</b>
+                    <b v-if="!visit.collapsed">close</b>
                   </button>
                 </div>
               </div>
@@ -206,7 +206,7 @@
                 <label for="lead-email">Your website</label>
               </div>
               <div class="form-group text-right">
-                <button type="submit" class="lead-submit btn btn-primary btn-lg ml-2" :disabled="leadSubmitting">
+                <button type="submit" class="lead-submit btn btn-primary ml-2" :disabled="leadSubmitting">
                   {{leadSubmitting ? "Submitting" : "Start free trial"}}
                 </button>
               </div>

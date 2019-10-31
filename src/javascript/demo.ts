@@ -143,11 +143,6 @@ function initApp(response: any) {
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify(payload)
-        }).catch(() => {
-          this.leadSubmitting = false;
-          this.leadMode = false;
-          gtag("event", "lead-submit", { event_category: "lead", event_label: "error" });
-          alert("🛑\nError occurred, contact us at: support@fingerprintjs.com");
         }).then((response: any) => {
           this.leadSubmitting = false;
           this.leadMode = false;
@@ -158,6 +153,11 @@ function initApp(response: any) {
             this.lead = {};
             gtag("event", "lead-submit", { event_category: "lead", event_label: "success" });
           }
+        }).catch(() => {
+          this.leadSubmitting = false;
+          this.leadMode = false;
+          gtag("event", "lead-submit", { event_category: "lead", event_label: "error" });
+          alert("🛑\nError occurred, contact us at: support@fingerprintjs.com");
         });
       }
     }
