@@ -3,6 +3,9 @@
   * Copyright 2019 https://fingerprintjs.com
   */
 import * as $ from "jquery";
+// this import is only necesssary to expand the navbar on mobile
+// need to get rid of jQuery and bootstrap JS completely
+import "bootstrap";
 import Vue from "vue";
 
 new Vue({
