@@ -25,6 +25,6 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch --colors",
-    "sass:build": ""
+    "sass:build": "webpack"
   }
 }
