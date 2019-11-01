@@ -13,26 +13,13 @@
   <link href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/dist/main.css">
   <title>Fingerprint.js PRO demo</title>
-  <script type="text/javascript">
-    var _paq = window._paq || [];
-    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function() {
-      var u="https://fpjs.matomo.cloud/";
-      _paq.push(['setTrackerUrl', u+'matomo.php']);
-      _paq.push(['setSiteId', '1']);
-      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-      g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/fpjs.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-    })();
-  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134245186-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'UA-134245186-1',{
-      'custom_map': {'dimension1': 'branch'},
+    gtag('config', 'UA-134245186-1', {
+      'custom_map': { 'dimension1': 'branch' },
       'branch': 'main-lead-optimize'
     });
   </script>
@@ -265,6 +252,21 @@
   </div>
   <script src="/dist/demo.js"></script>
   <script>
+    var initMatomo = function (fpjsVisitorId) {
+      var _paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['setUserId', fpjsVisitorId]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      window._paq = _paq;
+      (function () {
+        var u = "https://fpjs.matomo.cloud/";
+        _paq.push(['setTrackerUrl', u + 'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = '//cdn.matomo.cloud/fpjs.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
+      })();
+    }
     var metrics = { started: Date.now() };
     window.fpLayer = window.fpLayer || [];
     function fp() { fpLayer.push(arguments); }
@@ -272,6 +274,7 @@
     fp('config', 'loaded', function (fp) {
       metrics.loaded = Date.now();
       var onThen = function (res) {
+        initMatomo(res.visitorId);
         metrics.visitorId = res.visitorId;
         for (var i = 0, l = res.components.length; i < l; i++) {
           var component = res.components[i];
