@@ -157,7 +157,7 @@ function initApp(response: any) {
               branch: process.env.BRANCH
             });
           } else {
-            alert("Thanks, we received your request,\nwe'll get back to you soon.\n🚀");
+            alert("Thanks, we received your request,\nwe'll get back to you soon regarding your trial.\n🚀");
             this.lead = {};
             gtag("event", "lead-submit", { 
               event_category: "lead", 
