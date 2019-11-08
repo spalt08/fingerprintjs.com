@@ -128,7 +128,11 @@ function initApp(response: any) {
       },
       emailFormSubmit: function () {
         this.leadMode = true;
-        gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt", branch: "master" });
+        gtag("event", "lead-submit", {
+          event_category: "lead", 
+          event_label: "attempt",
+          branch: process.env.BRANCH
+        });
       },
       fullFormSubmit: function () {
         var payload = {
@@ -143,21 +147,33 @@ function initApp(response: any) {
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify(payload)
-        }).catch(() => {
-          this.leadSubmitting = false;
-          this.leadMode = false;
-          gtag("event", "lead-submit", { event_category: "lead", event_label: "error" });
-          alert("🛑\nError occurred, contact us at: support@fingerprintjs.com");
         }).then((response: any) => {
           this.leadSubmitting = false;
           this.leadMode = false;
           if (response.errors && response.errors.length > 0) {
-            gtag("event", "lead-submit", { event_category: "lead", event_label: "validation-fail" });
+            gtag("event", "lead-submit", { 
+              event_category: "lead", 
+              event_label: "validation-fail",
+              branch: process.env.BRANCH
+            });
           } else {
-            alert("Thanks, we received your request,\nwe'll get back to you soon.\n🚀");
+            alert("Thanks, we received your request,\nwe'll get back to you soon regarding your trial.\n🚀");
             this.lead = {};
-            gtag("event", "lead-submit", { event_category: "lead", event_label: "success", branch: "master" });
+            gtag("event", "lead-submit", { 
+              event_category: "lead", 
+              event_label: "success",
+              branch: process.env.BRANCH
+            });
           }
+        }).catch(() => {
+          this.leadSubmitting = false;
+          this.leadMode = false;
+          gtag("event", "lead-submit", { 
+            event_category: "lead",
+            event_label: "error",
+            branch: process.env.BRANCH
+          });
+          alert("🛑\nError occurred, contact us at: support@fingerprintjs.com");
         });
       }
     }

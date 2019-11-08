@@ -4,8 +4,8 @@ var webpack = require('webpack')
 module.exports = {
   mode: process.env["WEBPACK_ENV"] || "development",
   entry: {
-    index: './src/index',
-    demo: './src/demo'
+    index: './src/javascript/index',
+    demo: './src/javascript/demo'
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -44,7 +44,8 @@ module.exports = {
     new webpack.EnvironmentPlugin({
       MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
       FPJS_API_TOKEN: process.env.FPJS_API_TOKEN,
-      FPJS_LEAD_URL: process.env.FPJS_LEAD_URL
+      FPJS_LEAD_URL: process.env.FPJS_LEAD_URL,
+      BRANCH: process.env.BRANCH
     })
   ]
 }

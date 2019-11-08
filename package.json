@@ -7,16 +7,17 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "bootstrap": "^4",
+    "bootstrap": "^4.3.1",
     "jquery": "^3",
     "mapbox-gl": "^1.4",
     "vue": "^2.6"
   },
   "devDependencies": {
-    "@types/bootstrap": "^4",
     "@types/gtag.js": "^0.0.2",
     "@types/jquery": "^3",
     "@types/node": "^12",
+    "node-sass": "^4.13.0",
+    "popper.js": "^1.16.0",
     "ts-loader": "^6",
     "typescript": "^3",
     "webpack": "^4",
@@ -25,6 +26,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch --colors",
-    "sass:build": "webpack"
+    "sass:build": "node-sass ./src/scss/main.scss ./dist/main.css",
+    "sass:watch": "node-sass --watch ./src/scss/main.scss ./dist/main.css"
   }
 }
