@@ -43,8 +43,7 @@
     var metrics = { started: Date.now() };
     window.fpLayer = window.fpLayer || [];
     function fp() { fpLayer.push(arguments); }
-    fp('config', 'client', 'mDSpjPTMCy');
-    fp('config', '_endpoint', 'https://staging.api.fpjs.io');
+    fp('config', 'client', '1IZEt206');
     fp('config', 'loaded', function (fp) {
       metrics.loaded = Date.now();
       fp.send({ debug: true, timeout: 30000 }).then(function (res) {
