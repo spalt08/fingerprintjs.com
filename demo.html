@@ -252,31 +252,15 @@
   </div>
   <script src="/dist/demo.js"></script>
   <script>
-    var metrics = { started: Date.now() };
     window.fpLayer = window.fpLayer || [];
     function fp() { fpLayer.push(arguments); }
     fp('config', 'client', '1IZEt206');
     fp('config', 'loaded', function (fp) {
-      metrics.loaded = Date.now();
       var onThen = function (res) {
-        metrics.visitorId = res.visitorId;
-        for (var i = 0, l = res.components.length; i < l; i++) {
-          var component = res.components[i];
-          if (component.duration > 5) {
-            metrics[component.key] = component.duration;
-          }
-        }
       }
       var onCatch = function (err) {
-        if (err.error === FP.TimeoutError) {
-          metrics.timedout = Date.now();
-        } else {
-          metrics.err = err;
-        }
       };
       var onFinally = function () {
-        metrics.done = Date.now();
-        Rollbar.debug("fp", metrics);
       };
       fpjsDemo.load(fp, onThen, onCatch, onFinally);
     });

@@ -40,29 +40,13 @@
     gtag('config', 'UA-134245186-1');
   </script>
   <script>
-    var metrics = { started: Date.now() };
     window.fpLayer = window.fpLayer || [];
     function fp() { fpLayer.push(arguments); }
     fp('config', 'client', '1IZEt206');
     fp('config', 'loaded', function (fp) {
-      metrics.loaded = Date.now();
-      fp.send({ debug: true, timeout: 30000 }).then(function (res) {
-        metrics.visitorId = res.visitorId;
-        for (var i = 0, l = res.components.length; i < l; i++) {
-          var component = res.components[i];
-          if (component.duration > 5) {
-            metrics[component.key] = component.duration;
-          }
-        }
+      fp.send({ timeout: 30000 }).then(function (res) {
       }).catch(function (err) {
-        if (err.error === FP.TimeoutError) {
-          metrics.timedout = Date.now();
-        } else {
-          metrics.err = err;
-        }
       }).finally(function () {
-        metrics.done = Date.now();
-        Rollbar.debug("fp", metrics);
       });
     });
   </script>
