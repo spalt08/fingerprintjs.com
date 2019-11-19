@@ -12,23 +12,6 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/dist/main.css">
-  <script type="text/javascript">
-    var initMatomo = function (fpjsVisitorId) {
-      var _paq = window._paq || [];
-      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-      _paq.push(['setUserId', fpjsVisitorId]);
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      window._paq = _paq;
-      (function () {
-        var u = "https://fpjs.matomo.cloud/";
-        _paq.push(['setTrackerUrl', u + 'matomo.php']);
-        _paq.push(['setSiteId', '1']);
-        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-        g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = '//cdn.matomo.cloud/fpjs.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g, s);
-      })();
-    }
-  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134245186-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -58,7 +41,6 @@
     fp('config', 'loaded', function (fp) {
       metrics.loaded = Date.now();
       fp.send({ debug: true, timeout: 30000 }).then(function (res) {
-        initMatomo(res.visitorId);
         metrics.visitorId = res.visitorId;
         for (var i = 0, l = res.components.length; i < l; i++) {
           var component = res.components[i];
@@ -78,7 +60,7 @@
       });
     });
   </script>
-  <script async src="/js/fp-201910221534.js"></script>
+  <script async src="https://cdn.fpjs.io/@2.4.9/fp.js"></script>
 </head>
 
 <body>
