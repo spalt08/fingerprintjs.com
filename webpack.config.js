@@ -5,7 +5,8 @@ module.exports = {
   mode: process.env["WEBPACK_ENV"] || "development",
   entry: {
     index: './src/javascript/index',
-    demo: './src/javascript/demo'
+    demo: './src/javascript/demo',
+    calculator: './src/javascript/calculator'
   },
   output: {
     path: path.resolve(__dirname, './dist'),
