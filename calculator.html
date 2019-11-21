@@ -49,11 +49,7 @@
             <form v-on:submit.prevent="">
               <div class="form-group">
                 <label><b>How many identifications per month do you need?</b></label>
-                <input type="text" class="form-control form-control-lg" 
-                  style="color:black; font-weight: 700"
-                  placeholder="Use K for thousands and M for millions" 
-                  v-model="value"
-                />
+                <human-number-input v-model="value"/>
               </div>
               <div class="form-group">
                 <label>You can also use the slider</label>
@@ -67,7 +63,7 @@
                 <div class="card mb-3">
                   <div class="card-header text-white bg-primary">On-demand price</div>
                   <div class="card-body">
-                    <h5 class="card-title">$2,500 / month </h5>
+                    <h5 class="card-title" v-cloak>${{onDemand()}} / month</h5>
                     <p class="card-text">
                       Pay as you go, cancel any time
                     </p>
@@ -78,7 +74,7 @@
                 <div class="card mb-3">
                   <div class="card-header text-white bg-success">Reserved price</div>
                   <div class="card-body">
-                    <h5 class="card-title">$1,500 / month</h5>
+                    <h5 class="card-title" v-cloak>${{reserved()}} / month</h5>
                     <p class="card-text">
                       Requires a 12 month prepay
                     </p>
