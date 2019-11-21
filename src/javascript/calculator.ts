@@ -1,38 +1,43 @@
 import Vue from "vue";
 
+const SI_SYMBOL = ["", "K", "M", "B", " trillion", " 😱"];
+
 const tiers = [
   [0, 1_000_000, 1.0],
   [1_000_000, 10_000_000, 0.7],
   [10_000_000, 50_000_000, 0.5],
   [50_000_000, 100_000_000, 0.4],
-  [100_000_000, 1_000_000_000, 0.35],
-  [1_000_000_000, 100_000_000_000, 0.3],
+  [100_000_000, Number.MAX_SAFE_INTEGER, 0.35],
 ]
 const numberFormatter = new Intl.NumberFormat();
 
-Vue.component("HumanNumberInput", {
+
+function abbreviateNumber(number: number) {
+  // what tier? (determines SI symbol)
+  var tier = Math.log10(number) / 3 | 0;
+  // if zero, we don't need a suffix
+  if (tier == 0) return number;
+  // get suffix and determine scale
+  var suffix = SI_SYMBOL[tier];
+  var scale = Math.pow(10, tier * 3);
+  // scale the number
+  var scaled = number / scale;
+  // format number and add suffix
+  return scaled + suffix;
+}
+
+let humanNumberInput = Vue.component("HumanNumberInput", {
   props: ["value"],
-  template: `<input type="text" 
+  template: `<input type="text" maxlength="20"
   class="form-control form-control-lg"
   style="color:black; font-weight: 700"
   v-model="displayValue"
-  @blur="isInputActive = false" @focus="isInputActive = true"
   />`,
-  data: function () {
-    return {
-      isInputActive: false
-    }
-  },
   computed: {
     displayValue: {
       get: function () {
-        if (this.isInputActive) {
-          // Cursor is inside the input field. unformat display value for user
-          return this.value.toString();
-        } else {
-          // User is not modifying now. Format display value for user interface
-          return numberFormatter.format(this.value);
-        }
+        // User is not modifying now. Format display value for user interface
+        return numberFormatter.format(this.value);
       },
       set: function (modifiedValue: any) {
         // Recalculate value after ignoring "$" and "," in user input
@@ -54,7 +59,11 @@ let app = new Vue({
   data: {
     value: 200_000
   },
+  components: { humanNumberInput },
   methods: {
+    valueAbbr: function () {
+      return abbreviateNumber(this.value);
+    },
     onDemand: function () {
       if (this.value <= 100_000) {
         return 100;
@@ -66,7 +75,10 @@ let app = new Vue({
         price += Math.min(currentValue, tierMax) * tierPrice / 1000;
         currentValue -= tierMax;
       }
-      return numberFormatter.format(Math.ceil(price));
+      return price;
+    },
+    onDemandFormatted: function () {
+      return numberFormatter.format(Math.ceil(this.onDemand()));
     },
     reserved: function () {
       if (this.value <= 100_000) {
@@ -81,7 +93,10 @@ let app = new Vue({
         }
       }
       price *= 0.8; // reserved discount of 20%
-      return numberFormatter.format(Math.ceil(price));
+      return price;
+    },
+    reservedFormatted: function () {
+      return numberFormatter.format(Math.ceil(this.reserved()));
     }
   }
 })

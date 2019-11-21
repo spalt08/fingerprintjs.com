@@ -55,9 +55,9 @@
             <div class="row">
               <div class="col-12 col-lg-6">
                 <div class="card mb-3">
-                  <div class="card-header text-white bg-primary">On-demand price</div>
+                  <div class="card-header text-white bg-primary">On-demand price for <b>{{valueAbbr()}}</b> monthly calls</div>
                   <div class="card-body">
-                    <h5 class="card-title" v-cloak>${{onDemand()}} / month</h5>
+                    <h5 class="card-title" v-cloak>${{onDemandFormatted()}} / month</h5>
                     <p class="card-text">
                       Pay as you go, cancel any time
                     </p>
@@ -66,9 +66,9 @@
               </div>
               <div class="col-12 col-lg-6">
                 <div class="card mb-3">
-                  <div class="card-header text-white bg-success">Reserved price</div>
+                  <div class="card-header text-white bg-success">Reserved price <b>{{valueAbbr()}}</b> monthly calls</div>
                   <div class="card-body">
-                    <h5 class="card-title" v-cloak>${{reserved()}} / month</h5>
+                    <h5 class="card-title" v-cloak>${{reservedFormatted()}} / month</h5>
                     <p class="card-text">
                       Requires a 12 month prepay
                     </p>
