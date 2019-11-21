@@ -10,52 +10,49 @@ const tiers = [
 ]
 const numberFormatter = new Intl.NumberFormat();
 
-// Vue.component('HumanNumberInput', {
-//   props: {
-//   	value: null,
-//   },
-//   template: `<input type="text" class="form-control form-control-lg"
-//    style="color:black; font-weight: 700"
-//    placeholder="Use K for thousands and M for millions" 
-//    v-model="displayValue" 
-//    @blur="handleInputState" 
-//    @focus="handleInputState">`,
-//   data: function() {
-//     return {
-//       inputFocused: false
-//     }
-//   },
-//   methods: {
-//   	handleInputState (event: any) {
-//     	this.inputFocused = event.type === 'focus';
-//     },
-//     unmask (value) {
-//       return 999;
-//     },
-//     mask (value) {
-//     	return "$" + value;
-//     },
-//   },
-//   computed: {
-//     displayValue: {
-//       get: function() {
-//         if (this.inputFocused) {
-//           return this.value.toString()
-//         } else {
-//           return this.mask(this.value)
-//         }
-//       },
-//       set: function(modifiedValue) {        
-//         this.$emit('input', this.unmask(modifiedValue))
-//       }
-//     }
-//   }
-// });
+Vue.component("HumanNumberInput", {
+  props: ["value"],
+  template: `<input type="text" 
+  class="form-control form-control-lg"
+  style="color:black; font-weight: 700"
+  v-model="displayValue"
+  @blur="isInputActive = false" @focus="isInputActive = true"
+  />`,
+  data: function () {
+    return {
+      isInputActive: false
+    }
+  },
+  computed: {
+    displayValue: {
+      get: function () {
+        if (this.isInputActive) {
+          // Cursor is inside the input field. unformat display value for user
+          return this.value.toString();
+        } else {
+          // User is not modifying now. Format display value for user interface
+          return numberFormatter.format(this.value);
+        }
+      },
+      set: function (modifiedValue: any) {
+        // Recalculate value after ignoring "$" and "," in user input
+        let newValue = parseInt(modifiedValue.replace(/[^\d\.]/g, ""))
+        // Ensure that it is not NaN
+        if (isNaN(newValue)) {
+          newValue = 0
+        }
+        // Note: we cannot set this.value as it is a "prop". It needs to be passed to parent component
+        // $emit the event so that parent component gets it
+        this.$emit('input', newValue)
+      }
+    }
+  }
+});
 
 let app = new Vue({
   el: "#calculator",
   data: {
-    value: 200000
+    value: 200_000
   },
   methods: {
     onDemand: function () {
@@ -72,7 +69,7 @@ let app = new Vue({
       return numberFormatter.format(Math.ceil(price));
     },
     reserved: function () {
-      if(this.value <= 100_000) {
+      if (this.value <= 100_000) {
         return 80;
       }
       let price = 0;
