@@ -10,47 +10,47 @@ const tiers = [
 ]
 const numberFormatter = new Intl.NumberFormat();
 
-Vue.component('HumanNumberInput', {
-  props: {
-  	value: null,
-  },
-  template: `<input type="text" class="form-control form-control-lg"
-   style="color:black; font-weight: 700"
-   placeholder="Use K for thousands and M for millions" 
-   v-model="displayValue" 
-   @blur="handleInputState" 
-   @focus="handleInputState">`,
-  data: function() {
-    return {
-      inputFocused: false
-    }
-  },
-  methods: {
-  	handleInputState (event: any) {
-    	this.inputFocused = event.type === 'focus';
-    },
-    unmask (value) {
-      return 999;
-    },
-    mask (value) {
-    	return "$" + value;
-    },
-  },
-  computed: {
-    displayValue: {
-      get: function() {
-        if (this.inputFocused) {
-          return this.value.toString()
-        } else {
-          return this.mask(this.value)
-        }
-      },
-      set: function(modifiedValue) {        
-        this.$emit('input', this.unmask(modifiedValue))
-      }
-    }
-  }
-});
+// Vue.component('HumanNumberInput', {
+//   props: {
+//   	value: null,
+//   },
+//   template: `<input type="text" class="form-control form-control-lg"
+//    style="color:black; font-weight: 700"
+//    placeholder="Use K for thousands and M for millions" 
+//    v-model="displayValue" 
+//    @blur="handleInputState" 
+//    @focus="handleInputState">`,
+//   data: function() {
+//     return {
+//       inputFocused: false
+//     }
+//   },
+//   methods: {
+//   	handleInputState (event: any) {
+//     	this.inputFocused = event.type === 'focus';
+//     },
+//     unmask (value) {
+//       return 999;
+//     },
+//     mask (value) {
+//     	return "$" + value;
+//     },
+//   },
+//   computed: {
+//     displayValue: {
+//       get: function() {
+//         if (this.inputFocused) {
+//           return this.value.toString()
+//         } else {
+//           return this.mask(this.value)
+//         }
+//       },
+//       set: function(modifiedValue) {        
+//         this.$emit('input', this.unmask(modifiedValue))
+//       }
+//     }
+//   }
+// });
 
 let app = new Vue({
   el: "#calculator",
