@@ -40,22 +40,44 @@
       </nav>
     </div>
   </div>
-  <div class="container">
+  <div id="calculator" class="container">
     <div class="row">
-      <div class="col-12">
+      <div class="col">
         <h1 class="text-center mt-3 miriam">PRO pricing calculator</h1>
-        <div class="card mb-5">
-          <div id="calculator" class="card-body">
+        <div class="text-center mb-2">
+          <small>If you don't know how many identifications you need, use monthly user sessions</small>
+        </div>
+        <div class="card mb-2">
+          <div class="card-body">
             <form v-on:submit.prevent="">
-              <div class="form-group">
-                <label><b>How many identifications per month do you need?</b></label>
-                <human-number-input v-model="value" />
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label><b>How many identifications per month do you need?</b></label>
+                    <human-number-input v-model="value" />
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label>Or select from a template</label>
+                    <select class="form-control form-control-lg" v-model="value">
+                      <option value="200000">200K sessions/mo</option>
+                      <option value="500000">500K sessions/mo</option>
+                      <option value="1000000">1 million sessions/mo</option>
+                      <option value="5000000">5 million sessions/mo</option>
+                      <option value="10000000">10 million sessions/mo</option>
+                      <option value="50000000">50 million sessions/mo</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </form>
-            <div class="row">
-              <div class="col-12 col-lg-6">
+            <h3 class="text-center my-4" v-cloak>Your price for <strong>{{valueAbbr()}}</strong> monthly calls
+              <span class="red" v-cloak v-if="discount > 0">with your personal {{discount}}% discount</span></h3>
+            <div class="row mt-2">
+              <div class="col-12 col-lg-4">
                 <div class="card mb-3">
-                  <div class="card-header text-white bg-primary">On-demand price for <b>{{valueAbbr()}}</b> monthly calls</div>
+                  <div class="card-header text-white bg-primary">On-demand</div>
                   <div class="card-body">
                     <h5 class="card-title" v-cloak>${{onDemandFormatted()}} / month</h5>
                     <p class="card-text">
@@ -64,9 +86,9 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-lg-6">
+              <div class="col-12 col-lg-4">
                 <div class="card mb-3">
-                  <div class="card-header text-white bg-success">Reserved price <b>{{valueAbbr()}}</b> monthly calls</div>
+                  <div class="card-header text-white bg-success">Reserved</div>
                   <div class="card-body">
                     <h5 class="card-title" v-cloak>${{reservedFormatted()}} / month</h5>
                     <p class="card-text">
@@ -75,7 +97,43 @@
                   </div>
                 </div>
               </div>
+              <div class="col-12 col-lg-4">
+                <div class="card mb-3">
+                  <div class="card-header text-white bg-dark">On-premises license</div>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a href="mailto:sales@fingerprintjs.com">Contact sales</a>
+                    </h5>
+                    <p class="card-text">
+                      Deploy in your private cloud
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-12">
+            <form id="email-form" method="POST" action="#start-trial" v-on:submit.prevent="emailFormSubmit()">
+              <div class="row no-gutters mt-3">
+                <div class="col-12 col-lg-4">
+                  <div class="form-label-group">
+                    <input id="lead-email1" type="email" name="lead-email"
+                      class="lead-input form-control form-control-lg" autocomplete="off" placeholder="Enter your email"
+                      v-model="lead.email" />
+                    <label for="lead-email1">Enter your email</label>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                  <button type="submit" class="lead-submit btn btn-primary btn-block ml-lg-3">Start free
+                    trial</button>
+                </div>
+                <div class="col-12 order-lg-3 lead-explanation mt-3 mt-lg-0 text-center text-lg-left">
+                  Try Fingerprint.js PRO free for 14 days, no credit card required.
+                </div>
+              </div>
+            </form>
           </div>
         </div>
         <h2 class="text-center miriam mb-5">Pricing models</h2>
@@ -156,6 +214,35 @@
           A reserved plan is recommended when you have a high and/or predictable volume
           and getting a significant discount for your usage is important.
         </p>
+      </div>
+    </div>
+    <div class="overlay" v-cloak v-if="leadMode">
+      <button type="button" class="overlay-close" v-on:click="leadMode=false">Close</button>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-lg-6 offset-lg-3">
+            <h2 class="overlay-header mb-4">Start your free 14-day trial of Fingerprint.js PRO</h2>
+            <form v-on:submit.prevent="fullFormSubmit()">
+              <div class="form-label-group">
+                <input id="lead-email2" type="email" name="lead-email" autocomplete="off" autocapitalize="none"
+                  class="lead-input form-control form-control-lg" placeholder="Enter your email" required
+                  v-model="lead.email" />
+                <label for="lead-email">Email address</label>
+              </div>
+              <div class="form-label-group">
+                <input id="lead-website2" type="text" name="lead-website" autocomplete="off" autocapitalize="none"
+                  class="lead-input form-control form-control-lg" placeholder="Enter your website" required
+                  v-model="lead.website" />
+                <label for="lead-email">Your website</label>
+              </div>
+              <div class="form-group text-right">
+                <button type="submit" class="lead-submit btn btn-primary ml-2" :disabled="leadSubmitting">
+                  {{leadSubmitting ? "Submitting" : "Start free trial"}}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
