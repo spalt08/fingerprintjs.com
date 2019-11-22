@@ -63,10 +63,10 @@
                 <label for="lead-email">Email address</label>
               </div>
               <div class="form-label-group">
-                <input id="lead-website2" type="text" name="lead-website" autocomplete="off" autocapitalize="none"
+                <input id="lead-website2" type="url" name="lead-website" autocomplete="off" autocapitalize="none"
                   class="lead-input form-control form-control-lg" placeholder="Enter your website" required
                   v-model="lead.website" />
-                <label for="lead-email">Your website</label>
+                <label for="lead-email">Your website URL, e.g. https://example.com</label>
               </div>
               <div class="form-group text-right">
                 <button type="submit" class="lead-submit btn btn-primary ml-2" :disabled="leadSubmitting">
@@ -135,7 +135,7 @@
         </div>
       </div>
       <div class="col-8 offset-2 col-lg-4 offset-lg-4">
-        <a href="/demo" class="btn btn-danger btn-block mt-2 mt-md-4 mt-lg-5">Run the demo</a>
+        <a href="/demo" class="btn btn-danger btn-lg btn-block mt-2 mt-md-4 mt-lg-5">Run the demo</a>
       </div>
     </div>
 
