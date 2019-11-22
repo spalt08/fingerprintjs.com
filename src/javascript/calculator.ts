@@ -1,6 +1,5 @@
+import * as $ from "jquery";
 import Vue from "vue";
-
-const SI_SYMBOL = ["", "K", "M", "B", " trillion", " 😱"];
 
 const tiers = [
   [0, 1_000_000, 1.0],
@@ -11,14 +10,15 @@ const tiers = [
 ]
 const numberFormatter = new Intl.NumberFormat();
 
+const abbrSymbols = ["", "K", "M", "B", " trillion", " 😱"];
 
-function abbreviateNumber(number: number) {
+function abbreviateNumber(number: number): string | number {
   // what tier? (determines SI symbol)
   var tier = Math.log10(number) / 3 | 0;
   // if zero, we don't need a suffix
   if (tier == 0) return number;
   // get suffix and determine scale
-  var suffix = SI_SYMBOL[tier];
+  var suffix = abbrSymbols[tier];
   var scale = Math.pow(10, tier * 3);
   // scale the number
   var scaled = number / scale;
@@ -29,18 +29,16 @@ function abbreviateNumber(number: number) {
 let humanNumberInput = Vue.component("HumanNumberInput", {
   props: ["value"],
   template: `<input type="text" maxlength="20"
+  id="calc-input"
   class="form-control form-control-lg"
-  style="color:black; font-weight: 700"
   v-model="displayValue"
   />`,
   computed: {
     displayValue: {
       get: function () {
-        // User is not modifying now. Format display value for user interface
         return numberFormatter.format(this.value);
       },
       set: function (modifiedValue: any) {
-        // Recalculate value after ignoring "$" and "," in user input
         let newValue = parseInt(modifiedValue.replace(/[^\d\.]/g, ""))
         // Ensure that it is not NaN
         if (isNaN(newValue)) {
@@ -54,10 +52,45 @@ let humanNumberInput = Vue.component("HumanNumberInput", {
   }
 });
 
+let urlValueOrDefault = (defaultValue: number): number => {
+  let urlParams = new URLSearchParams(window.location.search);
+  let urlValueRaw = urlParams.get("v");
+  if (urlValueRaw) {
+    let urlValue = parseInt(urlValueRaw);
+    if (isNaN(urlValue)) {
+      return defaultValue;
+    }
+    return urlValue;
+  }
+  return defaultValue;
+}
+
+let urlDiscountOrDefault = (defaultValue = 0): number => {
+  let urlParams = new URLSearchParams(window.location.search);
+  let urlValueRaw = urlParams.get("d");
+  if (urlValueRaw) {
+    let urlValue = defaultValue;
+    try {
+      urlValue = parseInt(atob(urlValueRaw));
+    } catch (e) {
+      urlValue = defaultValue;
+    }
+    if (isNaN(urlValue)) {
+      return defaultValue;
+    }
+    return urlValue;
+  }
+  return defaultValue;
+}
+
 let app = new Vue({
   el: "#calculator",
   data: {
-    value: 200_000
+    value: urlValueOrDefault(200_000),
+    discount: urlDiscountOrDefault(0),
+    leadMode: false,
+    leadSubmitting: false,
+    lead: {}
   },
   components: { humanNumberInput },
   methods: {
@@ -66,7 +99,7 @@ let app = new Vue({
     },
     onDemand: function () {
       if (this.value <= 100_000) {
-        return 100;
+        return this.applyDiscount(100, this.discount);
       }
       let price = 0;
       let currentValue = this.value;
@@ -75,14 +108,14 @@ let app = new Vue({
         price += Math.min(currentValue, tierMax) * tierPrice / 1000;
         currentValue -= tierMax;
       }
-      return price;
+      return this.applyDiscount(price, this.discount);
     },
     onDemandFormatted: function () {
       return numberFormatter.format(Math.ceil(this.onDemand()));
     },
     reserved: function () {
       if (this.value <= 100_000) {
-        return 80;
+        return this.applyDiscount(80, this.discount);
       }
       let price = 0;
       for (let i = tiers.length - 1; i >= 0; i--) {
@@ -92,11 +125,67 @@ let app = new Vue({
           break;
         }
       }
-      price *= 0.8; // reserved discount of 20%
-      return price;
+      // reserved offers 20% on top of any existing discount
+      return this.applyDiscount(price, this.discount + 20);
     },
     reservedFormatted: function () {
       return numberFormatter.format(Math.ceil(this.reserved()));
+    },
+    applyDiscount: function (amount: number, discount: number): number {
+      if (discount > 0 && discount < 100) {
+        return amount * (100 - discount) / 100;
+      }
+      return amount;
+    },
+    emailFormSubmit: function () {
+      this.leadMode = true;
+      gtag("event", "lead-submit", {
+        event_category: "lead",
+        event_label: "attempt",
+        branch: process.env.BRANCH
+      });
+    },
+    fullFormSubmit: function () {
+      var payload = {
+        email: this.lead.email,
+        website: this.lead.website,
+        name: this.lead.email
+      };
+      this.leadSubmitting = true;
+      $.ajax({
+        url: process.env.FPJS_LEAD_URL,
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(payload)
+      }).then((response: any) => {
+        this.leadSubmitting = false;
+        this.leadMode = false;
+        if (response.errors && response.errors.length > 0) {
+          gtag("event", "lead-submit", {
+            event_category: "lead",
+            event_label: "validation-fail",
+            branch: process.env.BRANCH
+          });
+        } else {
+          alert("Thanks, we received your request,\nwe'll get back to you soon regarding your trial.\n🚀");
+          this.lead = {};
+          gtag("event", "lead-submit", {
+            event_category: "lead",
+            event_label: "success",
+            branch: process.env.BRANCH
+          });
+        }
+      }).catch(() => {
+        this.leadSubmitting = false;
+        this.leadMode = false;
+        gtag("event", "lead-submit", {
+          event_category: "lead",
+          event_label: "error",
+          branch: process.env.BRANCH
+        });
+        alert("🛑\nError occurred, contact us at: support@fingerprintjs.com");
+      });
     }
   }
-})
+});
