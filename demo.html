@@ -152,8 +152,8 @@
                 </div>
                 <div class="col-lg-1 col-2">
                   <button class="btn btn-sm btn-outline-secondary py-0" v-on:click="visit.onArrowClick()">
-                    <b v-if="visit.collapsed">open</b>
-                    <b v-if="!visit.collapsed">close</b>
+                    <small v-if="visit.collapsed">⬆️</small>
+                    <small v-if="!visit.collapsed">⬇️</small>
                   </button>
                 </div>
               </div>
