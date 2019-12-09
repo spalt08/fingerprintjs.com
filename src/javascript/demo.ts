@@ -47,8 +47,10 @@ class Visit {
     this.botProbability = response.botProbability;
     this.ip = response.ip;
     this.ipLocation = response.ipLocation;
-    this.lng = this.ipLocation.longitude;
-    this.lat = this.ipLocation.latitude;
+    if(this.ipLocation){
+      this.lng = this.ipLocation.longitude;
+      this.lat = this.ipLocation.latitude;
+    }
     this.browserDetails = response.browserDetails;
     this.time = new Date(response.time);
     this.visitorFound = response.visitorFound;
