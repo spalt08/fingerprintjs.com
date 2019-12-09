@@ -7,6 +7,11 @@ import * as $ from "jquery";
 // need to get rid of jQuery and bootstrap JS completely
 import "bootstrap";
 import Vue from "vue";
+import {FP} from "@fp-pro/client";
+
+FP.load({client: "1IZEt206", region: "us"}).then(fp => {
+  fp.send({timeout: 30000});
+});
 
 new Vue({
   el: "#vue-wrapper",
