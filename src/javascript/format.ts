@@ -1,4 +1,7 @@
 export var ipLocation = (ipLocation: any) => {
+  if(!ipLocation) {
+    return "Unknown location, anonymous proxy";
+  }
   var loc = ipLocation;
   var locParts = [];
   if (loc.city && loc.city.name) {
