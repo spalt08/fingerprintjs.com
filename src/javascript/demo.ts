@@ -7,19 +7,13 @@ import Vue from "vue";
 import * as mapboxgl from "mapbox-gl";
 import * as format from "./format";
 import { ago } from "./timeago";
+import { FP } from "@fp-pro/client";
 
-export function load(fp: any, onThen: (res: any) => void, onCatch: (err: any) => void, onFinally: () => void) {
-  let prSend = fp.send({ ip: 'full', callbackData: true, timeout: 30000 });
-  prSend.then(function (res: any) {
-    onThen(res);
+FP.load({ client: "1IZEt206", region: "us" }).then(fp => {
+  fp.send({ ip: "full", callbackData: true, timeout: 30_000 }).then(res => {
     initApp(res);
-  }).catch(function (err: any) {
-    onCatch(err);
-  }).finally(function () {
-    onFinally();
-  })
-}
-
+  });
+});
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/23467
 (mapboxgl as any).accessToken = process.env.MAPBOX_ACCESS_TOKEN;
@@ -129,7 +123,7 @@ function initApp(response: any) {
       emailFormSubmit: function () {
         this.leadMode = true;
         gtag("event", "lead-submit", {
-          event_category: "lead", 
+          event_category: "lead",
           event_label: "attempt",
           branch: process.env.BRANCH
         });
@@ -151,16 +145,16 @@ function initApp(response: any) {
           this.leadSubmitting = false;
           this.leadMode = false;
           if (response.errors && response.errors.length > 0) {
-            gtag("event", "lead-submit", { 
-              event_category: "lead", 
+            gtag("event", "lead-submit", {
+              event_category: "lead",
               event_label: "validation-fail",
               branch: process.env.BRANCH
             });
           } else {
             alert("Thanks, we received your request,\nwe'll get back to you soon regarding your trial.\n🚀");
             this.lead = {};
-            gtag("event", "lead-submit", { 
-              event_category: "lead", 
+            gtag("event", "lead-submit", {
+              event_category: "lead",
               event_label: "success",
               branch: process.env.BRANCH
             });
@@ -168,7 +162,7 @@ function initApp(response: any) {
         }).catch(() => {
           this.leadSubmitting = false;
           this.leadMode = false;
-          gtag("event", "lead-submit", { 
+          gtag("event", "lead-submit", {
             event_category: "lead",
             event_label: "error",
             branch: process.env.BRANCH
