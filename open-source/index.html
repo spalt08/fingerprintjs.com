@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Browser Fingerprinting, JavaScript identification, fraud detection">
-  <link rel="preconnect" href="https://api.fpjs.io">
-  <link rel="preconnect" href="https://api.rollbar.com">
+  <link rel="preconnect" href="https://staging.api.fpjs.io">
   <title>Fingerprint.js - Browser fingerprinting and fraud detection</title>
 
   <link rel="shortcut icon" href="/open-source/img/favicon.ico">
@@ -17,6 +16,7 @@
     window.fpLayer = window.fpLayer || [];
     function fp() { fpLayer.push(arguments); }
     fp('config', 'client', 'mDSpjPTMCy');
+    fp('config', 'region', 'us2');
     fp('config', 'endpoint', 'https://staging.api.fpjs.io');
     fp('config', 'loaded', function(fp){
       fp.send();
@@ -49,18 +49,7 @@
     gtag('js', new Date());
     gtag('config', 'UA-134245186-1');
   </script>
-  <script>
-    window.fpLayer = window.fpLayer || [];
-    function fp() { fpLayer.push(arguments); }
-    fp('config', 'client', '1IZEt206');
-    fp('config', 'loaded', function (fp) {
-      fp.send({ timeout: 30000 }).then(function (res) {
-      }).catch(function (err) {
-      }).finally(function () {
-      });
-    });
-  </script>
-  <script async src="https://cdn.fpjs.io/@2.5.0/fp.js"></script>
+
 
 </head>
 
