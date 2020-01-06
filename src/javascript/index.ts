@@ -9,7 +9,7 @@ import "bootstrap";
 import Vue from "vue";
 import {FP} from "@fp-pro/client";
 
-FP.load({client: "1IZEt206", region: "us"}).then(fp => {
+FP.load({client: "1IZEt206", region: "us", endpoint: "https://dev.fpjs.io"}).then(fp => {
   fp.send({timeout: 30000});
 });
 
