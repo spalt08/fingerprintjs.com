@@ -32,10 +32,11 @@
     window.fpLayer = window.fpLayer || [];
     function fp() { fpLayer.push(arguments); }
     fp('config', 'client', 'mDSpjPTMCy');
-    fp('config', 'region', 'us');
+    fp('config', 'region', 'us2');
     fp('config', 'endpoint', 'https://dev.fpjs.io');
     fp('config', 'loaded', function (fp) {
-      fp.send({timeout: 30000});
+      fp.send({timeout: 30000}).catch(function(err){
+      });
     });
   </script>
   <script async src="https://cdn.fpjs.io/@2/fp.js"></script>
