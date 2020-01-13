@@ -1,6 +1,6 @@
 /*!
   * fingerprintjs.com index.js
-  * Copyright 2019 https://fingerprintjs.com
+  * Copyright 2020 https://fingerprintjs.com
   */
 import * as $ from "jquery";
 // this import is only necesssary to expand the navbar on mobile
@@ -9,8 +9,10 @@ import "bootstrap";
 import Vue from "vue";
 import {FP} from "@fp-pro/client";
 
-FP.load({client: "1IZEt206", region: "us", endpoint: "https://dev.fpjs.io"}).then(fp => {
-  fp.send({timeout: 30000});
+FP.load({client: "1IZEt206", region: "us"}).then(fp => {
+  fp.send({timeout: 30000}).catch(function(e){
+    window.console && console.log(e);
+  });
 });
 
 new Vue({

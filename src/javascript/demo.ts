@@ -1,6 +1,6 @@
 /*!
   * fingerprintjs.com demo.ts
-  * Copyright 2019 https://fingerprintjs.com
+  * Copyright 2020 https://fingerprintjs.com
   */
 import * as $ from "jquery";
 import Vue from "vue";
@@ -9,7 +9,7 @@ import * as format from "./format";
 import { ago } from "./timeago";
 import { FP } from "@fp-pro/client";
 
-FP.load({ client: "1IZEt206", region: "us", endpoint: "https://dev.fpjs.io"}).then(fp => {
+FP.load({ client: "1IZEt206", region: "us"}).then(fp => {
   fp.send({ ip: "full", callbackData: true, timeout: 30_000}).then(res => {
     initApp(res);
   });
