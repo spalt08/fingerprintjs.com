@@ -117,16 +117,8 @@ let app = new Vue({
       if (this.value <= 100_000) {
         return this.applyDiscount(80, this.discount);
       }
-      let price = 0;
-      for (let i = tiers.length - 1; i >= 0; i--) {
-        let [tierMin, _, tierPrice] = tiers[i];
-        if (this.value >= tierMin) {
-          price = this.value * tierPrice / 1000;
-          break;
-        }
-      }
-      // reserved offers 20% on top of any existing discount
-      return this.applyDiscount(price, this.discount + 20);
+      // reserved offers 25% on top of any existing discount
+      return this.applyDiscount(this.onDemand(), this.discount + 25);
     },
     reservedFormatted: function () {
       return numberFormatter.format(Math.ceil(this.reserved()));
