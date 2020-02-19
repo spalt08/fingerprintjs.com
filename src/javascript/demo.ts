@@ -9,7 +9,7 @@ import * as format from "./format";
 import { ago } from "./timeago";
 import { FP } from "@fp-pro/client";
 
-FP.load({ client: "1IZEt206", region: "us"}).then(fp => {
+FP.load({ client: "1IZEt206", region: "us", endpoint: "https://f.fingerprintjs.com"}).then(fp => {
   fp.send({ ip: "full", callbackData: true, timeout: 30_000}).then(res => {
     initApp(res);
   });
