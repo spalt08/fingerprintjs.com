@@ -75,7 +75,11 @@ class Visit {
   }
 
   formattedTimeAgo() {
-    return ago(this.time) + ", " + this.time.toLocaleString();
+    return ago(this.time);
+  }
+
+  formattedDateTime() {
+    return this.time.toLocaleDateString() + " " + this.time.toLocaleTimeString();
   }
 
   onArrowClick() {
@@ -175,10 +179,10 @@ function initApp(response: any) {
     }
   });
   if (response.visitorFound) {
-    var url = "https://api.fpjs.io/visitors/";
+    var url = "https://f.fingerprintjs.com/visitors/";
     url += response.visitorId;
     url += "/?token=" + process.env.FPJS_API_TOKEN;
-    url += "&limit=10";
+    url += "&limit=20";
     $.getJSON(url, function (visitsResponse) {
       for (var i = 1; i < visitsResponse.visits.length; i++) {
         var visit = new Visit(i, visitsResponse.visits[i]);

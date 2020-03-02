@@ -145,17 +145,16 @@
           <div class="card mb-2" v-for="visit in visits">
             <div class="card-header" v-bind:class="{ 'incognito-header': visit.incognito }">
               <div class="row">
-                <div class="col-lg-11 col-10 miriam">
-                  <h5>
+                <div class="miriam">
+                  <strong>
+                    <span>&nbsp;</span>
                     <img src="/img/incognito.svg" v-if="visit.incognito" v-cloak />
-                    {{visit.formattedTimeAgo()}}
-                  </h5>
-                </div>
-                <div class="col-lg-1 col-2">
-                  <button class="btn btn-sm btn-outline-secondary py-0" v-on:click="visit.onArrowClick()">
-                    <small v-if="visit.collapsed">⬆️</small>
-                    <small v-if="!visit.collapsed">⬇️</small>
-                  </button>
+                    visited {{visit.formattedTimeAgo()}}
+                    <button class="btn btn-sm btn-outline-secondary py-0" v-on:click="visit.onArrowClick()">
+                      <small v-if="visit.collapsed">show more</small>
+                      <small v-if="!visit.collapsed">hide</small>
+                    </button>
+                  </strong>
                 </div>
               </div>
             </div>
@@ -179,6 +178,10 @@
                       <tr>
                         <th class="text-monospace">IP:</th>
                         <td class="miriam" v-cloak>{{visit.ip}}</td>
+                      </tr>
+                      <tr>
+                        <th class="text-monospace">Time:</th>
+                        <td class="miriam" v-cloak>{{visit.formattedDateTime()}}</td>
                       </tr>
                     </tbody>
                   </table>
