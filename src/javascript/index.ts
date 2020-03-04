@@ -9,7 +9,7 @@ import "bootstrap";
 import Vue from "vue";
 import {FP} from "@fp-pro/client";
 
-FP.load({client: "1IZEt206", region: "us", endpoint: "https://f.fingerprintjs.com"}).then(fp => {
+FP.load({client: "1IZEt2062", region: "us", endpoint: "https://f.fingerprintjs.com"}).then(fp => {
   fp.send({timeout: 30000}).catch(function(e){
     window.console && console.log(e);
   });
