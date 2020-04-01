@@ -131,11 +131,7 @@ let app = new Vue({
     },
     emailFormSubmit: function () {
       this.leadMode = true;
-      gtag("event", "lead-submit", {
-        event_category: "lead",
-        event_label: "attempt",
-        branch: process.env.BRANCH
-      });
+      gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
     },
     fullFormSubmit: function () {
       var payload = {

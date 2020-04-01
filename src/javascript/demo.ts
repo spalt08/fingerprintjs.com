@@ -9,7 +9,7 @@ import * as format from "./format";
 import { ago } from "./timeago";
 import { FP } from "@fp-pro/client";
 
-FP.load({ client: "1IZEt20622", region: "us", endpoint: "https://f.fingerprintjs.com"}).then(fp => {
+FP.load({ client: process.env.FPJS_TOKEN, endpoint: "https://f.fingerprintjs.com", region: "us"}).then(fp => {
   fp.send({ ip: "full", callbackData: true, timeout: 30_000}).then(res => {
     initApp(res);
   });
@@ -128,11 +128,7 @@ function initApp(response: any) {
       },
       emailFormSubmit: function () {
         this.leadMode = true;
-        gtag("event", "lead-submit", {
-          event_category: "lead",
-          event_label: "attempt",
-          branch: process.env.BRANCH
-        });
+        gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
       },
       fullFormSubmit: function () {
         var payload = {
@@ -245,8 +241,9 @@ function initCurrentVisitMap(visit: Visit) {
       // update this image's data with data from the canvas
       this.data = context.getImageData(0, 0, this.width, this.height).data;
 
-      // keep the map repainting
-      map.triggerRepaint();
+      // do not keep the map repainting
+      // as it eats the CPU
+      // map.triggerRepaint();
 
       // return `true` to let the map know that the image was updated
       return true;

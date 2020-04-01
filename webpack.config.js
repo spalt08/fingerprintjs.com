@@ -46,7 +46,7 @@ module.exports = {
       MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
       FPJS_API_TOKEN: process.env.FPJS_API_TOKEN,
       FPJS_LEAD_URL: process.env.FPJS_LEAD_URL,
-      BRANCH: process.env.BRANCH
+      FPJS_TOKEN: process.env.BRANCH
     })
   ]
 }

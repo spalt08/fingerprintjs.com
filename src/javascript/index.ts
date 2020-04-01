@@ -9,7 +9,7 @@ import "bootstrap";
 import Vue from "vue";
 import {FP} from "@fp-pro/client";
 
-FP.load({client: "1IZEt20622", region: "us", endpoint: "https://f.fingerprintjs.com"}).then(fp => {
+FP.load({client: process.env.FPJS_TOKEN, region: "us", endpoint: "https://f.fingerprintjs.com"}).then(fp => {
   fp.send({timeout: 30000}).catch(function(e){
     window.console && console.log(e);
   });
@@ -32,11 +32,7 @@ new Vue({
     },
     startTrial: function () {
       this.leadMode = true;
-      gtag("event", "lead-submit", {
-        event_category: "lead",
-        event_label: "attempt",
-        branch: process.env.BRANCH
-      });
+      gtag("event", "lead-submit", { event_category: "lead", event_label: "attempt" });
     },
     emailFormSubmit: function () {
       this.leadMode = true;
