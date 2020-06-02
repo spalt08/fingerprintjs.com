@@ -2,11 +2,7 @@ import * as $ from "jquery";
 import Vue from "vue";
 
 const tiers = [
-  [0, 1_000_000, 1.0],
-  [1_000_000, 10_000_000, 0.7],
-  [10_000_000, 50_000_000, 0.5],
-  [50_000_000, 100_000_000, 0.4],
-  [100_000_000, Number.MAX_SAFE_INTEGER, 0.35],
+  [0, Number.MAX_SAFE_INTEGER, 1.0],
 ]
 const numberFormatter = new Intl.NumberFormat();
 
@@ -115,10 +111,10 @@ let app = new Vue({
     },
     reserved: function () {
       if (this.value <= 100_000) {
-        return this.applyDiscount(80, this.discount);
+        return this.applyDiscount(100, this.discount);
       }
-      // reserved offers 25% on top of any existing discount
-      return this.applyDiscount(this.onDemand(), this.discount + 25);
+      // reserved offers 20% discount
+      return this.applyDiscount(this.onDemand(), this.discount + 20);
     },
     reservedFormatted: function () {
       return numberFormatter.format(Math.ceil(this.reserved()));
