@@ -111,7 +111,7 @@ let app = new Vue({
     },
     reserved: function () {
       if (this.value <= 100_000) {
-        return this.applyDiscount(100, this.discount);
+        return this.applyDiscount(100, this.discount + 20);
       }
       // reserved offers 20% discount
       return this.applyDiscount(this.onDemand(), this.discount + 20);
