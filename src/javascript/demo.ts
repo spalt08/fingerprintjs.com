@@ -12,7 +12,7 @@ import { FP } from "@fp-pro/client";
 FP.load({ client: process.env.FPJS_TOKEN, endpoint: "https://f.fingerprintjs.com", region: "us"}).then(fp => {
   fp.send({ ip: "full", callbackData: true, timeout: 30_000}).then(res => {
     initApp(res);
-  });
+  }).catch(e => window.console && console.log('Timeout: ', e))
 });
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/23467
