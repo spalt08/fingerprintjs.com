@@ -41,7 +41,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 col-lg-6 offset-lg-3">
-            <h2 class="overlay-header mb-4">Contact us to learn more about FingerprintJS Pro</h2>
+            <h2 class="overlay-header mb-4">Contact sales</h2>
             <form v-on:submit.prevent="fullFormSubmit()">
               <div class="form-label-group">
                 <input id="lead-email2" type="email" name="lead-email" autocomplete="off" autocapitalize="none"
@@ -57,7 +57,7 @@
               </div>
               <div class="form-group text-right">
                 <button type="submit" class="lead-submit btn btn-primary ml-2" :disabled="leadSubmitting">
-                  {{leadSubmitting ? "Submitting" : "Learn more"}}
+                  {{leadSubmitting ? "Submitting" : "Contact Sales"}}
                 </button>
               </div>
             </form>
@@ -76,11 +76,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a href="/demo" class="p-3 text-decoration-none text-light"> Demo </a>
+              <a href="/demo" class="p-3 text-decoration-none text-light"> Technical Demo </a>
               <a href="/pricing" class="p-3 text-decoration-none text-light"> Pricing </a>
               <a href="/open-source" class="p-3 text-decoration-none text-light"> Open-Source </a>
               <a href="https://docs.fingerprintjs.com/pro/" target="_blank" class="p-3 text-decoration-none text-light"> Docs </a>
-              <a href="https://dashboard.fingerprintjs.com/signup" target="_blank" class="p-3 text-light"><b> Start Trial</b></a>
             </div>
           </div>
         </nav>
@@ -91,8 +90,8 @@
       <div class="row">
         <div class="col-12 col-lg-5">
           <div class="text-center text-lg-left">
-            <h1 class="index-header">Fraud detection API</h1>
-            <h5><strong class="red">99.5%</strong> identification accuracy</h5>
+            <h1 class="index-header">Browser Fingerprinting API</h1>
+            <h5>Stop fraud, spam, and account takeovers with  <strong class="red">99.5% accurate </strong> browser fingerprinting as a service.</h5>
           </div>
           <form id="email-form" method="POST" action="#start-trial" v-on:submit.prevent="emailFormSubmit()">
             <div class="row no-gutters mt-4 mt-xl-5">
@@ -104,7 +103,7 @@
                 </div>
               </div>
               <div class="col-12 col-xl-4">
-                <button type="submit" class="lead-submit btn btn-primary btn-block ml-xl-3 px-3">Learn more</button>
+                <button type="submit" class="lead-submit btn btn-primary btn-block ml-xl-3 px-3">Contact sales</button>
               </div>
             </div>
           </form>
@@ -117,7 +116,7 @@
         </div>
       </div>
       <div class="col-8 offset-2 col-lg-4 offset-lg-4">
-        <a href="/demo" class="btn btn-danger btn-lg btn-block mt-2 mt-md-4 mt-lg-5">Run the demo</a>
+        <a href="https://dashboard.fingerprintjs.com" target="_blank" class="btn btn-danger btn-lg btn-block mt-2 mt-md-4 mt-lg-5">Start your free trial</a>
       </div>
     </div>
 
@@ -255,7 +254,7 @@
               <br/>
               <li><a href="/pricing?v=100000"><b>Pricing calculator</b></a></li>
             </ul>
-            <button type="button" class="btn btn-block lead-submit" v-on:click="startTrial('pricing:starter')">Contact us</button>
+            <a href="https://dashboard.fingerprintjs.com/signup" target="_blank" class="btn btn-block lead-submit">Start free trial</a>
           </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -270,7 +269,7 @@
               <br/>
               <li><a href="/pricing"><b>Pricing calculator</b></a></li>
             </ul>
-            <button type="button" class="btn btn-block lead-submit" v-on:click="startTrial('pricing:unlimited')">Contact us</button>
+            <button type="button" class="btn btn-block lead-submit" v-on:click="startTrial('pricing:unlimited')">Contact sales</button>
           </div>
         </div>
       </div>
