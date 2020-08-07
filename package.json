@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@fp-pro/client": "^2.7.3",
+    "@fp-pro/client": "^2.7.4",
     "bootstrap": "^4.3.1",
     "jquery": "^3",
     "mapbox-gl": "^1.9.1",
