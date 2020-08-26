@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@fp-pro/client@^2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@fp-pro/client/-/client-2.7.4.tgz#afe6d6d8fbad6a0454abbd860eb0a2b8fdffa553"
-  integrity sha512-K4aF8WcV42BI1KxIP74NXER+A8q1VPDcnrke2k8hr9yfGQzosKthkaG0yd97d5bIcJHf1xUFeFmmyhw5M2bKmg==
+"@fp-pro/client@^2.7.5":
+  version "2.7.5"
+  resolved "https://registry.yarnpkg.com/@fp-pro/client/-/client-2.7.5.tgz#d33cee50da6ce973b7dc27f9f96b166c961c7899"
+  integrity sha512-uUmvwAjn41Ee3mNk72ftNIeH5BsBlWY/XqRzH1wWW0x9f/3Xesh4N07r+Jp09YM+1ssEqZ8fHbai1MYoech4uw==
 
 "@mapbox/geojson-rewind@^0.5.0":
   version "0.5.0"
