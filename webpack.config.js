@@ -1,57 +1,150 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path');
+const HandlebarsPlugin = require('handlebars-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const postcssPresetEnv = require('postcss-preset-env');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const cssnano = require('cssnano');
+const Dotenv = require('dotenv-webpack')
+
+const { makeDataReplacements, registerHandlersHelpers } = require('./webpack.helpers.js');
+
+const mode = process.env.NODE_ENV || 'production';
+const PORT = process.env.PORT || 3000;
+
+const sourceDir = path.join(__dirname, 'src');
+const templateDir = path.join(__dirname, 'generated');
+const buildDir = path.join(__dirname, 'build');
+
+const isProd = mode === 'production';
+const prodPlugins = [new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i })];
 
 module.exports = {
-  mode: process.env["WEBPACK_ENV"] || "development",
-  entry: {
-    index: './src/javascript/index',
-    demo: './src/javascript/demo',
-    calculator: './src/javascript/calculator'
-  },
+  mode,
+  entry: path.join(sourceDir, 'entry.js'),
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: '[name].js',
-    library: "fpjsDemo"
+    path: buildDir,
+    filename: isProd ? 'bundle.[chunkhash].js' : 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
+        test: /\.js$/,
         exclude: /node_modules/,
-        options: {
-          appendTsSuffixTo: [/\.vue$/],
-        }
+        use: {
+          loader: 'babel-loader',
+        },
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
-    ]
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: !isProd,
+            },
+          },
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          isProd
+            ? {
+                loader: 'postcss-loader',
+                options: { ident: 'postcss', plugins: () => [postcssPresetEnv(), cssnano()] },
+              }
+            : null,
+          {
+            loader: 'sass-loader',
+          },
+        ].filter(Boolean),
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: { name: 'fonts/[name].[ext]' },
+          },
+        ],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          {
+            // Use the ignore loader because we manually copy image assets using the copy plugin
+            // loader: 'ignore-loader',
+            loader: 'file-loader',
+            options: {
+              name: '[folder]/[name].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
-  resolve: {
-    // https://stackoverflow.com/a/43596713
-    extensions: ['.ts', '.js', '.vue', '.json'],
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    }
-  },
-  devtool: '#eval-source-map',
   plugins: [
-    new webpack.EnvironmentPlugin({
-      MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
-      FPJS_API_TOKEN: process.env.FPJS_API_TOKEN,
-      FPJS_LEAD_URL: process.env.FPJS_LEAD_URL,
-      FPJS_TOKEN: process.env.BRANCH
-    })
-  ]
-}
-if (process.env.WEBPACK_ENV === 'production') {
-  module.exports.devtool = 'none';
-} else {
-  module.exports.devtool = '#eval-source-map';
-}
+    new Dotenv({
+      path: './.env', // Path to .env file (this is the default)
+      safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(sourceDir, 'views', 'layout', 'template.hbs'),
+      filename: path.join(templateDir, 'template.hbs'),
+      inject: false,
+    }),
+    new HandlebarsPlugin({
+      htmlWebpackPlugin: {
+        enabled: true,
+        prefix: 'html',
+      },
+      entry: path.join(sourceDir, 'views', '*.hbs'),
+      output: (name) => {
+        const page = name !== 'index' ? name : '';
+        return path.join(buildDir, page, 'index.html');
+      },
+      data: path.join(sourceDir, 'data', '*.json'),
+      partials: [
+        path.join(templateDir, 'template.hbs'),
+        path.join(sourceDir, 'views', 'partials', '*.hbs'),
+        path.join(sourceDir, 'views', 'partials', 'sections', '*.hbs'),
+      ],
+      onBeforeSetup: (Handlebars) => {
+        return registerHandlersHelpers(Handlebars);
+      },
+      onBeforeRender: (Handlebars, data) => {
+        return makeDataReplacements(data);
+      },
+    }),
+    new CopyWebpackPlugin(
+      [
+        {
+          from: path.join(sourceDir, 'img/company-logos'),
+          to: 'img/company-logos',
+        },
+      ],
+      {
+        ignore: ['.DS_Store'],
+      },
+    ),
+    new MiniCssExtractPlugin({
+      filename: isProd ? '[name].[chunkhash].css' : '[name].css',
+      chunkFilename: '[id].css',
+      fallback: 'style-loader',
+      use: [{ loader: 'css-loader', options: { minimize: isProd } }],
+    }),
+  ].concat(isProd ? prodPlugins : []),
+  devServer: {
+    contentBase: buildDir,
+    open: false,
+    port: PORT,
+  },
+  stats: {
+    assets: true,
+    children: false,
+    colors: true,
+    entrypoints: false,
+    hash: false,
+    modules: false,
+    version: false,
+  },
+};
