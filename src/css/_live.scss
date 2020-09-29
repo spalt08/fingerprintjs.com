@@ -93,7 +93,7 @@
       left: 0;
       width: 100%;
       height: 5rem;
-      background: linear-gradient(to top, v('bgcolor') 2.5rem, v('transparent') 100%);
+      background: linear-gradient(to top, v('bgcolor') 2.5rem, adjust-color(c('white'), $alpha: -1));
     }
 
     &-visits {
@@ -309,6 +309,10 @@
       border-right: 1px solid adjust-color(c('white'), $alpha: -0.9);
       --bgcolor: var(--brand-water);
       background-color: v('transparent');
+
+      &:after {
+        background: linear-gradient(to top, v('bgcolor') 2.5rem, adjust-color(c('brand-water'), $alpha: -1));
+      }
 
       &-visits {
         &__visit {
