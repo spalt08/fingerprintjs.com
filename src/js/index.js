@@ -5,6 +5,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import $ from 'jquery-slim';
 import 'regenerator-runtime/runtime';
 import Splide from '@splidejs/splide';
+import { initFpjsWidget } from './fpjs-widget';
 
 // DOM Elements
 const BODY = $('body');
@@ -33,6 +34,9 @@ const pricingTable = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
+  // FPJS widget
+  initFpjsWidget();
+
   // StarCounter
   const getStars = async () => {
     try {
@@ -200,6 +204,9 @@ document.addEventListener('DOMContentLoaded', () => {
   liveDemoMobileSplide.mount();
   liveDemoMobileButtonsPrev.click(() => liveDemoMobileSplide.go('-'));
   liveDemoMobileButtonsNext.click(() => liveDemoMobileSplide.go('+'));
+
+  // Temporary solution for accessing through widget file
+  window.liveDemoMobileSplide = liveDemoMobileSplide;
 
   // Form States - DEMO ONLY
   $('.form--get-started').submit((e) => {

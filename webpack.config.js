@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const cssnano = require('cssnano');
-const Dotenv = require('dotenv-webpack')
+const Dotenv = require('dotenv-webpack');
 
 const { makeDataReplacements, registerHandlersHelpers } = require('./webpack.helpers.js');
 
@@ -22,6 +22,7 @@ const prodPlugins = [new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i })];
 
 module.exports = {
   mode,
+  node: false,
   entry: path.join(sourceDir, 'entry.js'),
   output: {
     path: buildDir,
@@ -79,6 +80,10 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.handlebars$/,
+        loader: 'handlebars-loader',
       },
     ],
   },

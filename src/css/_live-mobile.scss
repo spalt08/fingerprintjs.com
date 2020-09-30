@@ -91,44 +91,56 @@
       display: block;
 
       .visit__value {
-        @include ar(1, 1);
         background-color: v('off-white');
         border-radius: 1rem;
         margin-top: 1.5rem;
+        overflow: hidden;
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: '';
+          background: #f04405;
+          border-radius: 50%;
+          height: 15px;
+          width: 15px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%) scale(1);
+          animation: pulse 2s infinite;
+        }
       }
     }
   }
 }
 
-.incognito {
-  .live-demo--mobile {
-    background-color: v('brand-water');
+.live-demo--mobile.live-demo--mobile__incognito {
+  background-color: v('brand-water');
 
-    .live-demo {
-      width: 100%;
+  .live-demo {
+    width: 100%;
 
-      &__title {
-        font-size: 2rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-      }
-
-      &__header {
-        color: v('white');
-        border-bottom: 1px solid adjust-color(c('white'), $alpha: -0.9);
-      }
+    &__title {
+      font-size: 2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
 
-    .visit {
+    &__header {
       color: v('white');
+      border-bottom: 1px solid adjust-color(c('white'), $alpha: -0.9);
+    }
+  }
 
-      // Location
-      &__location {
-        .visit__value {
-          background-color: adjust-color(c('white'), $alpha: -0.9);
-        }
+  .visit {
+    color: v('white');
+
+    // Location
+    &__location {
+      .visit__value {
+        background-color: adjust-color(c('white'), $alpha: -0.9);
       }
     }
   }

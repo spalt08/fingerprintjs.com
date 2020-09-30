@@ -14,95 +14,35 @@
         {{> sections/_get-started-form }}
     </header>
     <div class='section-content'>
-      <div class='fingerprint-live-demo'>
+      <div class='fingerprint-live-demo' id='fpjs_container'>
         <div class='fingerprint-live-demo-history'>
           <div class='fingerprint-live-demo__header'>
             Visit History
             <svg
               class='info'
-              data-tippy-content='Lorem ispum dolor sit amet'
+              data-tippy-content='FingerprintJS Pro allows you to get a history of visits with all available information'
               tabindex='0'
             >
               <use xlink:href='#info'></use>
             </svg>
           </div>
           <div class='history'>
-            <ul class='history-visits'>
-              <li
-                class='history-visits__visit history-visits__visit--now history-visits__visit--selected'
-              >
-                Live Demo
-                <svg class='incognito'>
-                  <use xlink:href='#incognito'></use>
-                </svg>
-              </li>
-              <li class='history-visits__visit'>
-                23 hours ago
-                <svg class='incognito'>
-                  <use xlink:href='#incognito'></use>
-                </svg>
-              </li>
-              <li
-                class='history-visits__visit history-visits__visit--incognito'
-              >
-                3 days ago
-                <svg class='incognito'>
-                  <use xlink:href='#incognito'></use>
-                </svg>
-              </li>
-              <li class='history-visits__visit'>
-                6 days ago
-                <svg class='incognito'>
-                  <use xlink:href='#incognito'></use>
-                </svg>
-              </li>
-              <li class='history-visits__visit'>
-                2 weeks ago
-                <svg class='incognito'>
-                  <use xlink:href='#incognito'></use>
-                </svg>
-              </li>
-              <li class='history-visits__visit'>
-                3 weeks ago
-                <svg class='incognito'>
-                  <use xlink:href='#incognito'></use>
-                </svg>
-              </li>
-              <li
-                class='history-visits__visit history-visits__visit--incognito'
-              >
-                30 days ago
-                <svg class='incognito'>
-                  <use xlink:href='#incognito'></use>
-                </svg>
-              </li>
-              <li
-                class='history-visits__visit history-visits__visit--incognito'
-              >
-                1 month ago
-                <svg class='incognito'>
-                  <use xlink:href='#incognito'></use>
-                </svg>
-              </li>
+            <ul class='history-visits' id='fpjs_history'>
             </ul>
           </div>
         </div>
         <div class='fingerprint-live-demo-current-visit'>
-          <div class='fingerprint-live-demo__header'>
-            Your Current Visit
-          </div>
+          <div class='fingerprint-live-demo__header' id='fpjs_visit_title'></div>
           <div class='current-visit'>
             <div class='current-visit__id'>
               <span class='current-visit__label'>
                 Your ID
               </span>
 
-              <span class='user-id'>
-                QyDG8Zmc3tIKmfzHg00e
-              </span>
+              <span class='user-id' id='fpjs_visitor_id'></span>
               <svg
                 class='info'
-                data-tippy-content='Lorem ispum dolor sit amet'
+                data-tippy-content='Every visitor to your website is assigned a permanent identifier.'
                 tabindex='0'
               >
                 <use xlink:href='#info'></use>
@@ -113,12 +53,10 @@
                 Bot
               </span>
 
-              <span class='user-bot'>
-                No
-              </span>
+              <span class='user-bot' id='fpjs_bot'></span>
               <svg
                 class='info'
-                data-tippy-content='Lorem ispum dolor sit amet'
+                data-tippy-content='Every response will include the botProbability field that you can use to identify bot traffic.'
                 tabindex='0'
               >
                 <use xlink:href='#info'></use>
@@ -129,21 +67,17 @@
                 IP
               </span>
 
-              <span class='user-ip'>
-                79.166.60.76
-              </span>
+              <span class='user-ip' id='fpjs_ip'></span>
             </div>
             <div class='current-visit__incognito'>
               <span class='current-visit__label'>
                 Incognito
               </span>
 
-              <span class='user-incognito'>
-                No
-              </span>
+              <span class='user-incognito' id='fpjs_incognito'></span>
               <svg
                 class='info'
-                data-tippy-content='Lorem ispum dolor sit amet'
+                data-tippy-content='FingerprintJS Pro analyzes every page view and detects if it was made in incognito mode.'
                 tabindex='0'
               >
                 <use xlink:href='#info'></use>
@@ -153,29 +87,22 @@
               <span class='current-visit__label'>
                 Browser
               </span>
-              <span class='user-browser'>
-                Chrome 84.0.4147 on Mac OS X (10.14.6)
-              </span>
+              <span class='user-browser' id='fpjs_browser'></span>
             </div>
             <div class='current-visit__location'>
               <span class='current-visit__label'>
                 Location
               </span>
-              <div class='user-location'></div>
+              <div class='user-location' id='fpjs_location'><img id='fpjs_location_img' /></div>
             </div>
           </div>
         </div>
       </div>
       <div class="splide splide--live-demo">
         <div class="splide__track">
-          <div class="splide__list">
-            {{> partials/live-demo-mobile }}
-            {{> partials/live-demo-mobile }}
-            {{> partials/live-demo-mobile }}
-          </div>
+          <div class="splide__list" id='fpjs_widget_mobile'></div>
         </div>
       </div>
-      
     </div>
   </div>
 </section>

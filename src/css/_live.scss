@@ -7,10 +7,19 @@
   font-size: 1.75rem;
   box-shadow: 0 20px 50px 0 adjust-color(c('brand-water'), $alpha: -0.9);
   max-width: 660px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
 
   @media screen and (max-width: 640px) {
     // flex-flow: column nowrap;
     display: none;
+  }
+
+  &__loaded {
+    transition: opacity .3s ease-out, transform .3s ease-out;
+    opacity: 1;
+    transform: translateY(0px);
   }
 
   svg {
@@ -269,9 +278,25 @@
         @include ar(1, 1, true);
         background-color: v('off-white');
         border-radius: 1.25rem;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
 
         @media screen and (max-width: 1024px) {
           margin-top: 1rem;
+        }
+
+        &::after {
+          position: absolute;
+          content: '';
+          background: #f04405;
+          border-radius: 50%;
+          height: 15px;
+          width: 15px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%) scale(1);
+          animation: pulse 2s infinite;
         }
       }
     }
@@ -279,6 +304,24 @@
 
   // end of Current Visit
 }
+
+@keyframes pulse {
+  0% {
+      transform: translate(-50%, -50%) scale(0.95);
+      box-shadow: 0 0 0 0 rgba(240, 68, 5, 0.7);
+  }
+  
+  70% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 10px rgba(240, 68, 5, 0);
+  }
+  
+  100% {
+      transform: translate(-50%, -50%) scale(0.95);
+      box-shadow: 0 0 0 0 rgba(240, 68, 5, 0);
+  }
+}
+
 
 .incognito {
   .fingerprint-live-demo {

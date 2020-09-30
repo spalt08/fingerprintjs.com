@@ -1,0 +1,84 @@
+<div class='splide__slide live-demo--mobile {{className}}'>
+  <header class='live-demo__header'>
+    <button class='btn btn--icon-only btn--clear btn--prev'>
+      <svg class='btn__icon'>
+        <use xlink:href='#chevron-left'></use>
+      </svg>
+    </button>
+    <h3 class='live-demo__title'>{{title}}</h3>
+    <button class='btn btn--icon-only btn--clear btn--next'>
+      <svg class='btn__icon'>
+        <use xlink:href='#chevron-right'></use>
+      </svg>
+    </button>
+  </header>
+  <div class='visit'>
+    <div class='visit__id'>
+      <div class='visit__label'>
+        Your ID
+        <svg
+          class='info'
+          data-tippy-content='Lorem ispum dolor sit amet'
+          tabindex='0'
+        >
+          <use xlink:href='#info'></use>
+        </svg>
+      </div>
+      <div class='visit__value'>{{visitId}}</div>
+    </div>
+    <div class='visit__bot'>
+      <div class='visit__label'>
+        Bot
+      </div>
+      <div class='visit__value'>
+        {{bot}}
+        <svg
+          class='info'
+          data-tippy-content='Lorem ispum dolor sit amet'
+          tabindex='0'
+        >
+          <use xlink:href='#info'></use>
+        </svg>
+      </div>
+    </div>
+    <div class='visit__ip'>
+      <div class='visit__label'>
+        IP
+      </div>
+      <div class='visit__value'>
+        {{ip}}
+      </div>
+    </div>
+    <div class='visit__incognito'>
+      <div class='visit__label'>
+        Incognito
+      </div>
+      <div class='visit__value'>
+        {{incognito}}
+        <svg
+          class='info'
+          data-tippy-content='Lorem ispum dolor sit amet'
+          tabindex='0'
+        >
+          <use xlink:href='#info'></use>
+        </svg>
+      </div>
+    </div>
+    <div class='visit__browser'>
+      <div class='visit__label'>
+        Browser
+      </div>
+      <div class='visit__value'>
+        {{browser}}
+      </div>
+    </div>
+    <div class='visit__location'>
+      <div class='visit__label'>
+        Location
+      </div>
+      <div class='visit__value'>
+        <img class='visit__location-image' src='{{location}}' />
+      </div>
+    </div>
+  </div>
+</div>
