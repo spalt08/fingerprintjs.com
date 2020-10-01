@@ -1,6 +1,6 @@
 
 import { FP } from "@fp-pro/client";
-import Splide from '@splidejs/splide';
+import tippy from 'tippy.js';
 import mobileTemplate from '../views/partials/demo/mobile.handlebars';
 
 const client = process.env.FPJS_TOKEN;
@@ -20,7 +20,10 @@ export function initFpjsWidget() {
     .then((fp) => fp.send(config))
     .then(showVisitInfo)
     .then(loadFpjsHistory)
-    .then(() => document.getElementById('fpjs_container').classList.add('fingerprint-live-demo__loaded'));
+    .then(() => {
+      document.getElementById('fpjs_loader').remove();
+      document.getElementById('fpjs_container').classList.add('fingerprint-live-demo__loaded');
+    });
   // TODO: log errors
   // .catch(e => window.console && console.log('Error: ', e));
 }
@@ -53,6 +56,10 @@ export function loadFpjsHistory(visitorId) {
           element.appendChild(icon);
 
           element.classList.add('history-visits__visit--incognito');
+
+          if (visits[0].requestId === visit.requestId) {
+            element.classList.add('history-visits__visit--now');
+          }
         }
 
         element.addEventListener('click', () => showVisitInfo(Object.assign(visit, { visitorId }), title));
@@ -68,11 +75,19 @@ export function loadFpjsHistory(visitorId) {
           incognito: visit.incognito ? 'Yes' : 'No',
           bot: getBotDecision(visit.botProbability),
           className: visit.incognito ? 'live-demo--mobile__incognito' : '',
-          location: `https://api.mapbox.com/styles/v1/mapbox/light-v10/static/${longitude},${latitude},12.00,0/392x392?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`,
+          location: `https://api.mapbox.com/styles/v1/mapbox/${visit.incognito ? 'dark-v10' : 'light-v10'}/static/${longitude},${latitude},7.00,0/512x512?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`,
         }));
       }
 
       highLightRequestId(visits[0].requestId);
+
+      // Tooltips initializations
+      tippy('[data-tippy-content]', {
+        animation: 'shift-away',
+        interactive: true,
+        arrow: false,
+        trigger: 'click',
+      });
     });
 }
 
@@ -112,7 +127,7 @@ function showVisitInfo(visitData, title) {
 
   // Map
   const { latitude, longitude } = ipLocation;
-  imgLocationSpan.src = `https://api.mapbox.com/styles/v1/mapbox/light-v10/static/${longitude},${latitude},12.00,0/392x392?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`;
+  imgLocationSpan.src = `https://api.mapbox.com/styles/v1/mapbox/${incognito ? 'dark-v10' : 'light-v10'}/static/${longitude},${latitude},7.00,0/400x400?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`;
   
   // Title
   if (title) {

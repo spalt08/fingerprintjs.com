@@ -56,10 +56,10 @@
     }
 
     .splide__pagination__page {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 1rem;
-      border: 2px solid v('brand-water');
+      width: 1rem;
+      height: 1rem;
+      border-radius: 0.5rem;
+      background-color: rgba(14, 17, 43, 0.22);
       @include transition((opacity));
       cursor: pointer;
 

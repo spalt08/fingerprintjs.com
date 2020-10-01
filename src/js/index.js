@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
           counter.innerHTML = new Intl.NumberFormat('en-US', {
             notation: 'compact',
             compactDisplay: 'short',
+            maximumFractionDigits: 1,
           }).format(json.stargazers_count);
         });
       }
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animation: 'shift-away',
     interactive: true,
     arrow: false,
+    trigger: 'click',
   });
 
   // Mobile menu toggle
@@ -155,6 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     rangeSliderInput.trigger('change');
     e.target.classList.add('payment-switcher__button--active');
+
+    if (e.target.dataset.type === 'annually') {
+      document.getElementById('billed_annual_text').textContent = 'billed yearly';
+    } else {
+      document.getElementById('billed_annual_text').textContent = 'billed monthly';
+    }
   }
 
   // Toggle Incognito
@@ -164,7 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
     type: 'slide',
     focus: 0,
     perPage: 6,
-    gap: '2rem',
+    gap: '0rem',
+    arrows: false,
     fixedHeight: 48,
     breakpoints: {
       425: { perPage: 1 },

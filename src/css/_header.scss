@@ -34,8 +34,8 @@
     background-color: v('off-white');
     left: 0;
     width: 100%;
-    padding: 2rem 0;
-    height: calc(100vh - (56px + 0rem));
+    padding: 3rem 0;
+    height: calc(100vh - (56px + 2rem));
     z-index: v(z-mobile-menu);
     display: flex;
     flex-direction: column;
@@ -170,7 +170,10 @@
     }
 
     .contact-social {
-      display: block;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-direction: row-reverse;
 
       >span {
         height: 28px;
@@ -295,7 +298,9 @@
     // @include gap(1rem);
 
     >*+* {
-      margin-left: 1rem;
+      @media screen and (min-width: 1024px) {
+        margin-left: 3rem;
+      }
     }
 
     >.btn {
