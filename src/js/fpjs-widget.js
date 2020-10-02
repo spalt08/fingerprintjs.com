@@ -38,8 +38,10 @@ export function loadFpjsHistory(visitorId) {
       container.innerHTML = '';
 
       for (const visit of visits) {
+        const isCurrent = activeRequestId === visit.requestId;
+
         const element = document.createElement('li');
-        const title = getVisitTitle(visit.timestamp);
+        const title = isCurrent ? 'Current visit' : getVisitTitle(visit.timestamp);
 
         element.classList.add('history-visits__visit');
         element.textContent = title;
@@ -56,10 +58,10 @@ export function loadFpjsHistory(visitorId) {
           element.appendChild(icon);
 
           element.classList.add('history-visits__visit--incognito');
+        }
 
-          if (visits[0].requestId === visit.requestId) {
-            element.classList.add('history-visits__visit--now');
-          }
+        if (isCurrent) {
+          element.classList.add('history-visits__visit--now');
         }
 
         element.addEventListener('click', () => showVisitInfo(Object.assign(visit, { visitorId }), title));
@@ -67,19 +69,19 @@ export function loadFpjsHistory(visitorId) {
 
         const { latitude, longitude } = visit.ipLocation;
 
-        liveDemoMobileSplide.add(mobileTemplate({
-          visitId: visitorId,
-          title,
-          browser: getBrowserName(visit.browserDetails),
-          ip: visit.ip,
-          incognito: visit.incognito ? 'Yes' : 'No',
-          bot: getBotDecision(visit.botProbability),
-          className: visit.incognito ? 'live-demo--mobile__incognito' : '',
-          location: `https://api.mapbox.com/styles/v1/mapbox/${visit.incognito ? 'dark-v10' : 'light-v10'}/static/${longitude},${latitude},7.00,0/512x512?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`,
-        }));
+        // liveDemoMobileSplide.add(mobileTemplate({
+        //   visitId: visitorId,
+        //   title,
+        //   browser: getBrowserName(visit.browserDetails),
+        //   ip: visit.ip,
+        //   incognito: visit.incognito ? 'Yes' : 'No',
+        //   bot: getBotDecision(visit.botProbability),
+        //   className: visit.incognito ? 'live-demo--mobile__incognito' : '',
+        //   location: `https://api.mapbox.com/styles/v1/mapbox/${visit.incognito ? 'dark-v10' : 'outdoors-v11'}/static/${longitude},${latitude},7.00,0/512x512?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`,
+        // }));
       }
 
-      highLightRequestId(visits[0].requestId);
+      highLightRequestId(activeRequestId);
 
       // Tooltips initializations
       tippy('[data-tippy-content]', {
@@ -127,7 +129,7 @@ function showVisitInfo(visitData, title) {
 
   // Map
   const { latitude, longitude } = ipLocation;
-  imgLocationSpan.src = `https://api.mapbox.com/styles/v1/mapbox/${incognito ? 'dark-v10' : 'light-v10'}/static/${longitude},${latitude},7.00,0/400x400?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`;
+  imgLocationSpan.src = `https://api.mapbox.com/styles/v1/mapbox/${incognito ? 'dark-v10' : 'outdoors-v11'}/static/${longitude},${latitude},7.00,0/400x400?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`;
   
   // Title
   if (title) {
@@ -142,7 +144,6 @@ function showVisitInfo(visitData, title) {
   } else {
     document.documentElement.classList.remove('incognito');
   }
-
   highLightRequestId(requestId);
 
   return visitorId;
@@ -158,12 +159,11 @@ function pluralize(num, one, many) {
   return `${num} ${many}`;
 }
 
-function getVisitTitle(timestamp) {
-  const now = Date.now();
+function getVisitTitle(timestamp, now = Date.now()) {
   const secondsDiff = Math.floor((now - timestamp) / 1000);
 
   if (secondsDiff < 1) {
-    return 'Current visit';
+    return 'Just now';
   }
 
   if (secondsDiff < 60) {

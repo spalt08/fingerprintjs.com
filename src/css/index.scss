@@ -40,3 +40,15 @@
 @import './slider';
 @import './live';
 @import './live-mobile';
+
+.swiper-container {
+  padding-bottom: 24px;
+}
+
+.swiper-pagination {
+  bottom: -5px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #202765;
+}
