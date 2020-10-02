@@ -1,8 +1,10 @@
 
 import { FP } from "@fp-pro/client";
 import tippy from 'tippy.js';
+import $ from 'jquery-slim';
 import mobileTemplate from '../views/partials/demo/mobile.handlebars';
 
+const dashboardEndpoint = process.env.FPJS_DASHBOARD_ENDPOINT;
 const client = process.env.FPJS_TOKEN;
 const token = process.env.FPJS_API_TOKEN;
 const endpoint = process.env.FPJS_ENDPOINT;
@@ -27,6 +29,39 @@ export function initFpjsWidget() {
     });
   // TODO: log errors
   // .catch(e => window.console && console.log('Error: ', e));
+
+  // Signup Form
+  $('.form--get-started').submit((event) => {
+    event.preventDefault();
+
+    const form = $('.form--get-started');
+    const email = event.currentTarget.elements[0].value;
+  
+    form.addClass('form--loading');
+    // const state = Math.floor(Math.random() * Math.floor(2));
+
+    fpPromise
+      .then(({ visitorId }) => fetch(`${dashboardEndpoint}/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, fpjsVisitorId: visitorId }),
+      }))
+      .then((response) => response.json())
+      .then(({ ok, error }) => {
+        form.removeClass('form--loading');
+  
+        if (!ok) {
+          form.addClass('form--failed');
+          $('.form-failed-reason').text(error.message || 'Something gone wrong. Please try again later.');
+          console.log( $('.form-failed-reason'), error.message || 'Something gone wrong. Please try again later.');
+
+          setTimeout(() => form.removeClass('form--failed'), 2500);
+        } else {
+
+          form.addClass('form--success');
+        }
+      });
+  });
 }
 
 // Load visit history

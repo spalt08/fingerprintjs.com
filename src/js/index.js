@@ -238,24 +238,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // liveDemoMobileSplide.mount();
   // liveDemoMobileButtonsPrev.click(() => liveDemoMobileSplide.go('-'));
   // liveDemoMobileButtonsNext.click(() => liveDemoMobileSplide.go('+'));
-
-  // Form States - DEMO ONLY
-  $('.form--get-started').submit((e) => {
-    e.preventDefault();
-    const form = $('.form--get-started');
-    const state = Math.floor(Math.random() * Math.floor(2));
-
-    form.toggleClass('form--success', state === 1);
-    form.toggleClass('form--failed', state === 0);
-
-    if (!!state) {
-      setTimeout(() => {
-        form.removeClass('form--success');
-      }, 1000);
-    } else {
-      setTimeout(() => {
-        form.removeClass('form--failed');
-      }, 1000);
-    }
-  });
 });

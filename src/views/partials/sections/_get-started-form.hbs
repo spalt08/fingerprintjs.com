@@ -1,7 +1,7 @@
 <form action='#' class='form form--get-started'>
   <div class='field field-with-button'>
     <label for='email' class='label'>
-      <input type='email' class='input' placeholder='Enter your email' />
+      <input type='email' name='email' required class='input' placeholder='Enter your email' />
     </label>
     <button class='btn submit' type='submit'>
       <span class='btn__label btn__label--desktop-only'>
@@ -24,7 +24,7 @@
     <svg class='form-state__icon'>
       <use xlink:href='#close'></use>
     </svg>
-    <div class='form-state__label'>
+    <div class='form-state__label form-failed-reason'>
       Submit failed. Please try again.
     </div>
   </div>
