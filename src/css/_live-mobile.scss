@@ -4,7 +4,11 @@
   background-color: v('white');
   font-size: 1.75rem;
   box-shadow: 0 20px 50px 0 adjust-color(c('brand-water'), $alpha: -0.9);
-  margin-right: 2rem;
+
+  max-width: calc(100% - 6rem);
+  &:first-child {
+    margin-left: 3rem;
+  }
 
   .live-demo {
     width: 100%;
@@ -145,4 +149,8 @@
       }
     }
   }
+}
+
+.swiper-container.live-demo-mobile-container {
+  overflow: visible;
 }

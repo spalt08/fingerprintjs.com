@@ -67,22 +67,18 @@
   //   }
   // }
 
-  .section-header {
-    margin-bottom: 6rem;
 
-    @media screen and (max-width: 768px) {
-      margin-bottom: 3rem;
-    }
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
   }
 
   .section__title {
-    font-weight: v('normal');
-    max-width: 60ch;
-    margin-bottom: 6rem;
+    font-weight: v(light);
+    font-size: 5rem;
 
-    @media screen and (max-width: 768px) {
-      margin-bottom: 3rem;
-      font-size: 2rem;
+    @media screen and (max-width: 425px) {
+      font-size: 3rem;
     }
   }
 

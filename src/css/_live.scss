@@ -116,6 +116,12 @@
         height: 4rem;
         cursor: pointer;
         @include transition((background-color));
+        text-overflow: ellipsis;
+        max-width: 186px;
+        overflow: hidden;
+        display: block;
+        line-height: 32px;
+        white-space: nowrap;
 
         &:before {
           content: none;

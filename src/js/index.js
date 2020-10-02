@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //   proToolsSplide.mount();
   // }
 
-  // const liveDemoMobileSplide = new Splide('.splide--live-demo', {
+  // const liveDemoMobileSplide = new Splide('.live-demo-mobile-container', {
   //   type: 'slide',
   //   perPage: 1,
   //   focus: 0,

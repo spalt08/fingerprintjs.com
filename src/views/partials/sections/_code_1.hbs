@@ -1,10 +1,9 @@
 {{! prettier-ignore }}
-<pre><code class='line-numbers language-javascript'>import FP from '@fingerprintjs/fingerprintjs';
+<pre><code class='line-numbers language-javascript'>import FP from '@fingerprintjs/fingerprintjs-pro';
 
-FP.load()
-  .then(client => fp.get({ token }))
+FP.load({ token })
+  .then(client => fp.get())
   .then(res => {
     console.log(res.visitorId);
-    console.log(res.botProbability);
   });
 </code></pre>

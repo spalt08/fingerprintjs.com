@@ -2,6 +2,7 @@
 import { FP } from "@fp-pro/client";
 import tippy from 'tippy.js';
 import $ from 'jquery-slim';
+import Swiper from 'swiper';
 import mobileTemplate from '../views/partials/demo/mobile.handlebars';
 
 const dashboardEndpoint = process.env.FPJS_DASHBOARD_ENDPOINT;
@@ -72,7 +73,7 @@ export function loadFpjsHistory(visitorId) {
       const container = document.getElementById('fpjs_history');
       
       container.innerHTML = '';
-
+      let mobileSlides = '';
       for (const visit of visits) {
         const isCurrent = activeRequestId === visit.requestId;
 
@@ -105,19 +106,37 @@ export function loadFpjsHistory(visitorId) {
 
         const { latitude, longitude } = visit.ipLocation;
 
-        // liveDemoMobileSplide.add(mobileTemplate({
-        //   visitId: visitorId,
-        //   title,
-        //   browser: getBrowserName(visit.browserDetails),
-        //   ip: visit.ip,
-        //   incognito: visit.incognito ? 'Yes' : 'No',
-        //   bot: getBotDecision(visit.botProbability),
-        //   className: visit.incognito ? 'live-demo--mobile__incognito' : '',
-        //   location: `https://api.mapbox.com/styles/v1/mapbox/${visit.incognito ? 'dark-v10' : 'outdoors-v11'}/static/${longitude},${latitude},7.00,0/512x512?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`,
-        // }));
+        mobileSlides += mobileTemplate({
+          visitId: visitorId,
+          title,
+          browser: getBrowserName(visit.browserDetails),
+          ip: visit.ip,
+          incognito: visit.incognito ? 'Yes' : 'No',
+          bot: getBotDecision(visit.botProbability),
+          className: visit.incognito ? 'live-demo--mobile__incognito' : '',
+          location: `https://api.mapbox.com/styles/v1/mapbox/${visit.incognito ? 'dark-v10' : 'outdoors-v11'}/static/${longitude},${latitude},7.00,0/512x512?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`,
+        });
       }
 
       highLightRequestId(activeRequestId);
+      const swiperContainer = document.getElementById('fpjs_widget_mobile');
+      swiperContainer.innerHTML = mobileSlides;
+
+      new Swiper(swiperContainer.parentElement, {
+        spaceBetween: 10,
+        slidesPerView: 1,
+        width: window.innerWidth - 48,
+        centeredSlides: true,
+        pagination: {
+          dynamicBullets: true,
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.btn--next',
+          prevEl: '.btn--prev',
+        },
+      });
 
       // Tooltips initializations
       tippy('[data-tippy-content]', {

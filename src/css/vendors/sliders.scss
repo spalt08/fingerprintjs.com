@@ -74,13 +74,9 @@
   }
 }
 
-.splide--live-demo {
+.live-demo-mobile-container {
   visibility: visible;
   margin-bottom: 0;
-
-  @media screen and (max-width: 640px) {
-    margin-bottom: 8rem;
-  }
 
   .splide__track {
     overflow: visible;
