@@ -11,7 +11,7 @@
 
   .container {
     display: flex;
-    align-items: center;
+    align-items: top;
     justify-content: space-between;
     // @include gap(2rem);
     position: relative;
@@ -34,10 +34,13 @@
   }
 
   .section__title {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: v(bold);
     color: v('white');
-    margin-bottom: 3rem;
+    padding-bottom: 4rem;
+    margin-bottom: 6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    margin-right: 4rem;
 
     @media screen and (max-width: 425px) {
       font-size: 3rem;

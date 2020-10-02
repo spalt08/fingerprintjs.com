@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "@fp-pro/client": "^2.7.5",
+    "favicons-webpack-plugin": "2.1.0",
     "jquery-slim": "^3.0.0",
     "prismjs": "^1.21.0",
     "swiper": "^6.3.2",

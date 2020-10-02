@@ -15,9 +15,10 @@ const config = {
 
 let activeRequestId;
 
+const fpPromise = FP.load({ client, endpoint, region }).then((fp) => fp.send(config));
+
 export function initFpjsWidget() {
-  FP.load({ client, endpoint, region })
-    .then((fp) => fp.send(config))
+  fpPromise
     .then(showVisitInfo)
     .then(loadFpjsHistory)
     .then(() => {
@@ -123,7 +124,7 @@ function showVisitInfo(visitData, title) {
 
   visitorIdSpan.textContent = visitorId;
   incognitoSpan.textContent = incognito ? 'Yes' : 'No';
-  botSpan.textContent = getBotDecision(botProbability);
+  botSpan.textContent = getBotDecision(typeof botProbability === 'number' ? botProbability : browserDetails.botProbability);
   ipSpan.textContent = ip;
   browserSpan.textContent = getBrowserName(browserDetails || visitData);
 

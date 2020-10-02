@@ -397,3 +397,13 @@
     }
   }
 }
+
+.nav__logo {
+  @media screen and (min-width: 760px) {
+    height: 40px;
+    width: 200px;
+  }
+  @media screen and (max-width: 360px) {
+    width: 110px;
+  }
+}

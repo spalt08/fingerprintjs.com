@@ -1,5 +1,5 @@
 {
-  "title": "FingerPrintJS | Browser Fingerprinting API",
+  "title": "FingerprintJS Pro - browser fingerprinting & fraud detection API",
   "trusted_logos": [
     "ebay",
     "target",
@@ -11,31 +11,35 @@
   ],
   "footer_links": [
     {
-      "title": "Solutions",
+      "title": "General",
       "links": [
         {
-          "title": "Browser Fingerprinting",
-          "url": "#"
+          "title": "Technical Demo",
+          "url": "/demo"
         },
         {
-          "title": "Anonymous User Identification",
-          "url": "#"
+          "title": "Open Source",
+          "url": "/open-source"
         },
         {
-          "title": "Bot Detection",
-          "url": "#"
+          "title": "Pricing",
+          "url": "/pricing"
         },
         {
-          "title": "Incognito Mode Detection",
-          "url": "#"
+          "title": "Support",
+          "url": "mailto:support@fingerprintjs.com"
         },
         {
-          "title": "Geolocation",
-          "url": "#"
+          "title": "Terms of Use",
+          "url": "https://docs.fingerprintjs.com/pro/legal/terms-of-service"
         },
         {
-          "title": "API & Webhooks",
-          "url": "#"
+          "title": "Privacy Policy",
+          "url": "https://docs.fingerprintjs.com/pro/legal/privacy-policy"
+        },
+        {
+          "title": "Log In",
+          "url": "https://dashboard.fingerprintjs.com/login"
         }
       ]
     },
@@ -43,24 +47,32 @@
       "title": "Docs",
       "links": [
         {
+          "title": "Get Started",
+          "url": "https://docs.fingerprintjs.com/pro/"
+        },
+        {
           "title": "Pro vs Free Version",
-          "url": "#"
+          "url": "https://docs.fingerprintjs.com/pro/pro-vs-free"
         },
         {
-          "title": "Regions",
-          "url": "#"
+          "title": "Browser Fingerprinting",
+          "url": "https://docs.fingerprintjs.com/pro/browser-fingerprinting"
         },
         {
-          "title": "Best Practices",
-          "url": "#"
+          "title": "Incognito Mode Detection",
+          "url": "https://docs.fingerprintjs.com/pro/incognito-private-mode-detection"
         },
         {
-          "title": "Integrations",
-          "url": "#"
+          "title": "Bot Detection",
+          "url": "https://docs.fingerprintjs.com/pro/bot-detection"
         },
         {
-          "title": "Legal",
-          "url": "#"
+          "title": "Cloudflare Integration",
+          "url": "https://docs.fingerprintjs.com/pro/integrations/cloudflare"
+        },
+        {
+          "title": "Server API",
+          "url": "https://docs.fingerprintjs.com/pro/server-api"
         }
       ]
     }

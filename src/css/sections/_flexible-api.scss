@@ -1,5 +1,5 @@
 .section--flexible-api {
-  background-color: adjust-color(c('brand-water'), $lightness: 15%);
+  background-color: #161e58;
   background-image: url('../img/flexible-api-background.svg');
   background-repeat: no-repeat;
   background-position: -10% 240%;
@@ -53,54 +53,58 @@
       font-size: 3rem;
     }
   }
+}
 
-  .tools-integrations {
-    display: flex;
-    align-items: flex-start;
-    // @include gap(2rem);
 
-    > * + * {
-      margin-top: 2rem;
+.tools-integrations {
+  display: flex;
+  align-items: flex-start;
+  color: #ffffff;
+  // @include gap(2rem);
 
-      @media screen and (min-width: 641px) {
-        margin-top: 0;
-        margin-left: 2rem;
-      }
-    }
+  > * + * {
+    margin-top: 2rem;
 
-    @media screen and (max-width: 640px) {
-      flex-wrap: wrap;
-      // @include gap(4rem);
+    @media screen and (min-width: 641px) {
+      margin-top: 0;
+      margin-left: 2rem;
     }
   }
 
-  .tools-integrations-item {
-    display: block;
-    // width: Max(100%, 250px);
+  @media screen and (max-width: 640px) {
+    flex-wrap: wrap;
+    // @include gap(4rem);
+  }
+}
 
-    &__icon-container {
-      background-color: adjust-color(c('brand-water'), $saturation: -10%, $lightness: 25%);
-      text-align: center;
-      padding: 2rem;
-      border-radius: 1rem;
-      margin-bottom: 3rem;
-      @include transition((background-color));
-    }
+.tools-integrations-item {
+  display: block;
+  // width: Max(100%, 250px);
 
-    &__icon {
-      width: 7rem;
-      height: 7rem;
-      fill: v('white');
-    }
+  &__icon-container {
+    background-color: adjust-color(c('brand-water'), $saturation: -10%, $lightness: 25%);
+    text-align: center;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    @include transition((background-color));
+  }
 
-    &__title {
-      font-size: 2.25rem;
-      margin-bottom: 2rem;
-    }
+  &__icon {
+    width: 7rem;
+    height: 7rem;
+    fill: v('white');
+  }
 
-    &__description {
-      opacity: v('muted');
-      font-size: 1.75rem;
-    }
+  &__title {
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+    padding-right: 3rem;
+  }
+
+  &__description {
+    opacity: v('muted');
+    font-size: 1.75rem;
+    padding-right: 3rem;
   }
 }

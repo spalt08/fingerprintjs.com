@@ -6,7 +6,7 @@
         <div class='menu'>
           <div class='menu__title'>{{this.title}}</div>
           {{#each this.links}}
-            <a href='{{this.url}}' class='menu__link'>
+            <a href='{{this.url}}' target='_blank' rel='noopener' class='menu__link'>
               {{this.title}}
             </a>
           {{/each}}
@@ -38,26 +38,26 @@
             </small>
             <ul class='social-links'>
               <li class='social-links__link'>
-                <a href='#0'>
+                <a href='https://www.linkedin.com/company/fingerprintjs/' target='_blank' rel='noopener'>
                   <svg>
                     <use xlink:href='#linkedin'></use>
                   </svg>
                 </a>
               </li>
               <li class='social-links__link'>
-                <a href='#0'>
+                <a href='https://twitter.com/FingerprintJs' target='_blank' rel='noopener'>
                   <svg>
                     <use xlink:href='#twitter'></use>
                   </svg>
                 </a>
               </li>
-              <li class='social-links__link'>
+              {{!-- <li class='social-links__link'>
                 <a href='#0'>
                   <svg>
                     <use xlink:href='#medium'></use>
                   </svg>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </div>
         </div>
