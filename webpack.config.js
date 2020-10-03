@@ -7,7 +7,6 @@ const postcssPresetEnv = require('postcss-preset-env');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const cssnano = require('cssnano');
 const Dotenv = require('dotenv-webpack');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const { makeDataReplacements, registerHandlersHelpers } = require('./webpack.helpers.js');
 
@@ -96,7 +95,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(sourceDir, 'views', 'layout', 'template.hbs'),
       filename: path.join(templateDir, 'template.hbs'),
-      inject: true,
+      inject: false,
     }),
     new HandlebarsPlugin({
       htmlWebpackPlugin: {
@@ -127,6 +126,10 @@ module.exports = {
           from: path.join(sourceDir, 'img/company-logos'),
           to: 'img/company-logos',
         },
+        {
+          from: path.join(__dirname, 'favicon.ico'),
+          to: 'favicon.ico',
+        },
       ],
       {
         ignore: ['.DS_Store'],
@@ -137,24 +140,6 @@ module.exports = {
       chunkFilename: '[id].css',
       fallback: 'style-loader',
       use: [{ loader: 'css-loader', options: { minimize: isProd } }],
-    }),
-    new FaviconsWebpackPlugin({
-      inject: true,
-      logo: './favicon.png',
-      background: '#ffffff',
-      // type of favicons to generate, WARNING: dramaticly decreases build speed, use wisely
-      icons: {
-        android: false,
-        appleIcon: false,
-        appleStartup: false,
-        coast: false,
-        favicons: true,
-        firefox: false,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false,
-      },
     }),
   ].concat(isProd ? prodPlugins : []),
   devServer: {

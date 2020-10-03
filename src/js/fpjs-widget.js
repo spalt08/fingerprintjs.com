@@ -67,7 +67,7 @@ export function initFpjsWidget() {
 
 // Load visit history
 export function loadFpjsHistory(visitorId) {
-  return fetch(`${endpoint}/visitors/${visitorId}?token=${token}&limit=50`)
+  return fetch(`${endpoint}/visitors/${visitorId}?token=${token}&limit=20`)
     .then((response) => response.json())
     .then(({ visits }) => {
       const container = document.getElementById('fpjs_history');
@@ -115,6 +115,7 @@ export function loadFpjsHistory(visitorId) {
           bot: getBotDecision(visit.botProbability),
           className: visit.incognito ? 'live-demo--mobile__incognito' : '',
           location: `https://api.mapbox.com/styles/v1/mapbox/${visit.incognito ? 'dark-v10' : 'outdoors-v11'}/static/${longitude},${latitude},7.00,0/512x512?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`,
+          locationClassName: visit.ipLocation ? '' : '-not-available',
         });
       }
 
@@ -174,6 +175,7 @@ function showVisitInfo(visitData, title) {
   const incognitoSpan = document.getElementById('fpjs_incognito');
   const browserSpan = document.getElementById('fpjs_browser');
   const imgLocationSpan = document.getElementById('fpjs_location_img');
+  const locationDiv = document.getElementById('fpjs_location');
   const titleSpan = document.getElementById('fpjs_visit_title');
 
   visitorIdSpan.textContent = visitorId;
@@ -184,6 +186,7 @@ function showVisitInfo(visitData, title) {
 
   // Map
   const { latitude, longitude } = ipLocation;
+  locationDiv.classList.toggle('-not-available', !ipLocation);
   imgLocationSpan.src = `https://api.mapbox.com/styles/v1/mapbox/${incognito ? 'dark-v10' : 'outdoors-v11'}/static/${longitude},${latitude},7.00,0/400x400?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`;
   
   // Title

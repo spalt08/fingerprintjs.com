@@ -67,12 +67,12 @@
           "url": "https://docs.fingerprintjs.com/pro/bot-detection"
         },
         {
-          "title": "Cloudflare Integration",
-          "url": "https://docs.fingerprintjs.com/pro/integrations/cloudflare"
-        },
-        {
           "title": "Server API",
           "url": "https://docs.fingerprintjs.com/pro/server-api"
+        },
+        {
+          "title": "Legal",
+          "url": "https://docs.fingerprintjs.com/pro/legal/dpa-gdpr"
         }
       ]
     }

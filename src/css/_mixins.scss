@@ -170,7 +170,7 @@
 
   > * {
     box-sizing: content-box;
-    height: 100%;
+    height: $height - $scollbarSize;
     width: 100%;
     overflow-y: scroll;
     padding: #{$padding};

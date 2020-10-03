@@ -5,5 +5,7 @@ FP.load({ token })
   .then(client => fp.get())
   .then(res => {
     console.log(res.visitorId);
+    console.log(res.incognito);
+    console.log(res.botProbability);
   });
 </code></pre>

@@ -16,6 +16,9 @@
     <div class='visit__id'>
       <div class='visit__label'>
         Your ID
+      </div>
+      <div class='visit__value'>
+        {{visitId}}
         <svg
           class='info'
           data-tippy-content='Every visitor to your website is assigned a unique & permanent identifier.'
@@ -24,7 +27,6 @@
           <use xlink:href='#info'></use>
         </svg>
       </div>
-      <div class='visit__value'>{{visitId}}</div>
     </div>
     <div class='visit__bot'>
       <div class='visit__label'>
@@ -57,7 +59,7 @@
         {{incognito}}
         <svg
           class='info'
-          data-tippy-content='FingerprintJS Pro analyzes every page view and detects if it was made in incognito mode.'
+          data-tippy-content='FingerprintJS Pro analyzes every page view and detects if it was made in incognito mode. Open this page in private mode to see it in action.'
           tabindex='0'
         >
           <use xlink:href='#info'></use>
@@ -76,7 +78,7 @@
       <div class='visit__label'>
         Location
       </div>
-      <div class='visit__value'>
+      <div class='visit__value user-location {{locationClassName}}'>
         <img class='visit__location-image' src='{{location}}' />
       </div>
     </div>

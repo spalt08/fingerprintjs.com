@@ -399,11 +399,16 @@
 }
 
 .nav__logo {
-  @media screen and (min-width: 760px) {
+  object-fit: contain;
+
+  @media screen and (min-width: 761px) {
     height: 40px;
-    width: 200px;
+    width: 220px;
+  }
+  @media screen and (max-width: 760px) {
+    width: 150px;
   }
   @media screen and (max-width: 360px) {
-    width: 110px;
+    width: 100px;
   }
 }
