@@ -115,7 +115,7 @@ export function loadFpjsHistory(visitorId) {
           bot: getBotDecision(visit.botProbability),
           className: visit.incognito ? 'live-demo--mobile__incognito' : '',
           location: `https://api.mapbox.com/styles/v1/mapbox/${visit.incognito ? 'dark-v10' : 'outdoors-v11'}/static/${longitude},${latitude},7.00,0/512x512?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`,
-          locationClassName: visit.ipLocation ? '' : '-not-available',
+          locationClassName: (latitude && longitude) ? '' : '-not-available',
         });
       }
 
@@ -186,7 +186,7 @@ function showVisitInfo(visitData, title) {
 
   // Map
   const { latitude, longitude } = ipLocation;
-  locationDiv.classList.toggle('-not-available', !ipLocation);
+  locationDiv.classList.toggle('-not-available', !latitude || !longitude);
   imgLocationSpan.src = `https://api.mapbox.com/styles/v1/mapbox/${incognito ? 'dark-v10' : 'outdoors-v11'}/static/${longitude},${latitude},7.00,0/400x400?access_token=pk.eyJ1IjoidmFsZW50aW52YXNpbHlldiIsImEiOiJja2ZvMGttN2UxanJ1MzNtcXp5YzNhbWxuIn0.BjZhTdjY812J3OdfgRiZ4A`;
   
   // Title
