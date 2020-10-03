@@ -88,10 +88,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new Dotenv({
-      path: './.env', // Path to .env file (this is the default)
-      safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
-    }),
     new HtmlWebpackPlugin({
       template: path.join(sourceDir, 'views', 'layout', 'template.hbs'),
       filename: path.join(templateDir, 'template.hbs'),
@@ -145,7 +141,12 @@ module.exports = {
       fallback: 'style-loader',
       use: [{ loader: 'css-loader', options: { minimize: isProd } }],
     }),
-  ].concat(isProd ? prodPlugins : []),
+  ].concat(isProd ? prodPlugins : [
+    new Dotenv({
+      path: './.env', // Path to .env file (this is the default)
+      safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
+    }),
+  ]),
   devServer: {
     contentBase: buildDir,
     open: false,
