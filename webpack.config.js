@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -18,7 +19,16 @@ const templateDir = path.join(__dirname, 'generated');
 const buildDir = path.join(__dirname, 'build');
 
 const isProd = mode === 'production';
-const prodPlugins = [new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i })];
+const prodPlugins = [
+  new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }),
+  new webpack.EnvironmentPlugin({
+    FPJS_TOKEN: process.env.FPJS_TOKEN,
+    FPJS_API_TOKEN: process.env.FPJS_API_TOKEN,
+    FPJS_ENDPOINT: process.env.FPJS_ENDPOINT,
+    FPJS_REGION: process.env.FPJS_REGION,
+    FPJS_DASHBOARD_ENDPOINT: process.env.FPJS_DASHBOARD_ENDPOINT,
+  }),
+];
 
 module.exports = {
   mode,
