@@ -130,6 +130,10 @@ module.exports = {
           from: path.join(__dirname, 'favicon.ico'),
           to: 'favicon.ico',
         },
+        {
+          from: path.join(__dirname, 'legacy'),
+          to: '.',
+        },
       ],
       {
         ignore: ['.DS_Store'],
