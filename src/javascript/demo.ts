@@ -7,10 +7,10 @@ import Vue from "vue";
 import * as mapboxgl from "mapbox-gl";
 import * as format from "./format";
 import { ago } from "./timeago";
-import { FP } from "@fp-pro/client";
+import * as FP from "@fingerprintjs/fingerprintjs-pro";
 
-FP.load({ client: process.env.FPJS_TOKEN, endpoint: "https://f.fingerprintjs.com", region: "us"}).then(fp => {
-  fp.send({ ip: "full", callbackData: true, timeout: 30_000}).then(res => {
+FP.load({ token: process.env.FPJS_TOKEN, endpoint: "https://f.fingerprintjs.com" }).then(fp => {
+  fp.get({ ipResolution: "full", extendedResult: true, timeout: 30_000}).then(res => {
     initApp(res);
   }).catch(e => window.console && console.log('Timeout: ', e))
 });
@@ -44,7 +44,7 @@ class Visit {
     this.response = response;
     this.visitorId = response.visitorId;
     this.incognito = response.incognito;
-    this.botProbability = response.botProbability;
+    this.botProbability = response.bot?.probability ?? 0;
     this.ip = response.ip;
     this.ipLocation = response.ipLocation;
     if(this.ipLocation){
@@ -108,7 +108,7 @@ class Visit {
   }
 }
 
-function initApp(response: any) {
+function initApp(response: FP.FullIpExtendedGetResult) {
   var currentVisit = new Visit(0, response);
   var app = new Vue({
     el: "#demo",

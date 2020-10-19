@@ -7,10 +7,10 @@ import * as $ from "jquery";
 // need to get rid of jQuery and bootstrap JS completely
 import "bootstrap";
 import Vue from "vue";
-import {FP} from "@fp-pro/client";
+import * as FP from "@fingerprintjs/fingerprintjs-pro";
 
-FP.load({client: process.env.FPJS_TOKEN, region: "us", endpoint: "https://f.fingerprintjs.com"}).then(fp => {
-  fp.send({timeout: 30000}).catch(function(e){
+FP.load({token: process.env.FPJS_TOKEN, endpoint: "https://f.fingerprintjs.com"}).then(fp => {
+  fp.get({timeout: 30000}).catch(function(e){
     window.console && console.log(e);
   });
 });
